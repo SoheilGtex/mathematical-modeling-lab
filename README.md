@@ -54,11 +54,36 @@ python examples/session_01/02_boat_production.py
 separate external solver installation. For future nonlinear problems,
 `scipy.optimize.minimize` or modeling frameworks such as Pyomo may be better.
 
+## Visualization (session 01)
+
+Install plotting dependencies (the `dev` extra also includes Matplotlib):
+
+```bash
+python -m pip install -e ".[dev]"
+python -m modeling_lab boats --integer --plot plots/boats.png
+```
+
+The generated PNG contains all three constraint lines, the feasible polygon,
+objective isoprofit lines, the continuous optimum, and the feasible integer
+lattice points plus the integer optimum. **The continuous and integer optima
+coincide at (x, y) = (0, 20)** with profit 1600 thousand toman; there is no
+integrality gap in this example. The machine-time constraint is binding at the
+optimum; the aluminum and labor constraints are redundant over the feasible
+triangle. Constraint curves may lie outside the feasible polygon.
+
+Figures are constructed from the coefficient matrices in `problems.py`; no
+hand-drawn coordinates or fabricated optimum values are used. Generated files
+under `plots/` are ignored by Git; intentionally publish selected figures under
+`docs/assets/` if desired. Current 2D plots require two nonnegative variables.
+
+The diet problem has three variables and cannot be plotted by this 2D routine.
+
 ## Repository structure
 
 ```text
 src/modeling_lab/
   linear.py            # validated model + linprog/milp adapter
+  visualization.py     # coefficient-driven feasible-region plots
   problems.py          # class problem data (single source of truth)
   __main__.py          # CLI and JSON output
 examples/session_01/
@@ -69,6 +94,7 @@ docs/
   example_template.md  # checklist for new class examples
 tests/
   test_session_01.py   # regression and feasibility tests
+  test_visualization.py # plot geometry, PNG and CLI tests
 .github/workflows/
   ci.yml               # automated tests on pushes and PRs
 ```
