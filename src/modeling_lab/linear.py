@@ -60,6 +60,11 @@ class Solution:
     constraint_slacks: dict[str, float]
     integer_variables: frozenset[str]
     solver: str
+    # MILP metadata is provided by HiGHS, not independently certified.
+    # In the original objective direction, a lower bound for minimization
+    # and an upper bound for maximization.
+    solver_objective_bound: float | None = None
+    solver_relative_gap: float | None = None
 
 
 def solve(model: LinearProgram, *, integer_variables: Iterable[str] = ()) -> Solution:
@@ -122,6 +127,17 @@ def solve(model: LinearProgram, *, integer_variables: Iterable[str] = ()) -> Sol
         if name in integers and abs(x[idx] - round(x[idx])) > 1e-6:
             raise OptimizationError(f"Solver returned a fractional integer variable: {name}")
 
+    # Store MILP proof metadata without treating it as independent evidence.
+    raw_bound = getattr(result, "mip_dual_bound", None) if integers else None
+    raw_gap = getattr(result, "mip_gap", None) if integers else None
+    objective_bound = (
+        float(-raw_bound if model.maximize else raw_bound)
+        if raw_bound is not None and np.isfinite(raw_bound) else None
+    )
+    relative_gap = (
+        float(raw_gap) if raw_gap is not None and np.isfinite(raw_gap) else None
+    )
+
     return Solution(
         model_name=model.name,
         objective_value=float(objective @ x),
@@ -130,4 +146,6 @@ def solve(model: LinearProgram, *, integer_variables: Iterable[str] = ()) -> Sol
         constraint_slacks=dict(zip(model.constraint_names, map(float, slack), strict=True)),
         integer_variables=integers,
         solver=solver,
+        solver_objective_bound=objective_bound,
+        solver_relative_gap=relative_gap,
     )

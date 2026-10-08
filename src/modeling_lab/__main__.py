@@ -3,9 +3,11 @@
 import argparse
 import json
 from pathlib import Path
+from dataclasses import asdict
 
 from .linear import Solution, solve
 from .problems import boat_production_problem, diet_problem
+from .verification import verify_solution
 from .sensitivity import (
     save_sensitivity_plot, session01_parameters, sweep_parameter,
 )
@@ -34,6 +36,7 @@ def main() -> None:
         help="Extension: diet uses whole eggs; boats use whole counts",
     )
     parser.add_argument("--json", action="store_true", help="Machine-readable output")
+    parser.add_argument("--verify", action="store_true", help="Independent feasibility and LP optimality checks")
     parser.add_argument(
         "--plot", type=Path, metavar="PNG_PATH",
         help="Render a two-variable LP (with integer overlay if --integer is set)",
@@ -75,6 +78,7 @@ def main() -> None:
         ("t",) if args.problem == "diet" else ("x", "y")
     ) if args.integer else ()
     result = solve(model, integer_variables=integer_variables)
+    verification = verify_solution(model, result) if args.verify else None
     if args.sensitivity:
         report = sweep_parameter(
             model, parameters[args.sensitivity], args.values,
@@ -107,6 +111,8 @@ def main() -> None:
             "integer_variables": sorted(result.integer_variables),
             "solver": result.solver,
         }
+        if verification is not None:
+            payload["verification"] = {**asdict(verification), "candidate_valid": verification.candidate_valid}
         if generated_plot is not None:
             payload["plot_path"] = str(generated_plot)
         if report is not None:
@@ -132,6 +138,16 @@ def main() -> None:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
     else:
         print(format_solution(result))
+        if verification is not None:
+            print(f"Verification: candidate_valid={verification.candidate_valid}")
+            print(f"Independently verified global optimality: {verification.independent_optimality_verified}")
+            print(f"Evidence: {verification.evidence}")
+            if verification.lp_primal_dual_gap is not None:
+                print(f"LP primal-dual gap: {verification.lp_primal_dual_gap:.6g}")
+            if verification.milp_solver_objective_bound is not None:
+                print(f"Solver-reported MILP bound: {verification.milp_solver_objective_bound:.6g}")
+            for note in verification.notes:
+                print(f"  Note: {note}")
         if generated_plot is not None:
             print(f"Plot saved to: {generated_plot}")
         if report is not None:
@@ -160,6 +176,14 @@ def main() -> None:
                 )
             if sensitivity_plot_path is not None:
                 print(f"Sensitivity plot saved to: {sensitivity_plot_path}")
+    # Verification failure must be actionable in scripts and CI, not only a
+    # printed diagnostic. MILPs lack an independent global-optimality proof;
+    # their candidate checks are nevertheless enforceable.
+    if verification is not None and (
+        not verification.candidate_valid
+        or (not integer_variables and not verification.independent_optimality_verified)
+    ):
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

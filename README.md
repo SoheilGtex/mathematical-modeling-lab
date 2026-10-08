@@ -99,6 +99,22 @@ Read the [sensitivity analysis notes](docs/sensitivity_analysis.md) for sign
 conventions, sample results, interpretation and limitations. This feature is
 an independent extension beyond the original handwritten class notes.
 
+## Independent solution verification (Feature 04)
+
+Check model feasibility, variable bounds, integer restrictions, and objective
+recomputation. For continuous LPs, an explicitly checked feasible dual witness
+and zero primal-dual gap provide a numerical LP optimality certificate.
+**MILP global optimality is not independently certified**: any gap or bound is
+HiGHS-reported metadata, clearly marked as such.
+
+```bash
+python -m modeling_lab diet --verify
+python -m modeling_lab boats --verify --json
+python -m modeling_lab boats --integer --verify
+```
+
+See [solution verification mathematics and limitations](docs/solution_verification.md).
+
 ## Repository structure
 
 ```text
@@ -106,6 +122,7 @@ src/modeling_lab/
   linear.py            # validated model + linprog/milp adapter
   visualization.py     # coefficient-driven feasible-region plots
   sensitivity.py       # RHS/coefficients scenarios and local LP duals
+  verification.py      # independent primal checks and LP dual witness
   problems.py          # class problem data (single source of truth)
   __main__.py          # CLI and JSON output
 examples/session_01/
@@ -115,10 +132,12 @@ docs/
   session_01.md        # formulation, assumptions, interpretation
   example_template.md  # checklist for new class examples
   sensitivity_analysis.md # sensitivity mathematics and examples
+  solution_verification.md # primal/dual checks and MILP caveats
 tests/
   test_session_01.py   # regression and feasibility tests
   test_visualization.py # plot geometry, PNG and CLI tests
   test_sensitivity.py   # parametric re-solves and dual sign tests
+  test_verification.py  # invalid-candidate and dual-certificate tests
 .github/workflows/
   ci.yml               # automated tests on pushes and PRs
 ```
