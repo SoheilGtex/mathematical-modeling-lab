@@ -92,3 +92,15 @@ source notes are not redistributed here.
 This is **not an official course resource**, exam syllabus, or grading rubric.
 The example data are instructional and should not be treated as real-world
 nutrition or pricing guidance.
+
+## License
+
+Copyright (c) 2026 Soheil Salmani.
+
+Unless otherwise noted, all original content in this repository,
+including Python source code, mathematical models, documentation,
+written solutions, and exam preparation materials, is licensed
+under the [MIT License](LICENSE).
+
+Third-party materials remain subject to their respective
+copyrights and are not relicensed without authorization.
