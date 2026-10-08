@@ -1,8 +1,8 @@
 # Example template — English first, Persian below
 
-Copy this file to `exam-prep/session_XX/NN_short_name.md` for each new example. Replace **every** placeholder with verified information from the actual class notes. Do not invent data, theorem statements, exam requirements, or numerical answers. Keep notes-derived content clearly separated from independently solved extensions.
+Copy this file to `sessions/session_XX/NN_short_name.md` for each new example. Replace **every** placeholder with verified information from the actual class notes. Do not invent data, theorem statements, exam requirements, or numerical answers. Keep notes-derived content clearly separated from independently solved extensions.
 
-این فایل را برای هر مثال جدید در مسیر `exam-prep/session_XX/NN_short_name.md` کپی کن. تمام عبارت‌های داخل کروشه را فقط با اطلاعات تأییدشدهٔ جزوه جایگزین کن. داده، فرمول، ادعای استاد یا جواب عددی را حدس نزن. مطالب برگرفته از کلاس را از حل و تحلیل تکمیلی جدا نگه دار.
+این فایل را برای هر مثال جدید در مسیر `sessions/session_XX/NN_short_name.md` کپی کن. تمام عبارت‌های داخل کروشه را فقط با اطلاعات تأییدشدهٔ جزوه جایگزین کن. داده، فرمول، ادعای استاد یا جواب عددی را حدس نزن. مطالب برگرفته از کلاس را از حل و تحلیل تکمیلی جدا نگه دار.
 
 ---
 

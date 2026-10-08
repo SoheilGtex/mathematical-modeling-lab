@@ -1,12 +1,33 @@
-# Session 01 — Night-before review | مرور شب امتحان
+# EXAM NIGHT — Cumulative Review | مرور یکپارچهٔ شب امتحان
 
-**Use this page last**, after reading the full [diet](01_diet.md) and [boat](02_boat_production.md) solutions. This is a **study aid**, not an official syllabus or an official grading rubric.
+> **One file for the entire term.** Read this before the written, paper-based exam.
+> **یک فایل برای تمام ترم.** این راهنما خلاصهٔ مرور امتحان تشریحی است، نه جایگزین حل‌های کامل.
 
-**این صفحه برای مرور نهایی است**؛ ابتدا حل تشریحی کامل [رژیم غذایی](01_diet.md) و [تولید قایق](02_boat_production.md) را بخوان. مطالب این صفحه جایگزین محدودهٔ رسمی امتحان یا بارم‌بندی استاد نیستند.
+This file is **generated** from marked review sections of each
+`sessions/session_NN/README.md`. Do not edit it directly; run
+`python scripts/build_exam_night.py` after adding/updating a session.
+CI runs `python scripts/build_exam_night.py --check` to reject stale output.
 
-## English — What you should be able to reproduce on paper
+توضیح منبع: صورت‌بندی مسائل جلسهٔ اول از جزوهٔ کلاس است؛ پاسخ‌های عددی،
+اثبات‌های بهینگی و نکات تکمیلی، محاسبات مستقل آموزشی هستند و محدودهٔ قطعی امتحان محسوب نمی‌شوند.
 
-### Core vocabulary
+## Contents | فهرست جلسات
+
+- [Session 01 | جلسهٔ 01](#session-01)
+
+---
+
+## Session 01
+
+**جلسهٔ 01**
+
+**Use this page last**, after reading the full [diet](sessions/session_01/01_diet.md) and [boat](sessions/session_01/02_boat_production.md) solutions. This is a **study aid**, not an official syllabus or an official grading rubric.
+
+**این صفحه برای مرور نهایی است**؛ ابتدا حل تشریحی کامل [رژیم غذایی](sessions/session_01/01_diet.md) و [تولید قایق](sessions/session_01/02_boat_production.md) را بخوان. مطالب این صفحه جایگزین محدودهٔ رسمی امتحان یا بارم‌بندی استاد نیستند.
+
+### English — What you should be able to reproduce on paper
+
+#### Core vocabulary
 
 - **Decision variable:** a quantity chosen by the decision-maker.
 - **Objective:** what we minimize or maximize.
@@ -17,7 +38,7 @@
 - **Slack:** unused resource in a $\le$ capacity constraint; for a $\ge$ minimum constraint, the amount above the minimum is a *surplus*.
 - **Operations research:** optimal allocation of limited resources among competing activities (interpretation given in the lecture notes).
 
-### Model 1 — Diet (cost in toman/day)
+#### Model 1 — Diet (cost in toman/day)
 
 $$
 \begin{aligned}
@@ -33,7 +54,7 @@ $$
 - **Feasibility:** A $=12$, B $=14$, all variables nonnegative.
 - **Why optimal:** multiplying the A constraint by $35/4$ and the B constraint by $15/2$ gives $\frac{65}{4}p+50s+40t\ge210$; since $p\ge0$, the cost is $\ge210$, attained by $(0,1,4)$.
 
-### Model 2 — Boats (profit in thousand toman)
+#### Model 2 — Boats (profit in thousand toman)
 
 $$
 \begin{aligned}
@@ -52,7 +73,7 @@ $$
 - **Why optimal:** $50x+80y=\frac{16}{3}(20x+15y)-\frac{170}{3}x\le\frac{16}{3}(300)=1600$, attained by $(0,20)$.
 - The original notes impose $x,y\ge0$ but **do not explicitly require integers**.
 
-### Final written-answer checklist
+#### Final written-answer checklist
 
 - [ ] Variables defined, with units and domain
 - [ ] Minimize or maximize chosen correctly
@@ -67,9 +88,9 @@ $$
 
 ---
 
-## فارسی — حفظیات ضروری و مرور سریع
+### فارسی — حفظیات ضروری و مرور سریع
 
-### مفاهیم مهم
+#### مفاهیم مهم
 
 - **متغیر تصمیم:** مجهولی که باید مقدار آن تعیین شود.
 - **تابع هدف:** کمیتی که قرار است کمینه یا بیشینه شود.
@@ -80,7 +101,7 @@ $$
 - **مقدار باقیمانده:** در قید ظرفیت از نوع $\le$، مقدار استفاده‌نشدهٔ منبع؛ در قید حداقل از نوع $\ge$، مقدار اضافه بر حداقل را مازاد می‌گوییم.
 - **تحقیق در عملیات:** تخصیص بهینهٔ منابع محدود موجود بین فعالیت‌های رقیب (برداشت مطرح‌شده در جزوه).
 
-### مثال ۱ — رژیم غذایی (هزینه به تومان در روز)
+#### مثال ۱ — رژیم غذایی (هزینه به تومان در روز)
 
 $$
 \begin{aligned}
@@ -96,7 +117,7 @@ $$
 - **کنترل قیود:** ویتامین A برابر ۱۲ و ویتامین B برابر ۱۴؛ تمام متغیرها نامنفی‌اند.
 - **دلیل بهینگی:** از جمع قید A با ضریب $35/4$ و قید B با ضریب $15/2$ نتیجه می‌شود $\frac{65}{4}p+50s+40t\ge210$؛ با $p\ge0$، هزینه دست‌کم ۲۱۰ است و جواب ما به آن می‌رسد.
 
-### مثال ۲ — تولید قایق (سود به هزار تومان)
+#### مثال ۲ — تولید قایق (سود به هزار تومان)
 
 $$
 \begin{aligned}
@@ -115,7 +136,7 @@ $$
 - **دلیل بهینگی:** $50x+80y=\frac{16}{3}(20x+15y)-\frac{170}{3}x\le1600$ و جواب $(0,20)$ به همین مقدار می‌رسد.
 - در جزوه فقط $x,y\ge0$ آمده و **صحیح بودن صریحاً ذکر نشده است**.
 
-### چک‌لیست پاسخ تشریحی
+#### چک‌لیست پاسخ تشریحی
 
 - [ ] متغیرها را با معنا، واحد و دامنه تعریف کرده‌ام.
 - [ ] تابع هدف را با جهت صحیح مینیمم/ماکزیمم نوشته‌ام.
@@ -128,7 +149,7 @@ $$
 - [ ] پاسخ را با **واحد و تفسیر** نوشته‌ام.
 - [ ] فرض‌های تکمیلی را به‌جای متن اصلی جزوه معرفی نکرده‌ام.
 
-### خودآزمایی بدون نگاه‌کردن به پاسخ
+#### خودآزمایی بدون نگاه‌کردن به پاسخ
 
 ۱. تفاوت جواب مجاز و جواب بهینه چیست؟
 
