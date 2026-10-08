@@ -14,6 +14,28 @@ Mathematical Modeling*, Kharazmi University (Fall 1405 / 2026).
 > their numbers should not be interpreted as real-world nutritional or
 > production data.
 
+## Written-exam study guide | جزوهٔ شب امتحان
+
+**Studying for a paper-based, descriptive exam?** Start with the
+**[bilingual exam-prep section](exam-prep/README.md)** — complete **English
+problem statements and written solutions followed by full Persian versions**,
+including mathematical formulations, hand calculations, optimality arguments,
+constraint checks, interpretations, and common mistakes. No coding is needed
+for this section.
+
+**برای امتحان تشریحی روی کاغذ:** از **[بخش فارسی/انگلیسیِ آمادگی امتحان](exam-prep/README.md)**
+شروع کن. صورت سؤال و حل تشریحی کامل ابتدا به انگلیسی و سپس به فارسی آمده است؛
+با تعریف متغیرها، تابع هدف، قیود، حل دستی، اثبات بهینگی، کنترل جواب و نکات
+اشتباهات رایج. **کدهای Python و امکانات محاسباتی قبلی بدون تغییر باقی مانده‌اند.**
+
+Quick access: [Modeling concepts](exam-prep/session_01/00_fundamentals.md) ·
+[Diet (EN/FA)](exam-prep/session_01/01_diet.md) ·
+[Boats (EN/FA)](exam-prep/session_01/02_boat_production.md) ·
+[Night-before review](exam-prep/session_01/quick_review.md).
+
+> The lecturer's original handwritten notes **formulate** the problems; the
+> hand-worked solutions in `exam-prep/` are independent study additions.
+
 ## Examples
 
 | Session | Problem | Type | Result (continuous formulation) |
