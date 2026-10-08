@@ -1,57 +1,55 @@
 # Mathematical Modeling Lab
 
-**Introductory Mathematical Modeling · Kharazmi University · Fall 1405 (2026)**
+[![Python tests](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/ci.yml)
 
-Bilingual, paper-exam-ready mathematical solutions **and** reproducible Python
-optimization experiments. **Choose one path**; you do not need to understand the
-Python code to study for the written exam.
+**Introductory Mathematical Modeling · Fall 1405 (2026) · Kharazmi University**
 
-## Choose your path | از کجا شروع کنم؟
+**English / فارسی · Written exam preparation + Python optimization**
 
-| Goal | Open | فارسی |
+An **independent educational repository** combining paper-based mathematical
+solutions with reproducible Python implementations. You can study for the
+written exam without running any code.
+
+## Start here | از اینجا شروع کن
+
+| I want to... | Go to | توضیح |
 | --- | --- | --- |
-| **Review the whole term before the exam** | **[EXAM_NIGHT.md](EXAM_NIGHT.md)** | **تنها فایل مرور شب امتحان، همه جلسات** |
-| Learn a lesson and hand-solve its problems | [Sessions](sessions/README.md) | جزوه کامل انگلیسی و فارسی، گام‌به‌گام |
-| Run the actual Python models | [Examples](examples/session_01/) | اجرای حل‌های عددی |
-| Understand the mathematical implementation | [Python package](src/modeling_lab/) | مدل، حل‌کننده، ترسیم، حساسیت و اعتبارسنجی |
-| Understand cross-cutting technical methods | [Technical docs](docs/) | مستندات فنی |
+| **Review for the final exam** | **[EXAM_NIGHT.md](EXAM_NIGHT.md)** | **تنها فایل مرور تجمعی کل ترم** |
+| Study full written solutions | [Course sessions](sessions/README.md) | صورت سؤال و حل تشریحی انگلیسی و فارسی |
+| Run class examples | [Python examples](examples/session_01/) | اجرای مدل‌ها و مشاهده جواب عددی |
+| Explore the reusable code | [Modeling package](src/modeling_lab/) | حل‌کننده، نمودار، حساسیت و اعتبارسنجی |
 
-## Course sessions | جلسات
+## Course coverage | جلسات درس
 
-| Session | Handwritten-exam notes | Computational implementation |
+| Session | Written notes (EN/FA) | Runnable examples |
 | --- | --- | --- |
-| **01 — Introduction, diet, boat production** | [Session 01 (EN/FA)](sessions/session_01/README.md) | [Run examples](examples/session_01/) |
+| **01 — Foundations, diet, boat production** | [Session 01](sessions/session_01/README.md) | [Session 01 scripts](examples/session_01/) |
 
-**Source vs. extensions:** The four-page session-01 handwritten notes
-formulate the diet and production models but do not compute their optimal
-solutions. Full hand solutions, proofs, the integer-model variant, and numerical
-experiments here are **independent educational extensions**. The published
-repository does not include the scanned original. This material is not an
-official exam syllabus or grading rubric.
+New sessions are added as the course progresses.
 
-## One cumulative exam review | فقط یک فایل شب امتحان
+## Written exam workflow | مطالعهٔ شب امتحان
 
-**[Read EXAM_NIGHT.md — مرور یکپارچهٔ تمام ترم](EXAM_NIGHT.md)**
+- **[EXAM_NIGHT.md](EXAM_NIGHT.md)** is the **single cumulative review file**.
+  It is assembled in session order from the marked review sections in each
+  session's `README.md`.
+- Complete hand-worked formulations, solutions, explanations, and optimality
+  arguments live in `sessions/session_NN/`. They are provided in **English and Persian**.
+- The Python code and technical analyses remain separate: **no programming is
+  needed for the paper exam**.
 
-There are **no separate `quick_review.md` files**. Each session's `README.md`
-contains a marked review excerpt. The standard-library-only generator compiles
-all session excerpts in numerical order into the **single, bilingual**
-`EXAM_NIGHT.md` at the repository root.
-
-After editing or adding a session, run:
+After adding or updating a session, rebuild and check the cumulative review:
 
 ```bash
 python3 scripts/build_exam_night.py
 python3 scripts/build_exam_night.py --check
 ```
 
-GitHub Actions rejects stale reviews. Detailed handwritten solutions remain
-in `sessions/session_NN/`, so the one-file summary remains concise.
-See the [contribution workflow](sessions/README.md#adding-a-new-session--افزودن-جلسه-جدید).
+CI checks that `EXAM_NIGHT.md` is up to date. For the process and templates,
+see [Sessions](sessions/README.md) and [Templates](templates/).
 
-## Python quick start | اجرای کدها
+## Python quick start
 
-Requires Python **3.11+**.
+Requires **Python 3.11+**.
 
 ```bash
 python3 -m venv .venv
@@ -65,25 +63,32 @@ python -m modeling_lab boats --integer --plot plots/boats.png
 python -m pytest -q
 ```
 
-Additional reusable tools:
+**Computational references:** [Sensitivity analysis](docs/sensitivity_analysis.md) ·
+[Solution verification](docs/solution_verification.md) ·
+[Session 01 model notes](sessions/session_01/computational_notes.md)
 
-- [Sensitivity analysis](docs/sensitivity_analysis.md) — parameter sweeps, LP shadow prices, LP/MILP differences.
-- [Solution verification](docs/solution_verification.md) — independent feasibility checks and LP dual witnesses.
-- [Session 01 computational notes](sessions/session_01/computational_notes.md) — coefficients, assumptions, solver outputs.
-
-## Repository map
+## Repository structure
 
 ```text
-EXAM_NIGHT.md               # the ONLY cumulative exam-night review
-sessions/                   # sessions, paper solutions EN/FA, session source excerpts
-examples/                   # runnable session examples
-src/modeling_lab/            # shared mathematical models + SciPy solver tooling
-docs/                        # cross-session computational methods
-templates/                   # separate written/computational authoring templates
-scripts/build_exam_night.py  # build/check the one-file final exam review
-tests/                       # automated regression tests
-.github/workflows/ci.yml    # Python 3.11 / 3.12 and review synchronization
+EXAM_NIGHT.md              # single cumulative exam review
+sessions/                  # written solutions + per-session review excerpts
+examples/                  # runnable Python examples grouped by session
+src/modeling_lab/           # reusable model/solver/plot/analysis code
+docs/                      # technical documentation
+templates/                 # written-solution and computational templates
+scripts/build_exam_night.py # rebuild / check cumulative exam review
+tests/                     # automated regression tests
+.github/workflows/ci.yml   # Python 3.11 / 3.12 CI
 ```
 
-Generated plots under `plots/` are gitignored. Model parameters in the course
-examples are pedagogical, not real-world pricing or nutrition advice.
+## Academic scope and attribution
+
+The handwritten notes for Session 01 present the **diet** and **boat production**
+model formulations, but **do not solve them numerically**. The full handwritten
+solutions, optimality arguments, integer-programming variant, visualizations,
+and sensitivity experiments are independent educational extensions. The scanned
+source notes are not redistributed here.
+
+This is **not an official course resource**, exam syllabus, or grading rubric.
+The example data are instructional and should not be treated as real-world
+nutrition or pricing guidance.
