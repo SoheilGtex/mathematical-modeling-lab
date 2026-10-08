@@ -18,5 +18,7 @@ jobs:
           cache: pip
       - name: Install project and test dependencies
         run: python -m pip install -e ".[dev]"
+      - name: Check cumulative exam-night review
+        run: python scripts/build_exam_night.py --check
       - name: Run tests
         run: python -m pytest -q
