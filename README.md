@@ -78,12 +78,34 @@ under `plots/` are ignored by Git; intentionally publish selected figures under
 
 The diet problem has three variables and cannot be plotted by this 2D routine.
 
+## Sensitivity analysis (session 01)
+
+One-at-a-time parameter sweeps re-solve the model for each scenario. Results
+include physical-unit parameters, changed optimal decisions, objective values,
+scenario statuses and optional PNGs. Local **shadow prices are reported for
+continuous LP RHS parameters only**, never as MILP shadow prices.
+
+```bash
+python -m modeling_lab boats --list-parameters
+python -m modeling_lab boats --sensitivity machine_minutes \
+  --values 240 300 360 400 --sensitivity-plot plots/machine_lp.png
+python -m modeling_lab boats --integer --sensitivity machine_minutes \
+  --values 300 310 315 400 --sensitivity-plot plots/machine_milp.png
+python -m modeling_lab diet --sensitivity vitamin_A_requirement \
+  --values 10 12 14 --json
+```
+
+Read the [sensitivity analysis notes](docs/sensitivity_analysis.md) for sign
+conventions, sample results, interpretation and limitations. This feature is
+an independent extension beyond the original handwritten class notes.
+
 ## Repository structure
 
 ```text
 src/modeling_lab/
   linear.py            # validated model + linprog/milp adapter
   visualization.py     # coefficient-driven feasible-region plots
+  sensitivity.py       # RHS/coefficients scenarios and local LP duals
   problems.py          # class problem data (single source of truth)
   __main__.py          # CLI and JSON output
 examples/session_01/
@@ -92,9 +114,11 @@ examples/session_01/
 docs/
   session_01.md        # formulation, assumptions, interpretation
   example_template.md  # checklist for new class examples
+  sensitivity_analysis.md # sensitivity mathematics and examples
 tests/
   test_session_01.py   # regression and feasibility tests
   test_visualization.py # plot geometry, PNG and CLI tests
+  test_sensitivity.py   # parametric re-solves and dual sign tests
 .github/workflows/
   ci.yml               # automated tests on pushes and PRs
 ```

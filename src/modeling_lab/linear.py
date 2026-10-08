@@ -15,7 +15,11 @@ from scipy.optimize import Bounds, LinearConstraint, linprog, milp
 
 
 class OptimizationError(RuntimeError):
-    """Raised if an optimization solver does not return a certified optimum."""
+    """Raised if a solver does not return a certified optimum."""
+
+    def __init__(self, message: str, *, status: int | None = None) -> None:
+        super().__init__(message)
+        self.status = status
 
 
 @dataclass(frozen=True)
@@ -100,7 +104,10 @@ def solve(model: LinearProgram, *, integer_variables: Iterable[str] = ()) -> Sol
         solver = "scipy.optimize.linprog (HiGHS)"
 
     if not result.success or result.x is None:
-        raise OptimizationError(f"{model.name}: solver status={result.status}; {result.message}")
+        raise OptimizationError(
+            f"{model.name}: solver status={result.status}; {result.message}",
+            status=int(result.status),
+        )
 
     x = np.asarray(result.x, dtype=float)
     slack = b_ub - a_ub @ x
