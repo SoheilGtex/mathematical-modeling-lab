@@ -12,6 +12,7 @@ only for the final, cumulative review.
 | --- | --- | --- |
 | 01 | Modeling fundamentals, diet, boat production / مبانی مدل‌سازی، رژیم غذایی، تولید قایق | [Session 01](session_01/README.md) |
 | 02 | Transportation, TV production / حمل‌ونقل، تولید تلویزیون | [Session 02](session_02/README.md) |
+| 03 | Numerical transportation, five-month production/inventory / حمل‌ونقل عددی و تولید پنج‌ماهه | [Session 03](session_03/README.md) |
 
 The original four-page session-one note **does not solve** the example models.
 Hand solutions and optimality arguments are independently derived educational

@@ -10,13 +10,11 @@
 
 The documentation opens in **English**. Use the small language selector at the top of any page to read the **complete Persian translation of that same page** (RTL). Dates and the academic term follow each language's calendar: Gregorian in English, Solar Hijri in Persian.
 
-The reader-facing site has a short introduction, a cumulative exam review and two course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
+The reader-facing site has a short introduction, a cumulative exam review and the course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
 
-| Read | Contents |
-| --- | --- |
-| [Exam review](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) | One cumulative written-exam guide for both sessions |
-| [Session 01](https://soheilgtex.github.io/mathematical-modeling-lab/session-01/) | Fundamentals, diet, and boat production |
-| [Session 02](https://soheilgtex.github.io/mathematical-modeling-lab/session-02/) | Transportation and television production (60,000 person-hours) |
+**Study:** [Complete course notes](https://soheilgtex.github.io/mathematical-modeling-lab/) — select a session from the site navigation; the home page does not repeat the growing session list.
+
+**Exam preparation:** [Cumulative exam review](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) — one continuously updated page for all sessions.
 
 **Scope and attribution:** Lecture formulations come from student-supplied notes. Worked optima, optimality proofs, integer variants and the numeric transportation demonstration are independent educational additions. This is not an official university resource. The lecture scans are not redistributed.
 
@@ -38,13 +36,16 @@ python -m modeling_lab boats --integer --plot plots/boats.png
 python -m modeling_lab televisions --verify
 python -m modeling_lab televisions --integer --verify
 python -m modeling_lab transport-demo --verify
+python -m modeling_lab transport-lecture --verify
+python -m modeling_lab production-plan --verify
 python -m pytest -q
 ```
 
 **Additional technical notes (source files):** [Sensitivity analysis](docs/sensitivity_analysis.md) ·
 [Solution verification](docs/solution_verification.md) ·
 [Session 01 model notes](sessions/session_01/computational_notes.md) ·
-[Session 02 model notes](sessions/session_02/computational_notes.md)
+[Session 02 model notes](sessions/session_02/computational_notes.md) ·
+[Session 03 model notes](sessions/session_03/computational_notes.md)
 
 ## Build the bilingual documentation locally
 
@@ -96,6 +97,10 @@ a TV production example with **60,000 person-hours of labor**, clarified
 by the student after the initial transcription of the handwriting was
 ambiguous. Numeric transport data in the Python demo are independently
 constructed and are not presented as lecture data.
+
+The four handwritten Session 03 pages contain the numerical transport and five-month
+production-planning models. The optimizers and exact hand proofs are independent
+educational additions. Both the numerical transport and production costs are stated in toman.
 
 This is **not an official course resource**, exam syllabus, or grading rubric.
 The example data are instructional and should not be treated as real-world

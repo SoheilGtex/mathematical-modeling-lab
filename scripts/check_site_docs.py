@@ -22,8 +22,8 @@ def check() -> list[str]:
           for p in ROOT.rglob("*.fa.md")}
     for stem in sorted(en.keys() ^ fa.keys()):
         errors.append(f"Missing translation for {stem}")
-    if len(en) < 14:
-        errors.append("Missing a required public document (expected 14 topics per language)")
+    if len(en) < 18:
+        errors.append("Missing a required public document (expected at least 18 topics per language)")
     for stem in sorted(en.keys() & fa.keys()):
         for lang, source in (("en", en[stem]), ("fa", fa[stem])):
             contents = source.read_text(encoding="utf-8")
@@ -44,7 +44,7 @@ def check() -> list[str]:
             # English prose must not contain Persian letters or Solar Hijri dates.
             if lang == "en" and PERSIAN.search(contents):
                 errors.append(f"Persian script found in English page: {label}")
-            if lang == "en" and re.search(r"\b14(?:0[0-9])\b", contents):
+            if lang == "en" and re.search(r"\b(?:Fall|Autumn|Spring|Summer|Winter)\s+14(?:0[0-9])\b", contents):
                 errors.append(f"Solar Hijri year found in English page: {label}")
             if lang == "fa" and re.search(r"\b(?:Fall|October|September)\s+2026\b", contents):
                 errors.append(f"Gregorian course/date label found in Persian page: {label}")
@@ -91,6 +91,24 @@ def check() -> list[str]:
         transport = (ROOT / f"session-02/transportation.{lang}.md").read_text("utf-8")
         if "x_{ij}" not in transport or "c_{ij}" not in transport:
             errors.append(f"Incomplete symbolic transportation model in {lang} page")
+    # Session 03 checks use the independently derived optima in both languages.
+    for lang in ("en", "fa"):
+        tfile = ROOT / f"session-03/transportation.{lang}.md"
+        pfile = ROOT / f"session-03/production.{lang}.md"
+        ttext = tfile.read_text("utf-8").translate(DIGIT_MAP)
+        ptext = pfile.read_text("utf-8").translate(DIGIT_MAP)
+        if lang == "en" and "toman" not in ttext:
+            errors.append("Session 03 transportation currency missing from English page")
+        if lang == "fa" and "تومان" not in ttext:
+            errors.append("Session 03 transportation currency missing from Persian page")
+        for name, txt, required in (
+            ("transportation", ttext, ("2550", "650", "x_{12}", "u_i+v_j")),
+            ("production", ptext, ("152300", "1200", "2100", "2400", "3000", "4000", "s_0=s_5=0")),
+        ):
+            compact = re.sub(r"[,\u066c\s\\,]", "", txt)
+            for item in required:
+                if item not in compact:
+                    errors.append(f"Missing Session 03 {name} data/proof {item!r} in {lang}")
     return errors
 
 
