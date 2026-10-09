@@ -4,9 +4,9 @@ The handwritten notes formulate the diet and boat production models but do not c
 
 ## Reading order
 
-1. [Fundamentals](fundamentals.md) — full written solution
-2. [Minimum-cost diet](diet.md) — full written solution
-3. [Boat production](boats.md) — full written solution
-4. [Computational notes](computation.md) — optional Python information
+1. [Fundamentals](fundamentals.md) — basic concepts and how to formulate a model.
+2. [Minimum-cost diet](diet.md) — formulation, written solution, and proof of optimality.
+3. [Boat production](boats.md) — formulation, written solution, and proof of optimality.
+4. [Computational notes](computation.md) — optional Python examples.
 
-Return to the [cumulative exam review](../exam.md).
+[Exam Review](../exam.md)

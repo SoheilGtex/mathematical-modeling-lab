@@ -48,6 +48,9 @@ def check() -> list[str]:
                 errors.append(f"Solar Hijri year found in English page: {label}")
             if lang == "fa" and re.search(r"\b(?:Fall|October|September)\s+2026\b", contents):
                 errors.append(f"Gregorian course/date label found in Persian page: {label}")
+            # Do not expose internal translation labels to readers.
+            if re.search(r"(?m)^\s*\*\*(?:EN|FA|English|Persian|فارسی|انگلیسی):\*\*", contents):
+                errors.append(f"Redundant language label in public page: {label}")
             for match in LINK.finditer(contents):
                 dest = unquote(urlsplit(match.group(1)).path)
                 if not dest or dest.startswith("/") or dest.startswith("#"):
@@ -67,6 +70,18 @@ def check() -> list[str]:
             errors.append(f"Wrong course title or academic term in {lang} homepage")
         if not homepage.startswith("---\nhide:\n  - toc\n---\n"):
             errors.append(f"Homepage table of contents is not hidden: {lang}")
+        if re.search(r"\]\(session-\d+/index\.md\)", homepage):
+            errors.append(f"Homepage duplicates the session navigation: {lang}")
+        if ("both sessions" in homepage or "دو جلسه" in homepage):
+            errors.append(f"Homepage refers to a fixed number of sessions: {lang}")
+        exam_page = (ROOT / f"exam.{lang}.md").read_text(encoding="utf-8")
+        exam_heading = exam_page.splitlines()[0]
+        if "Sessions 01–02" in exam_heading or "جلسات اول و دوم" in exam_heading:
+            errors.append(f"Exam review title is tied to the current sessions: {lang}")
+        # A single cumulative review should link to every published session.
+        for session_dir in sorted(ROOT.glob("session-[0-9][0-9]")):
+            if session_dir.is_dir() and f"{session_dir.name}/" not in exam_page:
+                errors.append(f"Session missing from {lang} cumulative review: {session_dir.name}")
     # Key facts must appear in BOTH languages, not merely a language fallback.
     for lang in ("en", "fa"):
         src = (ROOT / f"session-02/televisions.{lang}.md").read_text("utf-8").translate(DIGIT_MAP)
@@ -85,4 +100,4 @@ if __name__ == "__main__":
         for problem in problems:
             print(f"ERROR: {problem}", file=sys.stderr)
         sys.exit(1)
-    print("Site docs verified: 14 complete EN/FA pairs, local links and core data.")
+    print(f"Site docs verified: {len(list(ROOT.rglob('*.en.md')))} complete EN/FA pairs, local links and core data.")
