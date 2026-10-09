@@ -1,6 +1,6 @@
 # Session 01 — Introduction to Mathematical Modeling | جلسهٔ اول
 
-**Course:** Introductory Mathematical Modeling, Kharazmi University, Fall 1405.
+**Course:** Elementary Mathematical Modeling, Kharazmi University, Fall 2026.
 
 **Source boundary / تفکیک منبع:** The handwritten session-one notes formulate the diet
 and boat production problems but do not compute their optimal solutions.
