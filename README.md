@@ -24,6 +24,7 @@ written exam without running any code.
 | Session | Written notes (EN/FA) | Runnable examples |
 | --- | --- | --- |
 | **01 — Foundations, diet, boat production** | [Session 01](sessions/session_01/README.md) | [Session 01 scripts](examples/session_01/) |
+| **02 — Transportation, TV production** | [Session 02](sessions/session_02/README.md) | [Session 02 scripts](examples/session_02/) |
 
 New sessions are added as the course progresses.
 
@@ -60,12 +61,16 @@ python -m pip install -e ".[dev]"
 python -m modeling_lab diet --verify
 python -m modeling_lab boats --integer --verify
 python -m modeling_lab boats --integer --plot plots/boats.png
+python -m modeling_lab televisions --verify
+python -m modeling_lab televisions --integer --verify
+python -m modeling_lab transport-demo --verify
 python -m pytest -q
 ```
 
 **Computational references:** [Sensitivity analysis](docs/sensitivity_analysis.md) ·
 [Solution verification](docs/solution_verification.md) ·
-[Session 01 model notes](sessions/session_01/computational_notes.md)
+[Session 01 model notes](sessions/session_01/computational_notes.md) ·
+[Session 02 model notes](sessions/session_02/computational_notes.md)
 
 ## Repository structure
 
@@ -88,6 +93,12 @@ model formulations, but **do not solve them numerically**. The full handwritten
 solutions, optimality arguments, integer-programming variant, visualizations,
 and sensitivity experiments are independent educational extensions. The scanned
 source notes are not redistributed here.
+
+The single photographed Session 02 page gives a symbolic transport problem and
+a TV production example with **60,000 person-hours of labor**, clarified
+by the student after the initial transcription of the handwriting was
+ambiguous. Numeric transport data in the Python demo are independently
+constructed and are not presented as lecture data.
 
 This is **not an official course resource**, exam syllabus, or grading rubric.
 The example data are instructional and should not be treated as real-world

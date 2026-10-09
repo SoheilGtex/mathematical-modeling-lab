@@ -11,6 +11,7 @@ only for the final, cumulative review.
 | Session | Topics / مباحث | Full notes |
 | --- | --- | --- |
 | 01 | Modeling fundamentals, diet, boat production / مبانی مدل‌سازی، رژیم غذایی، تولید قایق | [Session 01](session_01/README.md) |
+| 02 | Transportation, TV production / حمل‌ونقل، تولید تلویزیون | [Session 02](session_02/README.md) |
 
 The original four-page session-one note **does not solve** the example models.
 Hand solutions and optimality arguments are independently derived educational
@@ -18,7 +19,7 @@ extensions; they are not claims about guaranteed exam requirements.
 
 ## Adding a new session | افزودن جلسه جدید
 
-1. Create `sessions/session_02/README.md` (and the complete English/Persian
+1. Create `sessions/session_NN/README.md` (and the complete English/Persian
    written solutions for its examples, starting with the [written template](../templates/written_solution.md)).
 2. In that session's README, describe the source and link the full solutions.
    Include exactly one block between the following markers:
@@ -37,7 +38,7 @@ extensions; they are not claims about guaranteed exam requirements.
    `quick_review.md` or edit `EXAM_NIGHT.md` manually.**
 4. Run `python3 scripts/build_exam_night.py --check` and `python -m pytest -q`.
    CI enforces the update so it cannot be forgotten when submitting a PR.
-5. For runnable models, add a Python entry under `examples/session_02/`,
+5. For runnable models, add a Python entry under `examples/session_NN/`,
    define its data in `src/modeling_lab/problems.py` or a suitable model module,
    and add regression tests. Use the [computational template](../templates/computational_example.md).
 6. Update the two short session-index tables in this file and in the root README.

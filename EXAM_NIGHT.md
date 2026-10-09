@@ -14,6 +14,7 @@ CI runs `python scripts/build_exam_night.py --check` to reject stale output.
 ## Contents | فهرست جلسات
 
 - [Session 01 | جلسهٔ 01](#session-01)
+- [Session 02 | جلسهٔ 02](#session-02)
 
 ---
 
@@ -164,3 +165,92 @@ $$
 ۶. اگر در مثال قایق‌ها قید صحیح بودن اضافه شود، آیا جواب تغییر می‌کند؟ **چرا؟**
 
 **برای پاسخ و اثبات کامل، به فایل‌های مثال‌ها مراجعه کن؛ این صفحه عمداً خلاصه است.**
+
+---
+
+## Session 02
+
+**جلسهٔ 02**
+
+**EN:** Exam-ready summaries only. For fully justified answers, read [Transportation](sessions/session_02/01_transportation.md) and [Television production](sessions/session_02/02_television_production.md).
+
+**فارسی:** این بخش مرور سریع است. برای پاسخ تشریحی کامل و اثبات‌ها، [حمل‌ونقل](sessions/session_02/01_transportation.md) و [تولید تلویزیون](sessions/session_02/02_television_production.md) را بخوان.
+
+#### English — Essential formulations
+
+**1. Transportation (lecture's symbolic example)**
+
+- $x_{ij}$: goods shipped from origin $i$ to destination $j$; $a_i$: origin supply; $b_j$: exact destination demand; $c_{ij}$: unit shipping cost.
+
+$$
+\boxed{\begin{aligned}
+\min\quad & Z=\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}\\
+\mathrm{s.t.}\quad&\sum_{j=1}^{n}x_{ij}\le a_i &&\forall i\\
+&\sum_{i=1}^{m}x_{ij}=b_j &&\forall j\\
+&x_{ij}\ge0 &&\forall i,j.
+\end{aligned}}
+$$
+
+- Minimum cost: **min**. Source capacity: **$\le$**. Destination demand: **$=$**. Nonnegativity is mandatory.
+- Necessary feasibility check: $\sum_i a_i\ge\sum_j b_j$. For a fully connected network with no extra route bounds, this is sufficient for continuous flows too.
+- **The lecture provides no numbers for transportation**, so there is no lecturer-specified numeric optimum.
+
+**2. Television production (lecture's production example)**
+
+- $x_1$: color TVs, $x_2$: black-and-white TVs; profit in dollars; labor in person-hours.
+
+$$
+\boxed{\begin{aligned}
+\max\quad& Z=60x_1+30x_2\\
+\mathrm{s.t.}\quad &20x_1+15x_2\le H\\
+&x_1\le2000,\quad x_2\le4000\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+- **Corrected labor capacity:** $H=60,000$ person-hours, as clarified by the student.
+- **Continuous optimum:** $(x_1,x_2)=(2000,4000/3)$ with $Z_{\max}=160,000$. Proof: $Z=2(20x_1+15x_2)+20x_1\le120,000+40,000=160,000$; equality is attained.
+- **Integer extension not written in the note:** $(2000,1333)$ with $Z=159,990$; all integer profits are multiples of 30 and $Z\le160,000$.
+
+**Checklist:** define variables with meanings/units; justify objective and each constraint; preserve the inequality directions; check the corrected labor capacity; verify candidate feasibility; prove optimality instead of merely quoting Python.
+
+---
+
+#### فارسی — مرور سریع شب امتحان
+
+**۱. مدل حمل‌ونقل (مدل نمادینِ جزوه)**
+
+- $x_{ij}$: مقدار کالای ارسالی از مبدأ $i$ به مقصد $j$.
+- $a_i$: ظرفیت مبدأ؛ $b_j$: تقاضای مقصد؛ $c_{ij}$: هزینهٔ واحد حمل.
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}\\
+\mathrm{s.t.}\quad&\sum_{j=1}^{n}x_{ij}\le a_i\quad\forall i\\
+&\sum_{i=1}^{m}x_{ij}=b_j\quad\forall j\\
+&x_{ij}\ge0\quad\forall i,j.
+\end{aligned}}
+$$
+
+- ظرفیت مبدأ $\le$، تقاضای مقصد **تساوی** و تمام متغیرها نامنفی‌اند.
+- از جمع قیود، شرط لازم امکان‌پذیری $\sum_i a_i\ge\sum_j b_j$ به دست می‌آید.
+- **در جزوه برای این مدل دادهٔ عددی نداریم**؛ جواب بهینهٔ عددی منتسب به استاد وجود ندارد.
+
+**۲. تولید تلویزیون**
+
+- $x_1$: تعداد تلویزیون رنگی؛ $x_2$: تعداد تلویزیون سیاه‌وسفید.
+
+$$
+\boxed{\begin{aligned}
+\max\quad&Z=60x_1+30x_2\\
+\mathrm{s.t.}\quad&20x_1+15x_2\le H\\
+&x_1\le2000,\quad x_2\le4000\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+- **ظرفیت تصحیح‌شده:** بنا بر اصلاح دانشجو $H=60\,000$ نفرساعت است.
+- **مدل پیوسته:** $x_1^*=2000$, $x_2^*=4000/3$ و سود $160\,000$ دلار. **اثبات:** $Z=2(20x_1+15x_2)+20x_1\le160\,000$ و جواب این کران را می‌گیرد.
+- **توسعهٔ صحیح‌بودن تعداد دستگاه (نه متن استاد):** $(2000,1333)$ با سود $159\,990$ دلار؛ این مقدار بزرگ‌ترین مضرب ۳۰ِ کمتر از $160\,000$ است.
+
+**چک‌لیست نمره‌آور:** متغیرها، دامنه و واحد را توضیح بده؛ تابع هدف و قیود را از متن استخراج کن؛ جهت نامساوی‌ها را کنترل کن؛ ظرفیت ۶۰٬۰۰۰ نفرساعت را درست بنویس؛ جواب را در تمام قیود جای‌گذاری و **بهینگی را ثابت کن**.
