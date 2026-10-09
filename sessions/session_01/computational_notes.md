@@ -1,6 +1,6 @@
 # Session 01 — Mathematical models, constraints, and optimization
 
-**Course:** Introductory Mathematical Modeling, Kharazmi University (Fall 1405).
+**Course:** Elementary Mathematical Modeling, Kharazmi University (Fall 2026).
 
 This document reformulates the examples from the course notes. The solver and
 numerical solutions are **our extensions**: the handwritten notes present
