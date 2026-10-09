@@ -1,0 +1,85 @@
+site_name: Mathematical Modeling Lab
+site_description: Independent course notes with complete English and Persian written solutions.
+site_url: https://soheilgtex.github.io/mathematical-modeling-lab/
+repo_url: https://github.com/SoheilGtex/mathematical-modeling-lab
+repo_name: SoheilGtex/mathematical-modeling-lab
+edit_uri: ''
+docs_dir: site_docs
+site_dir: _site
+copyright: Copyright © 2026 Soheil Salmani · Original content licensed under MIT
+
+theme:
+  name: material
+  language: en
+  palette:
+    scheme: default
+    primary: blue grey
+    accent: blue grey
+  features:
+    - navigation.top
+    - content.code.copy
+  font: false
+
+plugins:
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: false
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: fa
+          name: فارسی
+          build: true
+          copyright: "حق نشر © ۱۴۰۵ سهیل سلمانی · محتوای تألیفی تحت مجوز MIT"
+          nav_translations:
+            Overview: معرفی
+            Exam Review: مرور شب امتحان
+            Session 01: جلسهٔ اول
+            Session 02: جلسهٔ دوم
+            Introduction: معرفی جلسه
+            Fundamentals: مبانی مدل‌سازی
+            Diet: رژیم غذایی
+            Boat Production: تولید قایق
+            Transportation: حمل‌ونقل
+            Television Production: تولید تلویزیون
+            Technical Notes: مطالب فنی (اختیاری)
+            Computational Overview: نمای کلی محاسبات
+            Session 01 Computation: محاسبات جلسهٔ اول
+            Session 02 Computation: محاسبات جلسهٔ دوم
+            Sensitivity Analysis: تحلیل حساسیت
+            Solution Verification: اعتبارسنجی جواب
+
+nav:
+  - Overview: index.md
+  - Exam Review: exam.md
+  - Session 01:
+      - Introduction: session-01/index.md
+      - Fundamentals: session-01/fundamentals.md
+      - Diet: session-01/diet.md
+      - Boat Production: session-01/boats.md
+  - Session 02:
+      - Introduction: session-02/index.md
+      - Transportation: session-02/transportation.md
+      - Television Production: session-02/televisions.md
+  - Technical Notes:
+      - Computational Overview: reference/index.md
+      - Session 01 Computation: session-01/computation.md
+      - Session 02 Computation: session-02/computation.md
+      - Sensitivity Analysis: reference/sensitivity.md
+      - Solution Verification: reference/verification.md
+
+markdown_extensions:
+  - tables
+  - attr_list
+  - toc:
+      permalink: false
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+extra_css:
+  - assets/site.css

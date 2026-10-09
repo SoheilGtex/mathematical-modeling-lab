@@ -20,5 +20,7 @@ jobs:
         run: python -m pip install -e ".[dev]"
       - name: Check cumulative exam-night review
         run: python scripts/build_exam_night.py --check
+      - name: Check bilingual documentation completeness
+        run: python scripts/check_site_docs.py
       - name: Run tests
         run: python -m pytest -q

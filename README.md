@@ -2,51 +2,25 @@
 
 [![Python tests](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/ci.yml)
 
-**Introductory Mathematical Modeling · Fall 1405 (2026) · Kharazmi University**
+**Elementary Mathematical Modeling · Fall 2026 · Kharazmi University**
 
-**English / فارسی · Written exam preparation + Python optimization**
+**Independent course notes and reproducible Python models by Soheil Salmani.**
 
-An **independent educational repository** combining paper-based mathematical
-solutions with reproducible Python implementations. You can study for the
-written exam without running any code.
+### [Read the complete course notes →](https://soheilgtex.github.io/mathematical-modeling-lab/)
 
-## Start here | از اینجا شروع کن
+The documentation opens in **English**. Use the small language selector at the top of any page to read the **complete Persian translation of that same page** (RTL). Dates and the academic term follow each language's calendar: Gregorian in English, Solar Hijri in Persian.
 
-| I want to... | Go to | توضیح |
-| --- | --- | --- |
-| **Review for the final exam** | **[EXAM_NIGHT.md](EXAM_NIGHT.md)** | **تنها فایل مرور تجمعی کل ترم** |
-| Study full written solutions | [Course sessions](sessions/README.md) | صورت سؤال و حل تشریحی انگلیسی و فارسی |
-| Run class examples | [Python examples](examples/session_01/) | اجرای مدل‌ها و مشاهده جواب عددی |
-| Explore the reusable code | [Modeling package](src/modeling_lab/) | حل‌کننده، نمودار، حساسیت و اعتبارسنجی |
+The reader-facing site has a short introduction, a cumulative exam review and two course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
 
-## Course coverage | جلسات درس
+| Read | Contents |
+| --- | --- |
+| [Exam review](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) | One cumulative written-exam guide for both sessions |
+| [Session 01](https://soheilgtex.github.io/mathematical-modeling-lab/session-01/) | Fundamentals, diet, and boat production |
+| [Session 02](https://soheilgtex.github.io/mathematical-modeling-lab/session-02/) | Transportation and television production (60,000 person-hours) |
 
-| Session | Written notes (EN/FA) | Runnable examples |
-| --- | --- | --- |
-| **01 — Foundations, diet, boat production** | [Session 01](sessions/session_01/README.md) | [Session 01 scripts](examples/session_01/) |
-| **02 — Transportation, TV production** | [Session 02](sessions/session_02/README.md) | [Session 02 scripts](examples/session_02/) |
+**Scope and attribution:** Lecture formulations come from student-supplied notes. Worked optima, optimality proofs, integer variants and the numeric transportation demonstration are independent educational additions. This is not an official university resource. The lecture scans are not redistributed.
 
-New sessions are added as the course progresses.
-
-## Written exam workflow | مطالعهٔ شب امتحان
-
-- **[EXAM_NIGHT.md](EXAM_NIGHT.md)** is the **single cumulative review file**.
-  It is assembled in session order from the marked review sections in each
-  session's `README.md`.
-- Complete hand-worked formulations, solutions, explanations, and optimality
-  arguments live in `sessions/session_NN/`. They are provided in **English and Persian**.
-- The Python code and technical analyses remain separate: **no programming is
-  needed for the paper exam**.
-
-After adding or updating a session, rebuild and check the cumulative review:
-
-```bash
-python3 scripts/build_exam_night.py
-python3 scripts/build_exam_night.py --check
-```
-
-CI checks that `EXAM_NIGHT.md` is up to date. For the process and templates,
-see [Sessions](sessions/README.md) and [Templates](templates/).
+---
 
 ## Python quick start
 
@@ -67,19 +41,42 @@ python -m modeling_lab transport-demo --verify
 python -m pytest -q
 ```
 
-**Computational references:** [Sensitivity analysis](docs/sensitivity_analysis.md) ·
+**Additional technical notes (source files):** [Sensitivity analysis](docs/sensitivity_analysis.md) ·
 [Solution verification](docs/solution_verification.md) ·
 [Session 01 model notes](sessions/session_01/computational_notes.md) ·
 [Session 02 model notes](sessions/session_02/computational_notes.md)
 
-## Repository structure
+## Build the bilingual documentation locally
+
+```bash
+python -m pip install -r requirements-docs.txt
+python scripts/check_site_docs.py
+python -m mkdocs serve
+# Build verification: python -m mkdocs build --strict
+```
+
+GitHub Pages publishes the docs using `.github/workflows/pages.yml` after a
+successful push to `main`. Configure **Settings → Pages → Build and deployment →
+GitHub Actions** once in the repository settings. Both languages use equivalent
+paths; the selector stays on the current topic.
+
+When adding a session, add the `*.en.md` and `*.fa.md` pages together, update
+`mkdocs.yml` navigation, and run the documentation checks. Keep course-notes
+content separate from independently derived solutions. Date labels must use
+Gregorian dates in English and Solar Hijri dates in Persian (for example,
+**Fall 2026** (EN) / **Autumn 1405 SH** (FA)). Git metadata and the legal MIT copyright year
+are not converted.
+
+## Repository structure (for developers)
 
 ```text
-EXAM_NIGHT.md              # single cumulative exam review
+EXAM_NIGHT.md              # source-generated cumulative review (legacy EN/FA source)
 sessions/                  # written solutions + per-session review excerpts
 examples/                  # runnable Python examples grouped by session
 src/modeling_lab/           # reusable model/solver/plot/analysis code
-docs/                      # technical documentation
+docs/                      # technical documentation source
+site_docs/                 # complete English and Persian website pages
+mkdocs.yml                  # quiet, bilingual GitHub Pages navigation
 templates/                 # written-solution and computational templates
 scripts/build_exam_night.py # rebuild / check cumulative exam review
 tests/                     # automated regression tests
