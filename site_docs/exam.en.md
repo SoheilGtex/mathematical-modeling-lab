@@ -104,3 +104,39 @@ $$
 - **Integer extension not written in the note:** $(2000,1333)$ with $Z=159,990$; all integer profits are multiples of 30 and $Z\le160,000$.
 
 **Written-answer checklist:** Define the variables, units, and domains; derive the objective and constraints from the problem statement; check inequality directions and the confirmed labor capacity; verify feasibility; and justify optimality rather than simply reporting the solver output.
+
+
+## Session 03
+
+**Full worked solutions:** [Numerical transportation](session-03/transportation.md) and [five-month production/inventory](session-03/production.md).
+
+### Numerical transportation (lecture data)
+
+Three origins (Tabriz, Yazd, Kerman) and four destinations (Tehran, Mashhad, Isfahan, Shiraz):
+
+$$
+C=\begin{pmatrix}80&5&12&15\\1&9&4&5\\12&8&6&4\end{pmatrix},\quad
+a=(150,300,200),\quad b=(150,200,100,200).
+$$
+
+The lecture imposes source $\le$, destination $\ge$ and nonnegativity. Both totals are $650$, so **all seven supply/demand constraints bind**.
+
+- **Minimum cost:** $\boxed{2550}$ toman (as specified above the lecture table).
+- **Optimal nonzero shipments:** $x_{12}=150$, $x_{21}=150$, $x_{22}=50$, $x_{23}=100$, $x_{34}=200$.
+- **Global proof:** origin potentials $u=(0,4,3)$ and destination potentials $v=(-3,5,0,1)$ satisfy $u_i+v_j\le c_{ij}$ and provide an objective lower bound of $2550$.
+
+### Five-month production and inventory (lecture data)
+
+Monthly demands: $(1200,2100,2400,3000,4000)$; production capacities $x_i\le2000$ and $y_i\le600$; $s_0=s_5=0$.
+
+$$
+\begin{aligned}
+\min\quad&10\sum_{i=1}^5 x_i+15\sum_{i=1}^5 y_i+2\sum_{i=1}^4 s_i\\
+\mathrm{s.t.}\quad&x_i+y_i+s_{i-1}-s_i=d_i,\quad x_i,y_i,s_i\ge0.
+\end{aligned}
+$$
+
+- **Variables:** 14 independent ($5$ regular, $5$ overtime, $4$ end-of-month inventories).
+- **Optimal plan:** $x=(2000,2000,2000,2000,2000)$; $y=(300,600,600,600,600)$; $s=(1100,1600,1800,1400)$.
+- **Minimum cost:** $\boxed{152300}$ toman.
+- **Proof idea:** weight the five balances by $(15,17,19,21,23)$ and use the production upper bounds to prove $Z\ge152300$.

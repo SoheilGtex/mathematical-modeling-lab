@@ -39,16 +39,20 @@ plugins:
             Exam Review: مرور شب امتحان
             Session 01: جلسهٔ اول
             Session 02: جلسهٔ دوم
+            Session 03: جلسهٔ سوم
             Introduction: معرفی جلسه
             Fundamentals: مبانی مدل‌سازی
             Diet: رژیم غذایی
             Boat Production: تولید قایق
             Transportation: حمل‌ونقل
             Television Production: تولید تلویزیون
+            Numerical Transportation: حمل‌ونقل عددی
+            Production and Inventory: تولید و موجودی
             Technical Notes: مطالب فنی (اختیاری)
             Computational Overview: نمای کلی محاسبات
             Session 01 Computation: محاسبات جلسهٔ اول
             Session 02 Computation: محاسبات جلسهٔ دوم
+            Session 03 Computation: محاسبات جلسهٔ سوم
             Sensitivity Analysis: تحلیل حساسیت
             Solution Verification: اعتبارسنجی جواب
 
@@ -64,10 +68,15 @@ nav:
       - Introduction: session-02/index.md
       - Transportation: session-02/transportation.md
       - Television Production: session-02/televisions.md
+  - Session 03:
+      - Introduction: session-03/index.md
+      - Numerical Transportation: session-03/transportation.md
+      - Production and Inventory: session-03/production.md
   - Technical Notes:
       - Computational Overview: reference/index.md
       - Session 01 Computation: session-01/computation.md
       - Session 02 Computation: session-02/computation.md
+      - Session 03 Computation: session-03/computation.md
       - Sensitivity Analysis: reference/sensitivity.md
       - Solution Verification: reference/verification.md
 

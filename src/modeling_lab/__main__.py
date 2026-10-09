@@ -8,6 +8,7 @@ from dataclasses import asdict
 from .linear import Solution, solve
 from .problems import boat_production_problem, diet_problem
 from .session02 import television_problem, transportation_demo_problem, TV_LABOR_HOURS
+from .session03 import lecture_transportation_problem, production_inventory_problem
 from .verification import verify_solution
 from .sensitivity import (
     save_sensitivity_plot, session01_parameters, sweep_parameter,
@@ -31,7 +32,7 @@ def format_solution(solution: Solution) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Solve mathematical modeling examples")
-    parser.add_argument("problem", choices=["diet", "boats", "televisions", "transport-demo"])
+    parser.add_argument("problem", choices=["diet", "boats", "televisions", "transport-demo", "transport-lecture", "production-plan"])
     parser.add_argument(
         "--integer", action="store_true",
         help="Extension: impose integer counts (including television/transport flows)",
@@ -92,8 +93,12 @@ def main() -> None:
         model = television_problem(labor_hours=(
             TV_LABOR_HOURS if args.labor_hours is None else args.labor_hours
         ))
-    else:
+    elif args.problem == "transport-demo":
         model = transportation_demo_problem()
+    elif args.problem == "transport-lecture":
+        model = lecture_transportation_problem()
+    else:
+        model = production_inventory_problem()
     integer_variables = (
         ("t",) if args.problem == "diet" else model.variables
     ) if args.integer else ()
