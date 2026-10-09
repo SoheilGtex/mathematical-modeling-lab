@@ -4,4 +4,4 @@ These are independently worked **course assignments**, not additional lecture se
 
 - [Assignment 01 — Investment budgeting](investment-budget.md): four-year municipal financing with long-term securities and one-year deposits.
 
-[Lecture sessions](../index.md) and the [cumulative exam review](../exam.md) remain separate from assignments.
+The [lecture sessions](../index.md) remain separate from these full assignments. The [cumulative exam review](../exam.md) includes the **mathematical formulation** of every assignment as well as the lecture models.

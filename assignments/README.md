@@ -1,6 +1,6 @@
 # Assignments
 
-Assignments are separate from lecture sessions and the cumulative exam-night summary.
+Full assignment solutions stay separate from lecture sessions; their **model formulations** are included in the single cumulative exam-night summary.
 
 - **Assignment 01 — Investment Budgeting:** [English full worked solution](../site_docs/assignments/investment-budget.en.md) · [حل کامل فارسی](../site_docs/assignments/investment-budget.fa.md)
 

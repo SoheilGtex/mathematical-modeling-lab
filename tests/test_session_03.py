@@ -122,4 +122,5 @@ def test_site_and_cumulative_exam_review_refer_to_session03():
         assert "session-03/production.md" in exam
     one_file = (root / "EXAM_NIGHT.md").read_text("utf-8")
     assert "## Session 03" in one_file
-    assert "sessions/session_03/" in one_file
+    assert "site_docs/session-03/transportation.en.md" in one_file
+    assert "site_docs/session-03/production.fa.md" in one_file

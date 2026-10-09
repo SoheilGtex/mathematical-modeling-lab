@@ -1,142 +1,156 @@
-# Exam Review
+# Exam Review — Mathematical Modeling Only
 
-A concise review of the models, solutions, and key ideas covered in class. This page grows as new sessions are added. Follow the links in each section for full written solutions and proofs. This guide is not an official exam syllabus or grading scheme.
+**Instructor clarification:** only mathematical modeling is required for the examination.
+This single cumulative review covers **all sessions and assignments**, including future additions.
+Practice defining the decision variables, objective, constraints, units and domains.
+Numerical optimization and proof of optimality belong to the complete worked solutions, not this revision sheet.
+This is an independent study aid, not an official exam syllabus or grading rubric.
 
 ## Session 01
 
-**Full worked solutions:** [Diet](session-01/diet.md) and [Boat production](session-01/boats.md).
+### Modeling fundamentals
 
-### Core vocabulary
+- **Decision variable:** the quantity we choose; identify its meaning, measurement unit and domain.
+- **Objective:** an expression to minimize (cost) or maximize (profit).
+- **Constraint:** a limited resource uses $\le$; a required minimum uses $\ge$; an exact balance uses $=$.
+- **Domain:** declare nonnegativity and use integrality only if the problem explicitly requires whole units.
 
-- **Decision variable:** a quantity chosen by the decision-maker.
-- **Objective:** what we minimize or maximize.
-- **Constraint:** a required or limiting condition.
-- **Feasible:** satisfies all constraints and domain restrictions.
-- **Optimal:** feasible and no other feasible choice is better.
-- **Binding / active constraint:** equality holds at the reported solution.
-- **Slack:** unused resource in a $\le$ capacity constraint; for a $\ge$ minimum constraint, the amount above the minimum is a *surplus*.
-- **Operations research:** optimal allocation of limited resources among competing activities (interpretation given in the lecture notes).
+### Diet — minimum daily cost
 
-### Model 1 — Diet (cost in toman/day)
-
-$$
-\begin{aligned}
-\min\quad &100p+50s+40t\\
-\text{s.t.}\quad&p+4s+2t\ge12\\
-&p+2s+3t\ge14\\
-&p,s,t\ge0.
-\end{aligned}
-$$
-
-- $p$ = cheese, $s$ = milk, $t$ = eggs.
-- **Optimal:** $(p,s,t)=(0,1,4)$, cost $210$ toman/day.
-- **Feasibility:** A $=12$, B $=14$, all variables nonnegative.
-- **Why optimal:** multiplying the A constraint by $35/4$ and the B constraint by $15/2$ gives $\frac{65}{4}p+50s+40t\ge210$; since $p\ge0$, the cost is $\ge210$, attained by $(0,1,4)$.
-
-### Model 2 — Boats (profit in thousand toman)
-
-$$
-\begin{aligned}
-\max\quad&50x+80y\\
-\text{s.t.}\quad&50x+30y\le1000\\
-&20x+15y\le300\\
-&3x+5y\le200\\
-&x,y\ge0.
-\end{aligned}
-$$
-
-- $x$ = regular boats, $y$ = competition boats; **5 hours = 300 minutes**.
-- **Optimal:** $(x,y)=(0,20)$, profit $1600$ thousand toman.
-- **Feasibility:** uses $600/1000$ kg aluminum, $300/300$ minutes machine time, $100/200$ labor hours.
-- **Graphical check:** feasible vertices $(0,0)$, $(15,0)$, $(0,20)$; profits $0$, $750$, $1600$.
-- **Why optimal:** $50x+80y=\frac{16}{3}(20x+15y)-\frac{170}{3}x\le\frac{16}{3}(300)=1600$, attained by $(0,20)$.
-- The original notes impose $x,y\ge0$ but **do not explicitly require integers**.
-
-### Final written-answer checklist
-
-- [ ] Variables defined, with units and domain
-- [ ] Minimize or maximize chosen correctly
-- [ ] Every coefficient derived from the statement
-- [ ] Every inequality points in the correct direction
-- [ ] Hours and minutes converted consistently
-- [ ] Complete model written clearly
-- [ ] Numerical candidate found and all constraints checked
-- [ ] Optimality justified (not only feasibility)
-- [ ] Result written with units and interpretation
-- [ ] Source assumptions separated from later extensions
-
-## Session 02
-
-**Full worked solutions:** [Transportation](session-02/transportation.md) and [Television production](session-02/televisions.md).
-
-### Transportation — symbolic model from the lecture
-
-- $x_{ij}$: goods shipped from origin $i$ to destination $j$; $a_i$: origin supply; $b_j$: exact destination demand; $c_{ij}$: unit shipping cost.
+From the [complete diet solution](session-01/diet.md), let $p,s,t$ represent the quantities of cheese, milk and eggs, respectively. Costs are in toman per day; vitamin A and B requirements are minima.
 
 $$
 \boxed{\begin{aligned}
-\min\quad & Z=\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}\\
-\mathrm{s.t.}\quad&\sum_{j=1}^{n}x_{ij}\le a_i &&\forall i\\
-&\sum_{i=1}^{m}x_{ij}=b_j &&\forall j\\
-&x_{ij}\ge0 &&\forall i,j.
+\min\quad&Z=100p+50s+40t\\
+\mathrm{s.t.}\quad&p+4s+2t\ge12&&\text{(vitamin A)}\\
+&p+2s+3t\ge14&&\text{(vitamin B)}\\
+&p,s,t\ge0.
 \end{aligned}}
 $$
 
-- Minimum cost: **min**. Source capacity: **$\le$**. Destination demand: **$=$**. Nonnegativity is mandatory.
-- Necessary feasibility check: $\sum_i a_i\ge\sum_j b_j$. For a fully connected network with no extra route bounds, this is sufficient for continuous flows too.
-- **The lecture provides no numbers for transportation**, so there is no lecturer-specified numeric optimum.
+**Why these directions?** Daily cost is minimized while each nutrient intake must be **at least** its required amount.
 
-### Television production
+### Boat production — maximum profit
 
-- $x_1$: color TVs, $x_2$: black-and-white TVs; profit in dollars; labor in person-hours.
+In the [boat model and full solution](session-01/boats.md), $x$ is the number of ordinary boats and $y$ the number of racing boats; profit is measured in **thousand toman**.
 
 $$
 \boxed{\begin{aligned}
-\max\quad& Z=60x_1+30x_2\\
-\mathrm{s.t.}\quad &20x_1+15x_2\le H\\
-&x_1\le2000,\quad x_2\le4000\\
+\max\quad&Z=50x+80y\\
+\mathrm{s.t.}\quad&50x+30y\le1000&&\text{(aluminum, kg)}\\
+&20x+15y\le300&&\text{(machine, minutes)}\\
+&3x+5y\le200&&\text{(labor, hours)}\\
+&x,y\ge0.
+\end{aligned}}
+$$
+
+Convert the available **5 machine-hours to 300 minutes** before writing the machine constraint. The supplied lecture model does not explicitly require integer variables; do not silently add integrality.
+
+## Session 02
+
+### Transportation — symbolic lecture model
+
+From the [complete transportation explanation](session-02/transportation.md), let $x_{ij}$ be the shipment from source $i$ to destination $j$, $a_i$ the available supply, $b_j$ the **exact** destination demand and $c_{ij}$ the unit transport cost ($i=1,\ldots,m$, $j=1,\ldots,n$).
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=\sum_{i=1}^{m}\sum_{j=1}^{n}c_{ij}x_{ij}\\
+\mathrm{s.t.}\quad&\sum_{j=1}^{n}x_{ij}\le a_i&&\forall i\\
+&\sum_{i=1}^{m}x_{ij}=b_j&&\forall j\\
+&x_{ij}\ge0&&\forall i,j.
+\end{aligned}}
+$$
+
+The source limits are **upper bounds**, and every destination's stated requirement is **exact**. This lecture example has no lecturer-provided numerical cost matrix.
+
+### Television production — profit maximization
+
+For the [television model](session-02/televisions.md), let $x_1$ and $x_2$ be color and black-and-white televisions. Profit is in USD, labor in person-hours.
+
+$$
+\boxed{\begin{aligned}
+\max\quad&Z=60x_1+30x_2\\
+\mathrm{s.t.}\quad&20x_1+15x_2\le60000&&\text{(labor)}\\
+&x_1\le2000&&\text{(color TV limit)}\\
+&x_2\le4000&&\text{(black-and-white limit)}\\
 &x_1,x_2\ge0.
 \end{aligned}}
 $$
 
-- **Corrected labor capacity:** $H=60,000$ person-hours, as clarified by the student.
-- **Continuous optimum:** $(x_1,x_2)=(2000,4000/3)$ with $Z_{\max}=160,000$. Proof: $Z=2(20x_1+15x_2)+20x_1\le120,000+40,000=160,000$; equality is attained.
-- **Integer extension not written in the note:** $(2000,1333)$ with $Z=159,990$; all integer profits are multiples of 30 and $Z\le160,000$.
-
-**Written-answer checklist:** Define the variables, units, and domains; derive the objective and constraints from the problem statement; check inequality directions and the confirmed labor capacity; verify feasibility; and justify optimality rather than simply reporting the solver output.
-
+The labor capacity is **60,000 person-hours**, confirmed from the corrected notes. Do not mix profit units with labor units.
 
 ## Session 03
 
-**Full worked solutions:** [Numerical transportation](session-03/transportation.md) and [five-month production/inventory](session-03/production.md).
+### Numerical transportation — the lecture's 3×4 table
 
-### Numerical transportation (lecture data)
-
-Three origins (Tabriz, Yazd, Kerman) and four destinations (Tehran, Mashhad, Isfahan, Shiraz):
+In the [complete numerical transportation problem](session-03/transportation.md), $x_{ij}$ is the amount shipped from origin $i$ (Tabriz, Yazd, Kerman) to destination $j$ (Tehran, Mashhad, Isfahan, Shiraz). The shipping costs $c_{ij}$ are **in toman per unit**.
 
 $$
-C=\begin{pmatrix}80&5&12&15\\1&9&4&5\\12&8&6&4\end{pmatrix},\quad
-a=(150,300,200),\quad b=(150,200,100,200).
+C=(c_{ij})=\begin{pmatrix}
+80&5&12&15\\
+1&9&4&5\\
+12&8&6&4
+\end{pmatrix},\quad a=(150,300,200),\quad b=(150,200,100,200).
 $$
 
-The lecture imposes source $\le$, destination $\ge$ and nonnegativity. Both totals are $650$, so **all seven supply/demand constraints bind**.
-
-- **Minimum cost:** $\boxed{2550}$ toman (as specified above the lecture table).
-- **Optimal nonzero shipments:** $x_{12}=150$, $x_{21}=150$, $x_{22}=50$, $x_{23}=100$, $x_{34}=200$.
-- **Global proof:** origin potentials $u=(0,4,3)$ and destination potentials $v=(-3,5,0,1)$ satisfy $u_i+v_j\le c_{ij}$ and provide an objective lower bound of $2550$.
-
-### Five-month production and inventory (lecture data)
-
-Monthly demands: $(1200,2100,2400,3000,4000)$; production capacities $x_i\le2000$ and $y_i\le600$; $s_0=s_5=0$.
-
 $$
-\begin{aligned}
-\min\quad&10\sum_{i=1}^5 x_i+15\sum_{i=1}^5 y_i+2\sum_{i=1}^4 s_i\\
-\mathrm{s.t.}\quad&x_i+y_i+s_{i-1}-s_i=d_i,\quad x_i,y_i,s_i\ge0.
-\end{aligned}
+\boxed{\begin{aligned}
+\min\quad&Z=\sum_{i=1}^{3}\sum_{j=1}^{4}c_{ij}x_{ij}\\
+\mathrm{s.t.}\quad&\sum_{j=1}^{4}x_{ij}\le a_i&&i=1,2,3\\
+&\sum_{i=1}^{3}x_{ij}\ge b_j&&j=1,2,3,4\\
+&x_{ij}\ge0&&\forall i,j.
+\end{aligned}}
 $$
 
-- **Variables:** 14 independent ($5$ regular, $5$ overtime, $4$ end-of-month inventories).
-- **Optimal plan:** $x=(2000,2000,2000,2000,2000)$; $y=(300,600,600,600,600)$; $s=(1100,1600,1800,1400)$.
-- **Minimum cost:** $\boxed{152300}$ toman.
-- **Proof idea:** weight the five balances by $(15,17,19,21,23)$ and use the production upper bounds to prove $Z\ge152300$.
+Unlike Session 02's symbolic model, this note writes destination demand as **$\ge$**. Both totals equal $650$, so these constraints hold as equalities in any feasible plan **for this data**. Do not change the original inequality directions when initially modeling the question.
+
+### Five-month production and inventory planning
+
+From the [complete production/inventory formulation](session-03/production.md), $x_i$ denotes regular production, $y_i$ overtime production and $s_i$ the inventory at the **end** of month $i$. The demand vector is $d=(1200,2100,2400,3000,4000)$. Regular capacity is $2000$ units/month, overtime capacity is $600$ units/month. Unit costs: regular production $10$ toman, overtime $15$ toman, inventory holding $2$ toman per unit carried to the next month.
+
+Set $s_0=s_5=0$ as boundary conditions; $s_1,\ldots,s_4$ are decision variables.
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=10\sum_{i=1}^{5}x_i+15\sum_{i=1}^{5}y_i+2\sum_{i=1}^{4}s_i\\
+\mathrm{s.t.}\quad&x_i+y_i+s_{i-1}-s_i=d_i&&i=1,\ldots,5\\
+&0\le x_i\le2000&&i=1,\ldots,5\\
+&0\le y_i\le600&&i=1,\ldots,5\\
+&s_i\ge0&&i=1,\ldots,4\\
+&s_0=s_5=0.
+\end{aligned}}
+$$
+
+There are **14 decision variables**: five $x_i$, five $y_i$ and four $s_i$. The monthly balance equations are **equalities**, not capacity inequalities.
+
+## Assignment 01
+
+### Municipal investment budgeting — Assignment 01
+
+See the [complete analytical assignment solution](assignments/investment-budget.md). The municipality needs $2,4,8,5$ **million USD** at the **start** of years 1–4. It issues interest-bearing long-term securities at coupon rates $7\%,6\%,6.5\%,7.5\%$ and can deposit any unspent funds for one year at returns $6\%,5.5\%,4.5\%$ (years 1–3).
+
+- $x_i\ge0$: millions of USD in long-term securities sold at the start of year $i$, for $i=1,2,3,4$.
+- $s_i\ge0$: millions of USD deposited after paying for year $i$, available next year with return, for $i=1,2,3$.
+
+Assuming the same **20 nominal yearly coupon payments** for each issue (no discount rate is provided), define the total coupon-cost objective:
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=20(0.07x_1+0.06x_2+0.065x_3+0.075x_4)\\
+\mathrm{s.t.}\quad&x_1-s_1=2\\
+&x_2+1.06s_1-s_2=4\\
+&x_3+1.055s_2-s_3=8\\
+&x_4+1.045s_3=5\\
+&x_i\ge0\ (i=1,\ldots,4),\quad s_i\ge0\ (i=1,2,3).
+\end{aligned}}
+$$
+
+**Modeling explanation:** every year's available funds equal its required spending plus the next deposit. The factors $1.06,1.055,1.045$ include the principal **and** one year's deposit interest. This objective counts nominal coupon expense (not principal repayment or discounted present value). The handout calls the issued instruments “shares,” but because it specifies interest and maturity, the model interprets them as **bond-like interest-bearing securities**; state this assumption.
+
+## Modeling-only checklist
+
+- [ ] Define every decision variable, its meaning, units and domain.
+- [ ] State whether the objective is minimized or maximized.
+- [ ] Translate each resource limit, minimum requirement and balance into a constraint.
+- [ ] Check inequality directions, conversions, indices and boundary conditions.
+- [ ] Present the complete mathematical model; no numerical optimum is required.
