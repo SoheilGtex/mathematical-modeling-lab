@@ -1,0 +1,9 @@
+/* Quiet, readable course notes; no cards, hero animations, or decorative UI. */
+.md-typeset { font-size: .81rem; line-height: 1.85; }
+.md-typeset h1 { font-weight: 700; letter-spacing: -.015em; }
+.md-typeset h2 { margin-top: 1.7em; }
+html[lang="fa"] .md-typeset,
+html[lang="fa"] .md-nav { font-family: Tahoma, "Noto Sans Arabic", sans-serif; }
+html[lang="fa"] .md-typeset { line-height: 2.05; }
+/* Mathematical notation and code keep their conventional direction. */
+.md-typeset .arithmatex, .md-typeset pre, .md-typeset code { direction: ltr; }

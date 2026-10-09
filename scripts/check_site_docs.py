@@ -1,0 +1,88 @@
+#!/usr/bin/env python3
+"""Check that the public documentation has complete EN/FA page pairs."""
+from __future__ import annotations
+
+import re
+import sys
+from pathlib import Path
+from urllib.parse import unquote, urlsplit
+
+ROOT = Path(__file__).resolve().parents[1] / "site_docs"
+PERSIAN = re.compile(r"[\u0600-\u06ff]")
+LINK = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
+FENCE = re.compile(r"^\s*```", re.MULTILINE)
+DIGIT_MAP = str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩", "01234567890123456789")
+
+
+def check() -> list[str]:
+    errors: list[str] = []
+    en = {p.relative_to(ROOT).as_posix().removesuffix(".en.md"): p
+          for p in ROOT.rglob("*.en.md")}
+    fa = {p.relative_to(ROOT).as_posix().removesuffix(".fa.md"): p
+          for p in ROOT.rglob("*.fa.md")}
+    for stem in sorted(en.keys() ^ fa.keys()):
+        errors.append(f"Missing translation for {stem}")
+    if len(en) < 14:
+        errors.append("Missing a required public document (expected 14 topics per language)")
+    for stem in sorted(en.keys() & fa.keys()):
+        for lang, source in (("en", en[stem]), ("fa", fa[stem])):
+            contents = source.read_text(encoding="utf-8")
+            label = source.relative_to(ROOT)
+            body = contents
+            if contents.startswith("---\n"):
+                _, marker, body = contents[4:].partition("\n---\n")
+                if not marker:
+                    errors.append(f"Unclosed front matter: {label}")
+            if not body.lstrip().startswith("# "):
+                errors.append(f"Missing page title: {label}")
+            if len(contents.strip()) < 80:
+                errors.append(f"Incomplete page: {label}")
+            if len(FENCE.findall(contents)) % 2:
+                errors.append(f"Unbalanced code fences: {label}")
+            if contents.count("$$") % 2 or contents.count(r"\[") != contents.count(r"\]"):
+                errors.append(f"Unbalanced display-math delimiters: {label}")
+            # English prose must not contain Persian letters or Solar Hijri dates.
+            if lang == "en" and PERSIAN.search(contents):
+                errors.append(f"Persian script found in English page: {label}")
+            if lang == "en" and re.search(r"\b14(?:0[0-9])\b", contents):
+                errors.append(f"Solar Hijri year found in English page: {label}")
+            if lang == "fa" and re.search(r"\b(?:Fall|October|September)\s+2026\b", contents):
+                errors.append(f"Gregorian course/date label found in Persian page: {label}")
+            for match in LINK.finditer(contents):
+                dest = unquote(urlsplit(match.group(1)).path)
+                if not dest or dest.startswith("/") or dest.startswith("#"):
+                    continue
+                if urlsplit(match.group(1)).scheme or dest.startswith("mailto:"):
+                    continue
+                candidate = (source.parent / dest).resolve()
+                if dest.endswith(".md"):
+                    candidate = candidate.with_name(candidate.stem + f".{lang}.md")
+                if not candidate.is_file():
+                    errors.append(f"Broken local link in {label}: {match.group(1)}")
+    # The public homepages use the correct official course title and date calendar.
+    for lang, expected in (("en", "Elementary Mathematical Modeling · Fall 2026"),
+                           ("fa", "مدل‌سازی مقدماتی ریاضی · پاییز ۱۴۰۵")):
+        homepage = (ROOT / f"index.{lang}.md").read_text(encoding="utf-8")
+        if expected not in homepage:
+            errors.append(f"Wrong course title or academic term in {lang} homepage")
+        if not homepage.startswith("---\nhide:\n  - toc\n---\n"):
+            errors.append(f"Homepage table of contents is not hidden: {lang}")
+    # Key facts must appear in BOTH languages, not merely a language fallback.
+    for lang in ("en", "fa"):
+        src = (ROOT / f"session-02/televisions.{lang}.md").read_text("utf-8").translate(DIGIT_MAP)
+        compact = re.sub(r"[,\u066c\s\\,]", "", src)
+        if "60000" not in compact or "160000" not in compact or "159990" not in compact:
+            errors.append(f"Missing verified TV capacity/objective results in {lang} page")
+        transport = (ROOT / f"session-02/transportation.{lang}.md").read_text("utf-8")
+        if "x_{ij}" not in transport or "c_{ij}" not in transport:
+            errors.append(f"Incomplete symbolic transportation model in {lang} page")
+    return errors
+
+
+if __name__ == "__main__":
+    problems = check()
+    if problems:
+        for problem in problems:
+            print(f"ERROR: {problem}", file=sys.stderr)
+        sys.exit(1)
+    print("Site docs verified: 14 complete EN/FA pairs, local links and core data.")
