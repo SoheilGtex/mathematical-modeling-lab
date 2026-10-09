@@ -1,10 +1,10 @@
-# Exam Review — Sessions 01–02
+# Exam Review
 
-**One cumulative review for the written exam.** Use the full worked solutions to learn each derivation; the summary below is for revision, not an official syllabus.
+A concise review of the models, solutions, and key ideas covered in class. This page grows as new sessions are added. Follow the links in each section for full written solutions and proofs. This guide is not an official exam syllabus or grading scheme.
 
 ## Session 01
 
-**Use this page last**, after reading the full [diet](session-01/diet.md) and [boat](session-01/boats.md) solutions. This is a **study aid**, not an official syllabus or an official grading rubric.
+**Full worked solutions:** [Diet](session-01/diet.md) and [Boat production](session-01/boats.md).
 
 ### Core vocabulary
 
@@ -67,9 +67,9 @@ $$
 
 ## Session 02
 
-**EN:** Exam-ready summaries only. For fully justified answers, read [Transportation](session-02/transportation.md) and [Television production](session-02/televisions.md).
+**Full worked solutions:** [Transportation](session-02/transportation.md) and [Television production](session-02/televisions.md).
 
-**1. Transportation (lecture's symbolic example)**
+### Transportation — symbolic model from the lecture
 
 - $x_{ij}$: goods shipped from origin $i$ to destination $j$; $a_i$: origin supply; $b_j$: exact destination demand; $c_{ij}$: unit shipping cost.
 
@@ -86,7 +86,7 @@ $$
 - Necessary feasibility check: $\sum_i a_i\ge\sum_j b_j$. For a fully connected network with no extra route bounds, this is sufficient for continuous flows too.
 - **The lecture provides no numbers for transportation**, so there is no lecturer-specified numeric optimum.
 
-**2. Television production (lecture's production example)**
+### Television production
 
 - $x_1$: color TVs, $x_2$: black-and-white TVs; profit in dollars; labor in person-hours.
 
@@ -103,4 +103,4 @@ $$
 - **Continuous optimum:** $(x_1,x_2)=(2000,4000/3)$ with $Z_{\max}=160,000$. Proof: $Z=2(20x_1+15x_2)+20x_1\le120,000+40,000=160,000$; equality is attained.
 - **Integer extension not written in the note:** $(2000,1333)$ with $Z=159,990$; all integer profits are multiples of 30 and $Z\le160,000$.
 
-**Checklist:** define variables with meanings/units; justify objective and each constraint; preserve the inequality directions; check the corrected labor capacity; verify candidate feasibility; prove optimality instead of merely quoting Python.
+**Written-answer checklist:** Define the variables, units, and domains; derive the objective and constraints from the problem statement; check inequality directions and the confirmed labor capacity; verify feasibility; and justify optimality rather than simply reporting the solver output.

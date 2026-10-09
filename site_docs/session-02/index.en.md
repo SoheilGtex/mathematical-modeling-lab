@@ -4,8 +4,8 @@ The only photographed page supplied for this session contains two models. The tr
 
 ## Reading order
 
-1. [Transportation](transportation.md) — full written solution
-2. [Television production](televisions.md) — full written solution
-3. [Computational notes](computation.md) — optional Python information
+1. [Transportation](transportation.md) — symbolic formulation and an independently developed numerical example.
+2. [Television production](televisions.md) — formulation, written solution, and proof of optimality.
+3. [Computational notes](computation.md) — optional Python examples.
 
-Return to the [cumulative exam review](../exam.md).
+[Exam Review](../exam.md)

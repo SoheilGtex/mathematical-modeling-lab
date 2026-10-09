@@ -7,20 +7,14 @@ hide:
 
 **Elementary Mathematical Modeling · Fall 2026 · Kharazmi University**
 
-Independent course notes by **Soheil Salmani**. Each topic contains the mathematical formulation, a fully worked paper-and-pencil solution, and an explanation of optimality. Python implementations are available separately.
+These independent course notes and worked solutions were prepared by **Soheil Salmani**. Each topic explains the mathematical model, the steps of the solution, and the reasoning behind optimality. Python implementations are provided separately.
 
-This is an independent student project, **not an official university resource**. The original lecture material is distinguished from independently developed solutions and examples.
+This is an independent student project, **not an official university or instructor resource**. Material drawn from the class notes is distinguished from additional solutions and examples.
 
-## Start reading
+## Course materials
 
-1. **[Exam review](exam.md)** — one cumulative summary of both sessions.
-2. **[Session 01](session-01/index.md)** — modeling fundamentals, minimum-cost diet, and boat production.
-3. **[Session 02](session-02/index.md)** — transportation and television production.
+Use the navigation menu to browse each session and its fully worked problems. The [Exam Review](exam.md) brings the key points together on one page and is expanded as new sessions are added.
 
-For the written examination, start with the worked solutions; use the exam review for a final recap. **No Python is required to read the mathematics.**
+## Code and computation
 
-## Reproducible implementations
-
-The [github.com/SoheilGtex/mathematical-modeling-lab source repository](https://github.com/SoheilGtex/mathematical-modeling-lab) contains the Python package, runnable examples, tests, and MIT-licensed original material. See the optional [computational reference](reference/index.md) for implementation details.
-
-**Language:** The selector at the top of the page switches between complete English and Persian versions of the same topic.
+The [GitHub repository](https://github.com/SoheilGtex/mathematical-modeling-lab) contains the Python implementations, runnable examples, and tests. Further details are available in the optional [technical notes](reference/index.md). No code is required to follow the written solutions.
