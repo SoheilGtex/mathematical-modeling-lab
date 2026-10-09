@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Build the single cumulative, bilingual, paper-exam review document.
+"""Generate the one modeling-only, bilingual exam review from review_sources.
 
-Source excerpts live inside each sessions/session_NN/README.md, delimited by:
-    <!-- EXAM_NIGHT_START -->
-    <!-- EXAM_NIGHT_END -->
-
-Never edit EXAM_NIGHT.md directly. CI uses --check to prevent stale material.
+Every session and every published assignment must have both language excerpts.
+Run `python scripts/build_exam_night.py` to regenerate EXAM_NIGHT.md and both
+MkDocs review pages. Run with --check in CI to reject stale or missing material.
 """
 
 from __future__ import annotations
@@ -15,122 +13,200 @@ import difflib
 import re
 import sys
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-START = "<!-- EXAM_NIGHT_START -->"
-END = "<!-- EXAM_NIGHT_END -->"
-SESSION_PATTERN = re.compile(r"session_(\d+)$")
-LINK_PATTERN = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
-HEADING_PATTERN = re.compile(r"^(#{1,5})(\s+.*)$", re.MULTILINE)
+SOURCE = "review_sources"
+SESSION = re.compile(r"session_(\d+)$")
+LINK = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
+HEADING = re.compile(r"^(#{1,5})(\s+.*)$", re.MULTILINE)
+PERSIAN_ORDINALS = {1: "اول", 2: "دوم", 3: "سوم", 4: "چهارم", 5: "پنجم", 6: "ششم"}
 
 
-def _rewrite_links(content: str, session_dir: Path, root: Path) -> str:
-    """Resolve local Markdown links relative to the generated root-level file."""
+def fa_ordinal(n: int) -> str:
+    return PERSIAN_ORDINALS.get(n, f"شمارهٔ {n}")
 
-    def replace(match: re.Match[str]) -> str:
+
+def topics(root: Path) -> list[tuple[str, str, str]]:
+    """List all published sessions followed by assignments, checking coverage."""
+    session_root = root / "sessions"
+    if not session_root.is_dir():
+        raise ValueError("Missing sessions/ directory")
+    numbers = sorted(
+        int(match.group(1))
+        for child in session_root.iterdir()
+        if child.is_dir() and (match := SESSION.fullmatch(child.name))
+    )
+    if not numbers or len(numbers) != len(set(numbers)):
+        raise ValueError("Missing sessions or duplicate numeric session IDs")
+
+    result = [(f"session_{n:02d}", f"Session {n:02d}", f"جلسهٔ {fa_ordinal(n)}") for n in numbers]
+    assignment_dir = root / "site_docs" / "assignments"
+    if assignment_dir.exists():
+        stems = sorted(p.name.removesuffix(".en.md") for p in assignment_dir.glob("*.en.md") if p.name != "index.en.md")
+        persian = {p.name.removesuffix(".fa.md") for p in assignment_dir.glob("*.fa.md") if p.name != "index.fa.md"}
+        if set(stems) != persian:
+            raise ValueError("Every assignment must have both English and Persian site pages")
+        for i, slug in enumerate(stems, 1):
+            result.append((f"assignment_{slug}", f"Assignment {i:02d}", f"تمرین {fa_ordinal(i)}"))
+
+    expected = {f"{key}.{lang}.md" for key, _, _ in result for lang in ("en", "fa")}
+    actual = {p.name for p in (root / SOURCE).glob("*.md")}
+    if missing := expected - actual:
+        raise ValueError(f"Missing modeling-only exam sources: {', '.join(sorted(missing))}")
+    if extra := actual - expected:
+        raise ValueError(f"Unexpected exam source without session/assignment: {', '.join(sorted(extra))}")
+    return result
+
+
+def extract(root: Path, key: str, lang: str, *, site: bool) -> str:
+    """Resolve standard MkDocs links into root-relative source links for GitHub."""
+    source = root / SOURCE / f"{key}.{lang}.md"
+    content = source.read_text(encoding="utf-8").strip()
+    if not content or not content.startswith("### "):
+        raise ValueError(f"Expected a nonempty model section starting with ### in {source}")
+
+    def link(match: re.Match[str]) -> str:
         label, target = match.groups()
         parsed = urlsplit(target)
-        if parsed.scheme or parsed.netloc or target.startswith(("/", "#", "mailto:")):
+        if parsed.scheme or parsed.netloc or target.startswith(("#", "mailto:")):
             return match.group(0)
-        path = (session_dir / parsed.path).resolve()
-        try:
-            relative_path = path.relative_to(root)
-        except ValueError as exc:
-            raise ValueError(f"Link escapes repository: {target}") from exc
-        if not path.exists():
-            raise ValueError(f"Broken local link in {session_dir}: {target}")
-        suffix = (f"?{parsed.query}" if parsed.query else "") + (
-            f"#{parsed.fragment}" if parsed.fragment else ""
-        )
-        return f"[{label}]({relative_path.as_posix()}{suffix})"
+        relative = unquote(parsed.path)
+        if not relative.endswith(".md") or relative.startswith("/") or ".." in Path(relative).parts:
+            raise ValueError(f"Unsupported or unsafe link in {source}: {target}")
+        full_page = root / "site_docs" / Path(relative).with_suffix(f".{lang}.md")
+        if not full_page.is_file():
+            raise ValueError(f"Broken {lang} exam review link: {target} ({source})")
+        if site:
+            return match.group(0)
+        suffix = (f"?{parsed.query}" if parsed.query else "") + (f"#{parsed.fragment}" if parsed.fragment else "")
+        return f"[{label}](site_docs/{Path(relative).with_suffix(f'.{lang}.md').as_posix()}{suffix})"
 
-    return LINK_PATTERN.sub(replace, content)
+    content = LINK.sub(link, content)
+    if not site:
+        # The root document has a language heading inside each topic.
+        content = HEADING.sub(lambda m: "#" + m.group(1) + m.group(2), content)
+    return content
 
 
-def build(root: Path = ROOT) -> str:
+def generated(root: Path = ROOT) -> dict[str, str]:
     root = root.resolve()
-    session_root = root / "sessions"
-    sessions: list[tuple[int, Path]] = []
-    for child in session_root.iterdir():
-        if child.is_dir() and (match := SESSION_PATTERN.fullmatch(child.name)):
-            sessions.append((int(match.group(1)), child))
-    sessions.sort(key=lambda item: item[0])
-    if not sessions:
-        raise ValueError("No sessions/session_NN directories found")
-    if len({n for n, _ in sessions}) != len(sessions):
-        raise ValueError("Duplicate numeric session indices")
-
-    intro = [
-        "# EXAM NIGHT — Cumulative Review | مرور یکپارچهٔ شب امتحان",
+    sections = topics(root)
+    root_parts = [
+        "# EXAM NIGHT — Mathematical Modeling Only | مرور شب امتحان — فقط مدل‌سازی",
         "",
-        "> **One file for the entire term.** Read this before the written, paper-based exam.",
-        "> **یک فایل برای تمام ترم.** این راهنما خلاصهٔ مرور امتحان تشریحی است، نه جایگزین حل‌های کامل.",
+        "> **Instructor clarification:** the examination focuses on **model formulation only**.",
+        "> **طبق توضیح استاد:** در امتحان **فقط مدل‌سازی ریاضی** مدنظر است.",
         "",
-        "This file is **generated** from marked review sections of each",
-        "`sessions/session_NN/README.md`. Do not edit it directly; run",
-        "`python scripts/build_exam_night.py` after adding/updating a session.",
-        "CI runs `python scripts/build_exam_night.py --check` to reject stale output.",
+        "This is one cumulative guide for **every course session and assignment**. Define decision variables,",
+        "write the objective and all constraints, and specify domains and units. Numerical solutions,",
+        "optimality proofs, simplex and software are intentionally excluded from this exam review.",
+        "Full worked solutions remain available from the linked pages.",
         "",
-        "توضیح منبع: صورت‌بندی مسائل جلسهٔ اول از جزوهٔ کلاس است؛ پاسخ‌های عددی،",
-        "اثبات‌های بهینگی و نکات تکمیلی، محاسبات مستقل آموزشی هستند و محدودهٔ قطعی امتحان محسوب نمی‌شوند.",
+        "این فایل شامل **تمام جلسات و تمرین‌ها** است. تمرکز مرور بر تعریف متغیرها، تابع هدف،",
+        "قیود، واحدها و دامنهٔ متغیرهاست؛ حل عددی و اثبات بهینگی در صفحات کامل باقی می‌مانند.",
+        "این مجموعه یک منبع دانشجویی مستقل است، نه بارم‌بندی رسمی امتحان.",
         "",
-        "## Contents | فهرست جلسات",
+        "**Generated file:** Edit the bilingual files in `review_sources/`, not this file.",
+        "Run `python scripts/build_exam_night.py` after adding or changing a session/assignment.",
+        "",
+        "## Contents | فهرست",
         "",
     ]
-    for number, session_dir in sessions:
-        intro.append(
-            f"- [Session {number:02d} | جلسهٔ {number:02d}](#session-{number:02d})"
-        )
-    intro.append("")
+    for key, en, fa in sections:
+        root_parts.append(f"- [{en} | {fa}](#{key.replace('_', '-')})")
+    root_parts.append("")
 
-    parts = ["\n".join(intro).rstrip()]
-    for number, session_dir in sessions:
-        readme = session_dir / "README.md"
-        if not readme.is_file():
-            raise ValueError(f"Missing required session guide: {readme}")
-        source = readme.read_text(encoding="utf-8")
-        if source.count(START) != 1 or source.count(END) != 1:
-            raise ValueError(f"Session {number:02d} must have exactly one pair of review markers")
-        before_end = source.split(END, 1)[0]
-        if START not in before_end:
-            raise ValueError(f"Incorrect review-marker order in {readme}")
-        excerpt = before_end.split(START, 1)[1].strip()
-        if not excerpt:
-            raise ValueError(f"Empty review section in {readme}")
-        # Shift excerpt headings down one level below the session heading.
-        excerpt = HEADING_PATTERN.sub(lambda m: "#" + m.group(1) + m.group(2), excerpt)
-        excerpt = _rewrite_links(excerpt, session_dir, root)
-        parts.append(f"## Session {number:02d}\n\n**جلسهٔ {number:02d}**\n\n{excerpt}")
-    return "\n\n---\n\n".join(parts).rstrip() + "\n"
+    en_parts = [
+        "# Exam Review — Mathematical Modeling Only",
+        "",
+        "**Instructor clarification:** only mathematical modeling is required for the examination.",
+        "This single cumulative review covers **all sessions and assignments**, including future additions.",
+        "Practice defining the decision variables, objective, constraints, units and domains.",
+        "Numerical optimization and proof of optimality belong to the complete worked solutions, not this revision sheet.",
+        "This is an independent study aid, not an official exam syllabus or grading rubric.",
+        "",
+    ]
+    fa_parts = [
+        "# مرور شب امتحان — فقط مدل‌سازی ریاضی",
+        "",
+        "**طبق توضیح استاد، فقط مدل‌سازی مسائل در امتحان مدنظر است.**",
+        "این مرور واحد، **تمام جلسات و تمرین‌ها** را شامل می‌شود و با اضافه‌شدن مطالب جدید تکمیل خواهد شد.",
+        "در هر مسئله متغیرها و واحدشان، تابع هدف، قیود و دامنهٔ متغیرها را تمرین کنید.",
+        "حل عددی و اثبات بهینگی در صفحات تشریحی کامل موجودند و در این مرور نیامده‌اند.",
+        "این مجموعه راهنمای مستقل مطالعه است، نه بارم‌بندی رسمی امتحان.",
+        "",
+    ]
+
+    for key, en, fa in sections:
+        en_excerpt = extract(root, key, "en", site=True)
+        fa_excerpt = extract(root, key, "fa", site=True)
+        if key.startswith("session_"):
+            number = int(key.split("_")[1])
+            en_title, fa_title = f"Session {number:02d}", f"جلسهٔ {fa_ordinal(number)}"
+        else:
+            en_title, fa_title = en, fa
+        en_parts.extend([f"## {en_title}", "", en_excerpt, ""])
+        fa_parts.extend([f"## {fa_title}", "", fa_excerpt, ""])
+        en_root = extract(root, key, "en", site=False)
+        fa_root = extract(root, key, "fa", site=False)
+        root_parts.extend([
+            "---", "", f'<a id="{key.replace("_", "-")}"></a>',
+            f"## {en_title} | {fa_title}", "", "### English", "", en_root, "",
+            "### فارسی", "", fa_root, "",
+        ])
+
+    en_parts.extend([
+        "## Modeling-only checklist", "",
+        "- [ ] Define every decision variable, its meaning, units and domain.",
+        "- [ ] State whether the objective is minimized or maximized.",
+        "- [ ] Translate each resource limit, minimum requirement and balance into a constraint.",
+        "- [ ] Check inequality directions, conversions, indices and boundary conditions.",
+        "- [ ] Present the complete mathematical model; no numerical optimum is required.", "",
+    ])
+    fa_parts.extend([
+        "## چک‌لیست مدل‌سازی", "",
+        "- [ ] همهٔ متغیرهای تصمیم، معنا، واحد و دامنهٔ آن‌ها را مشخص کرده‌ام.",
+        "- [ ] کمینه یا بیشینه بودن تابع هدف را درست انتخاب کرده‌ام.",
+        "- [ ] قیود ظرفیت، حداقل نیاز و موازنه را از صورت مسئله استخراج کرده‌ام.",
+        "- [ ] جهت نامساوی‌ها، تبدیل واحدها، اندیس‌ها و شرایط ابتدا و انتها را کنترل کرده‌ام.",
+        "- [ ] مدل نهایی را کامل نوشته‌ام؛ نیازی به محاسبهٔ جواب بهینه نیست.", "",
+    ])
+    return {
+        "EXAM_NIGHT.md": "\n".join(root_parts).rstrip() + "\n",
+        "site_docs/exam.en.md": "\n".join(en_parts).rstrip() + "\n",
+        "site_docs/exam.fa.md": "\n".join(fa_parts).rstrip() + "\n",
+    }
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--check", action="store_true", help="Fail if EXAM_NIGHT.md is stale")
+    parser.add_argument("--check", action="store_true", help="Fail if any generated review is stale")
     args = parser.parse_args()
-    path = ROOT / "EXAM_NIGHT.md"
     try:
-        expected = build()
+        outputs = generated()
     except (ValueError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
+    bad = False
+    for name, expected in outputs.items():
+        path = ROOT / name
+        if args.check:
+            current = path.read_text(encoding="utf-8") if path.exists() else ""
+            if current != expected:
+                sys.stderr.writelines(difflib.unified_diff(
+                    current.splitlines(keepends=True), expected.splitlines(keepends=True),
+                    fromfile=name, tofile="generated " + name,
+                ))
+                bad = True
+        else:
+            path.write_text(expected, encoding="utf-8")
+            print(f"Updated {name}")
+    if bad:
+        print("Exam review is stale: run python scripts/build_exam_night.py", file=sys.stderr)
+        return 1
     if args.check:
-        current = path.read_text(encoding="utf-8") if path.exists() else ""
-        if current != expected:
-            diff = difflib.unified_diff(
-                current.splitlines(keepends=True),
-                expected.splitlines(keepends=True),
-                fromfile=str(path),
-                tofile="expected generated output",
-            )
-            sys.stderr.writelines(diff)
-            print("EXAM_NIGHT.md is outdated; run python scripts/build_exam_night.py", file=sys.stderr)
-            return 1
-        print(f"EXAM_NIGHT.md is up to date ({expected.count('## Session ')} sessions)")
-    else:
-        path.write_text(expected, encoding="utf-8")
-        print(f"Updated {path.relative_to(ROOT)}")
+        print("Modeling-only exam review is up to date (sessions + assignments; EN/FA)")
     return 0
 
 

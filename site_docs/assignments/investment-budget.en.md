@@ -152,7 +152,7 @@ Total security proceeds issued: $2+16.118188621\ldots=18.118188621\ldots$ millio
 3. Write all **four** cash-flow equalities; do not subtract deposit interest a second time in the coupon-cost objective.
 4. Distinguish a coupon's **20 nominal payments** from the issue principal or the net-present-value calculation (no discount rate given).
 5. A feasible schedule is not automatically optimal: show the positive-coefficient lower-bound identity.
-6. Keep this **assignment** separate from the three lecture sessions and their single cumulative exam-review page.
+6. The assignment has a **complete worked solution** here; its **model formulation** also appears in the single cumulative exam review.
 
 ### Computational check (optional)
 
