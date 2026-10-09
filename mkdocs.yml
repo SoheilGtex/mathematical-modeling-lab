@@ -40,6 +40,9 @@ plugins:
             Session 01: جلسهٔ اول
             Session 02: جلسهٔ دوم
             Session 03: جلسهٔ سوم
+            Assignments: تمرین‌ها
+            Assignment Overview: معرفی تمرین‌ها
+            Investment Budgeting: بودجه‌بندی سرمایه‌گذاری
             Introduction: معرفی جلسه
             Fundamentals: مبانی مدل‌سازی
             Diet: رژیم غذایی
@@ -72,6 +75,9 @@ nav:
       - Introduction: session-03/index.md
       - Numerical Transportation: session-03/transportation.md
       - Production and Inventory: session-03/production.md
+  - Assignments:
+      - Assignment Overview: assignments/index.md
+      - Investment Budgeting: assignments/investment-budget.md
   - Technical Notes:
       - Computational Overview: reference/index.md
       - Session 01 Computation: session-01/computation.md
