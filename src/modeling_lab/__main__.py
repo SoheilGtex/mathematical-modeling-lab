@@ -7,6 +7,7 @@ from dataclasses import asdict
 
 from .linear import Solution, solve
 from .problems import boat_production_problem, diet_problem
+from .session02 import television_problem, transportation_demo_problem, TV_LABOR_HOURS
 from .verification import verify_solution
 from .sensitivity import (
     save_sensitivity_plot, session01_parameters, sweep_parameter,
@@ -30,12 +31,16 @@ def format_solution(solution: Solution) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Solve mathematical modeling examples")
-    parser.add_argument("problem", choices=["diet", "boats"])
+    parser.add_argument("problem", choices=["diet", "boats", "televisions", "transport-demo"])
     parser.add_argument(
         "--integer", action="store_true",
-        help="Extension: diet uses whole eggs; boats use whole counts",
+        help="Extension: impose integer counts (including television/transport flows)",
     )
     parser.add_argument("--json", action="store_true", help="Machine-readable output")
+    parser.add_argument(
+        "--labor-hours", type=float, default=None, metavar="HOURS",
+        help="Televisions only: monthly person-hours (default: 60000, confirmed correction)",
+    )
     parser.add_argument("--verify", action="store_true", help="Independent feasibility and LP optimality checks")
     parser.add_argument(
         "--plot", type=Path, metavar="PNG_PATH",
@@ -58,7 +63,13 @@ def main() -> None:
         help="Save objective-versus-parameter plot for a sensitivity sweep",
     )
     args = parser.parse_args()
-    parameters = session01_parameters(args.problem)
+    if args.labor_hours is not None and args.problem != "televisions":
+        parser.error("--labor-hours applies only to televisions")
+    parameters = session01_parameters(args.problem) if args.problem in {"diet", "boats"} else {}
+    if args.list_parameters and not parameters:
+        parser.error("Sensitivity parameter listing is currently available only for session 01")
+    if args.sensitivity is not None and not parameters:
+        parser.error("Sensitivity sweeps are currently available only for session 01")
     if args.list_parameters:
         for key, parameter in parameters.items():
             print(f"{key}: {parameter.kind}, {parameter.unit}")
@@ -73,11 +84,27 @@ def main() -> None:
             )
         if not args.values:
             parser.error("--sensitivity requires --values (one or more numbers)")
-    model = diet_problem() if args.problem == "diet" else boat_production_problem()
+    if args.problem == "diet":
+        model = diet_problem()
+    elif args.problem == "boats":
+        model = boat_production_problem()
+    elif args.problem == "televisions":
+        model = television_problem(labor_hours=(
+            TV_LABOR_HOURS if args.labor_hours is None else args.labor_hours
+        ))
+    else:
+        model = transportation_demo_problem()
     integer_variables = (
-        ("t",) if args.problem == "diet" else ("x", "y")
+        ("t",) if args.problem == "diet" else model.variables
     ) if args.integer else ()
     result = solve(model, integer_variables=integer_variables)
+    if args.problem == "televisions" and not args.json:
+        print(
+            "Television labor capacity: " + f"{model.b_ub[0]:g} person-hours "
+            "(student-confirmed source correction: 60000)."
+        )
+    if args.problem == "transport-demo" and not args.json:
+        print("Illustrative numbers only: the session notes give no numeric transport instance.")
     verification = verify_solution(model, result) if args.verify else None
     if args.sensitivity:
         report = sweep_parameter(
