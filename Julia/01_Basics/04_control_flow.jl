@@ -57,25 +57,21 @@ for i in 1:5
     println(i)
 end
 
-# Calculate the sum of numbers from 1 to 100
-total = 0
-
-for i in 1:100
-    total += i
-end
-
-println("Sum from 1 to 100: ", total)
-
 
 # 5. WHILE LOOPS
 # --------------
 
-counter = 1
+function count_to_five()
+    counter = 1
 
-while counter <= 5
-    println("Counter: ", counter)
-    counter += 1
+    while counter <= 5
+        println("Counter: ", counter)
+        counter += 1
+    end
 end
+
+count_to_five()
+# Note: Functions are covered in a separate file in this section.
 
 
 # 6. BREAK
