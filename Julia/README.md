@@ -24,13 +24,27 @@ The directory will gradually include:
 
 ## Requirements
 
-To run the examples, you may need:
+### Julia Basics
 
-- [Julia](https://julialang.org/downloads/)
-- [JuMP](https://jump.dev/JuMP.jl/stable/)
-- [HiGHS](https://highs.dev/)
+To run the introductory Julia examples in `01_Basics/`, you only need to install [Julia](https://julialang.org/downloads/).
 
-The required packages will depend on the example being executed.
+No additional packages are required for these examples.
+
+### Optimization Examples
+
+The optimization examples in `02_Optimization/` may require the following Julia packages:
+
+- [JuMP](https://jump.dev/JuMP.jl/stable/): for mathematical optimization modeling.
+- [HiGHS](https://highs.dev/): an optimization solver used to solve supported optimization models.
+
+Install these packages in the Julia environment you use to run the optimization examples:
+
+```julia
+using Pkg
+Pkg.add(["JuMP", "HiGHS"])
+```
+
+**Note:** Install JuMP and HiGHS only if you intend to run examples that use them. They are not required for the basic Julia examples.
 
 ## Getting Started
 
@@ -71,14 +85,27 @@ Contributions, corrections, and suggestions are welcome. Please keep examples cl
 
 ## پیش‌نیازها
 
-برای اجرای مثال‌ها ممکن است به ابزارها و بسته‌های زیر نیاز داشته باشید:
+### مبانی زبان Julia
 
-- [زبان برنامه‌نویسی جولیا (Julia)](https://julialang.org/downloads/)
-- [بستهٔ JuMP](https://jump.dev/JuMP.jl/stable/)
-- [حل‌کنندهٔ HiGHS](https://highs.dev/)
+برای اجرای مثال‌های مقدماتی زبان Julia در پوشه `01_Basics/`، تنها کافی است زبان برنامه‌نویسی [Julia](https://julialang.org/downloads/) را نصب کنید.
 
-بسته‌های موردنیاز به مثال موردنظر بستگی دارند.
+برای اجرای این مثال‌ها، به نصب هیچ پکیج اضافی نیاز ندارید.
 
+### مثال‌های بهینه‌سازی
+
+مثال‌های بهینه‌سازی در پوشه `02_Optimization/` ممکن است به پکیج‌های زیر در زبان Julia نیاز داشته باشند:
+
+- [JuMP](https://jump.dev/JuMP.jl/stable/): برای مدل‌سازی مسائل بهینه‌سازی ریاضی.
+- [HiGHS](https://highs.dev/): یک حل‌گر بهینه‌سازی که برای حل مدل‌های بهینه‌سازی پشتیبانی‌شده استفاده می‌شود.
+
+این پکیج‌ها را در محیط Julia مورد استفاده برای اجرای مثال‌های بهینه‌سازی نصب کنید:
+
+```julia
+using Pkg
+Pkg.add(["JuMP", "HiGHS"])
+```
+
+**نکته:** نصب JuMP و HiGHS تنها زمانی لازم است که قصد اجرای مثال‌هایی را داشته باشید که از این ابزارها استفاده می‌کنند. این پکیج‌ها برای اجرای مثال‌های مقدماتی زبان Julia ضروری نیستند.
 ## شروع کار
 
 ۱. زبان جولیا را نصب کنید.
