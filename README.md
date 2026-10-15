@@ -1,10 +1,11 @@
 # Mathematical Modeling Lab
 
 [![Python tests](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/ci.yml)
+[![Julia examples](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/julia.yml/badge.svg)](https://github.com/SoheilGtex/mathematical-modeling-lab/actions/workflows/julia.yml)
 
 **Elementary Mathematical Modeling · Fall 2026 · Kharazmi University**
 
-**Independent course notes and reproducible Python models by Soheil Salmani.**
+**Project contributors: [Soheil Salmani](https://github.com/SoheilGtex) · [Mahdieh Moghiseh](https://github.com/mahdiehmg).**
 
 ### [Read the complete course notes →](https://soheilgtex.github.io/mathematical-modeling-lab/)
 
@@ -19,6 +20,17 @@ The reader-facing site has a short introduction, a cumulative exam review and th
 **Scope and attribution:** Lecture formulations come from student-supplied notes. Worked optima, optimality proofs, integer variants and the numeric transportation demonstration are independent educational additions. This is not an official university resource. The lecture scans are not redistributed.
 
 ---
+
+## Julia learning materials
+
+The [Julia learning materials](Julia/README.md) are an optional part of the project. The current
+[Basics examples](Julia/01_Basics/) cover variables, control flow, and functions;
+Optimization and Course Examples are planned, not yet implemented.
+
+Read the bilingual [Julia guide on the website](https://soheilgtex.github.io/mathematical-modeling-lab/julia/).
+The Basics examples require Julia only (no JuMP or HiGHS). Julia and Python
+are **optional computational supplements**, not requirements for the written
+exam, which focuses on modeling the course sessions **and assignments**.
 
 ## Python quick start
 
@@ -105,6 +117,10 @@ educational additions. Both the numerical transport and production costs are sta
 This is **not an official course resource**, exam syllabus, or grading rubric.
 The example data are instructional and should not be treated as real-world
 nutrition or pricing guidance.
+
+## Contributors
+
+Meet the project team in [CONTRIBUTORS.md](CONTRIBUTORS.md).
 
 ## License
 

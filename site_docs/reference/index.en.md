@@ -7,3 +7,7 @@ This appendix is **optional** for written exam preparation. The main sessions co
 - [Session 01 computation](../session-01/computation.md) and [Session 02 computation](../session-02/computation.md) — commands, assumptions and numeric comparisons.
 
 [View source code and tests](https://github.com/SoheilGtex/mathematical-modeling-lab).
+
+## Julia (optional)
+
+[Julia basics](../julia/index.md) are optional and independent of the Python models. They are not required for the modeling-only written exam.

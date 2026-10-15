@@ -1,12 +1,12 @@
 site_name: Mathematical Modeling Lab
-site_description: Independent course notes with complete English and Persian written solutions.
+site_description: Bilingual mathematical modeling notes, Python models and contributed Julia basics.
 site_url: https://soheilgtex.github.io/mathematical-modeling-lab/
 repo_url: https://github.com/SoheilGtex/mathematical-modeling-lab
 repo_name: SoheilGtex/mathematical-modeling-lab
 edit_uri: ''
 docs_dir: site_docs
 site_dir: _site
-copyright: Copyright © 2026 Soheil Salmani · Original content licensed under MIT
+copyright: 'Project contributors: Soheil Salmani · Mahdieh Moghiseh · Original content licensed under MIT'
 
 theme:
   name: material
@@ -33,7 +33,7 @@ plugins:
         - locale: fa
           name: فارسی
           build: true
-          copyright: "حق نشر © ۱۴۰۵ سهیل سلمانی · محتوای تألیفی تحت مجوز MIT"
+          copyright: "مشارکت‌کنندگان: سهیل سلمانی · مهدیه مقیسه · محتوای تألیفی با مجوز MIT"
           nav_translations:
             Overview: معرفی
             Exam Review: مرور شب امتحان
@@ -51,6 +51,7 @@ plugins:
             Television Production: تولید تلویزیون
             Numerical Transportation: حمل‌ونقل عددی
             Production and Inventory: تولید و موجودی
+            Julia Learning: آموزش جولیا
             Technical Notes: مطالب فنی (اختیاری)
             Computational Overview: نمای کلی محاسبات
             Session 01 Computation: محاسبات جلسهٔ اول
@@ -78,6 +79,7 @@ nav:
   - Assignments:
       - Assignment Overview: assignments/index.md
       - Investment Budgeting: assignments/investment-budget.md
+  - Julia Learning: julia/index.md
   - Technical Notes:
       - Computational Overview: reference/index.md
       - Session 01 Computation: session-01/computation.md

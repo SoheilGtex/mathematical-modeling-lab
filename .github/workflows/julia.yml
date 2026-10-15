@@ -1,0 +1,30 @@
+name: Julia examples
+
+on:
+  push:
+    paths:
+      - 'Julia/**'
+      - '.github/workflows/julia.yml'
+  pull_request:
+    paths:
+      - 'Julia/**'
+      - '.github/workflows/julia.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  basics:
+    name: Julia basics (1.x)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+      - name: Run Julia example scripts
+        run: |
+          julia --startup-file=no Julia/01_Basics/01_variables.jl
+          julia --startup-file=no Julia/01_Basics/04_control_flow.jl
+          julia --startup-file=no Julia/01_Basics/05_functions.jl
