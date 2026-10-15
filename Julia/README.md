@@ -1,5 +1,7 @@
 # Julia for Mathematical Modeling
 
+**Project contributors:** [Soheil Salmani](https://github.com/SoheilGtex) · [Mahdieh Moghiseh](https://github.com/mahdiehmg)
+
 This directory contains Julia learning materials and code examples for the Mathematical Modeling course.
 
 The goal is to learn Julia step by step and use it to formulate, implement, and solve mathematical models.
@@ -60,6 +62,8 @@ Contributions, corrections, and suggestions are welcome. Please keep examples cl
 ---
 
 # جولیا برای مدل‌سازی ریاضی
+
+**مشارکت‌کنندگان پروژه:** [سهیل سلمانی](https://github.com/SoheilGtex) · [مهدیه مقیسه](https://github.com/mahdiehmg)
 
 این پوشه شامل مطالب آموزشی و مثال‌های کدنویسی به زبان جولیا برای درس مدل‌سازی ریاضی است.
 
