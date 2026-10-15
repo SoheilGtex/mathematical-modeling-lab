@@ -1,7 +1,5 @@
 # Julia Learning Materials
 
-**Project contributors:** [Soheil Salmani](https://github.com/SoheilGtex) · [Mahdieh Moghiseh](https://github.com/mahdiehmg)
-
 These optional Julia tutorials complement the mathematical-modeling course.
 The Julia section is maintained separately from the Python implementation and
 from the **modeling-only exam review** for all course sessions and assignments.
