@@ -21,6 +21,7 @@ Run `python scripts/build_exam_night.py` after adding or changing a session/assi
 - [Session 02 | جلسهٔ دوم](#session-02)
 - [Session 03 | جلسهٔ سوم](#session-03)
 - [Session 04 | جلسهٔ چهارم](#session-04)
+- [Session 05 | جلسهٔ پنجم](#session-05)
 - [Assignment 01 | تمرین اول](#assignment-investment-budget)
 
 ---
@@ -390,6 +391,87 @@ $$
 $$
 
 **نسبت را با سود اشتباه نگیرید.** تابع هدف **کسری خطی** است و نه خطی معمولی. چون هزینهٔ ثابت ۲۰۰ است، مخرج در ناحیهٔ مجاز مثبت می‌ماند.
+
+---
+
+<a id="session-05"></a>
+## Session 05 | جلسهٔ پنجم
+
+### English
+
+#### Linear-fractional objective and Charnes–Cooper model
+
+The [fractional-programming lecture example](site_docs/session-05/fractional.en.md) is
+
+$$\boxed{\begin{aligned}
+\max\quad &\frac{10x_1+20x_2+10}{3x_1+4x_2+20}\\
+\mathrm{s.t.}\quad &x_1+3x_2\le50,\\
+&3x_1+2x_2\le80,\\
+&x_1,x_2\ge0.
+\end{aligned}}$$
+
+The denominator is **strictly positive** ($\ge20$). Let $t=1/(3x_1+4x_2+20)$ and $y_i=tx_i$ ($x_i=y_i/t$). Multiply **both** resource constraints by $t$ and normalize the denominator:
+
+$$\boxed{\begin{aligned}
+\max\quad&10y_1+20y_2+10t\\
+\mathrm{s.t.}\quad&y_1+3y_2\le50t,\\
+&3y_1+2y_2\le80t,\\
+&3y_1+4y_2+20t=1,\\
+&y_1,y_2,t\ge0.
+\end{aligned}}$$
+
+**Remember:** in general $t>0$ is needed to invert the transformation; for this model, $t=0$ is impossible because the first scaled constraint and $y\ge0$ contradict the normalizing equality. Do not drop the constant $10$ in the numerator or $20$ in the denominator.
+
+#### Triangular fuzzy membership as a mathematical model
+
+From the [fuzzy-number lecture](site_docs/session-05/fuzzy.en.md), a crisp characteristic function has values only $0$ or $1$, while fuzzy membership satisfies $\mu_{\widetilde A}(x)\in[0,1]$. For the triangular fuzzy number $\widetilde M=(1,5,7)$:
+
+$$\boxed{\mu_{\widetilde M}(x)=\begin{cases}
+0,&x\le1,\\
+(x-1)/4,&1<x\le5,\\
+(7-x)/2,&5<x<7,\\
+0,&x\ge7.
+\end{cases}}$$
+
+**Modeling point:** derive the two straight-line equations from $(1,0)$, $(5,1)$ and $(7,0)$. This is a **membership-function model**, not a fuzzy optimization problem; no numerical optimizer is included in the exam review.
+
+### فارسی
+
+#### تابع هدف کسری و مدل تبدیلی چارنز–کوپر
+
+در [مثال برنامه‌ریزی کسری جلسه](site_docs/session-05/fractional.fa.md) مدل اولیه عبارت است از
+
+$$\boxed{\begin{aligned}
+\max\quad &\frac{10x_1+20x_2+10}{3x_1+4x_2+20}\\
+\mathrm{s.t.}\quad&x_1+3x_2\le50,\\
+&3x_1+2x_2\le80,\\
+&x_1,x_2\ge0.
+\end{aligned}}$$
+
+مخرج همواره **مثبت** (حداقل ۲۰) است. با $t=1/(3x_1+4x_2+20)$ و $y_i=tx_i$ (و $x_i=y_i/t$) هر **دو** قید را در $t$ ضرب کرده، قید نرمال‌سازی می‌نویسیم:
+
+$$\boxed{\begin{aligned}
+\max\quad &10y_1+20y_2+10t\\
+\mathrm{s.t.}\quad&y_1+3y_2\le50t,\\
+&3y_1+2y_2\le80t,\\
+&3y_1+4y_2+20t=1,\\
+&y_1,y_2,t\ge0.
+\end{aligned}}$$
+
+**نکته:** در حالت کلی برای بازگشت به مدل اول باید $t>0$ باشد. در این مثال $t=0$ به‌دلیل تناقض قید اول و قید تساوی ممکن نیست. عدد ثابت ۱۰ صورت و عدد ثابت ۲۰ مخرج را فراموش نکنید.
+
+#### مدل‌سازی تابع عضویت فازی مثلثی
+
+در [بخش مجموعه‌های فازی](site_docs/session-05/fuzzy.fa.md)، تابع مشخصهٔ مجموعهٔ معمولی فقط صفر یا یک می‌گیرد؛ اما درجهٔ عضویت فازی در بازهٔ $[0,1]$ است. عدد فازی مثلثی جزوه $\widetilde M=(1,5,7)$ است:
+
+$$\boxed{\mu_{\widetilde M}(x)=\begin{cases}
+0,&x\le1,\\
+(x-1)/4,&1<x\le5,\\
+(7-x)/2,&5<x<7,\\
+0,&x\ge7.
+\end{cases}}$$
+
+**نکتهٔ مدل‌سازی:** دو معادلهٔ خط را از سه رأس $(1,0)$، $(5,1)$ و $(7,0)$ بنویسید. این یک **مدل تابع عضویت** است و در جزوه مسئلهٔ بهینه‌سازی فازی تعریف نشده؛ حل عددی در مرور شب امتحان نمی‌آید.
 
 ---
 

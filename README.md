@@ -53,6 +53,8 @@ python -m modeling_lab production-plan --verify
 python examples/session_04/01_machine_allocation.py
 python examples/session_04/02_crude_oil.py
 python examples/session_04/03_revenue_cost_ratio.py
+python examples/session_05/01_fractional_charnes_cooper.py
+python examples/session_05/02_triangular_fuzzy.py
 python -m pytest -q
 ```
 
@@ -61,7 +63,8 @@ python -m pytest -q
 [Session 01 model notes](sessions/session_01/computational_notes.md) ·
 [Session 02 model notes](sessions/session_02/computational_notes.md) ·
 [Session 03 model notes](sessions/session_03/computational_notes.md) ·
-[Session 04 model notes](sessions/session_04/computational_notes.md)
+[Session 04 model notes](sessions/session_04/computational_notes.md) ·
+[Session 05 model notes](sessions/session_05/computational_notes.md)
 
 ## Build the bilingual documentation locally
 
@@ -121,6 +124,10 @@ educational additions. Both the numerical transport and production costs are sta
 The four-page Session 04 note presents a 3×4 machine allocation LP, a two-crude refinery LP,
 and a two-product **linear-fractional** revenue/cost model. The optima and proofs
 in this repository are independently derived study additions; the original scan is not redistributed.
+
+The seven-page Session 05 note covers the Charnes–Cooper conversion of linear-fractional
+programs and a triangular fuzzy membership function. The fractional optimum and its
+proof are independently derived; the note does not specify a fuzzy optimization problem.
 
 This is **not an official course resource**, exam syllabus, or grading rubric.
 The example data are instructional and should not be treated as real-world
