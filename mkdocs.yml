@@ -40,6 +40,7 @@ plugins:
             Session 01: جلسهٔ اول
             Session 02: جلسهٔ دوم
             Session 03: جلسهٔ سوم
+            Session 04: جلسهٔ چهارم
             Assignments: تمرین‌ها
             Assignment Overview: معرفی تمرین‌ها
             Investment Budgeting: بودجه‌بندی سرمایه‌گذاری
@@ -51,12 +52,16 @@ plugins:
             Television Production: تولید تلویزیون
             Numerical Transportation: حمل‌ونقل عددی
             Production and Inventory: تولید و موجودی
+            Machine Allocation: تخصیص ماشین‌ها
+            Crude Oil Refining: پالایش نفت خام
+            Revenue-to-Cost Ratio: نسبت درآمد به هزینه
             Julia Learning: آموزش جولیا
             Technical Notes: مطالب فنی (اختیاری)
             Computational Overview: نمای کلی محاسبات
             Session 01 Computation: محاسبات جلسهٔ اول
             Session 02 Computation: محاسبات جلسهٔ دوم
             Session 03 Computation: محاسبات جلسهٔ سوم
+            Session 04 Computation: محاسبات جلسهٔ چهارم
             Sensitivity Analysis: تحلیل حساسیت
             Solution Verification: اعتبارسنجی جواب
 
@@ -76,6 +81,11 @@ nav:
       - Introduction: session-03/index.md
       - Numerical Transportation: session-03/transportation.md
       - Production and Inventory: session-03/production.md
+  - Session 04:
+      - Introduction: session-04/index.md
+      - Machine Allocation: session-04/machines.md
+      - Crude Oil Refining: session-04/crude.md
+      - Revenue-to-Cost Ratio: session-04/ratio.md
   - Assignments:
       - Assignment Overview: assignments/index.md
       - Investment Budgeting: assignments/investment-budget.md
@@ -85,6 +95,7 @@ nav:
       - Session 01 Computation: session-01/computation.md
       - Session 02 Computation: session-02/computation.md
       - Session 03 Computation: session-03/computation.md
+      - Session 04 Computation: session-04/computation.md
       - Sensitivity Analysis: reference/sensitivity.md
       - Solution Verification: reference/verification.md
 

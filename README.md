@@ -50,6 +50,9 @@ python -m modeling_lab televisions --integer --verify
 python -m modeling_lab transport-demo --verify
 python -m modeling_lab transport-lecture --verify
 python -m modeling_lab production-plan --verify
+python examples/session_04/01_machine_allocation.py
+python examples/session_04/02_crude_oil.py
+python examples/session_04/03_revenue_cost_ratio.py
 python -m pytest -q
 ```
 
@@ -57,7 +60,8 @@ python -m pytest -q
 [Solution verification](docs/solution_verification.md) ·
 [Session 01 model notes](sessions/session_01/computational_notes.md) ·
 [Session 02 model notes](sessions/session_02/computational_notes.md) ·
-[Session 03 model notes](sessions/session_03/computational_notes.md)
+[Session 03 model notes](sessions/session_03/computational_notes.md) ·
+[Session 04 model notes](sessions/session_04/computational_notes.md)
 
 ## Build the bilingual documentation locally
 
@@ -113,6 +117,10 @@ constructed and are not presented as lecture data.
 The four handwritten Session 03 pages contain the numerical transport and five-month
 production-planning models. The optimizers and exact hand proofs are independent
 educational additions. Both the numerical transport and production costs are stated in toman.
+
+The four-page Session 04 note presents a 3×4 machine allocation LP, a two-crude refinery LP,
+and a two-product **linear-fractional** revenue/cost model. The optima and proofs
+in this repository are independently derived study additions; the original scan is not redistributed.
 
 This is **not an official course resource**, exam syllabus, or grading rubric.
 The example data are instructional and should not be treated as real-world
