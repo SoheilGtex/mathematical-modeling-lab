@@ -14,6 +14,7 @@ only for the final, cumulative review.
 | 02 | Transportation, TV production / حمل‌ونقل، تولید تلویزیون | [Session 02](session_02/README.md) |
 | 03 | Numerical transportation, five-month production/inventory / حمل‌ونقل عددی و تولید پنج‌ماهه | [Session 03](session_03/README.md) |
 | 04 | Machine allocation, crude refining, revenue-to-cost ratio / تخصیص ماشین، پالایش نفت، نسبت درآمد به هزینه | [Session 04](session_04/README.md) |
+| 05 | Charnes–Cooper fractional programming and triangular fuzzy membership / برنامه‌ریزی کسری و عضویت فازی مثلثی | [Session 05](session_05/README.md) |
 
 The original four-page session-one note **does not solve** the example models.
 Hand solutions and optimality arguments are independently derived educational
