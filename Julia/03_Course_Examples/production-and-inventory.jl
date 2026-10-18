@@ -3,8 +3,8 @@ using HiGHS
 
 model = Model(HiGHS.Optimizer)
 
-@variable(model, x[1:5] >= 0) # Regular time
-@variable(model, y[1:5] >= 0) # Overtime
+@variable(model, x[1:5] <= 2000) # Regular time
+@variable(model, y[1:5] <= 600) # Overtime
 @variable(model, z[1:4] >= 0) # Ending inventory
 
 @objective(model, Min, 
@@ -15,6 +15,7 @@ model = Model(HiGHS.Optimizer)
 @constraint(model, x[3] + y[3] + z[2] - z[3] == 2400)
 @constraint(model, x[4] + y[4] + z[3] - z[4] == 3000)
 @constraint(model, x[5] + y[5] + z[4] == 4000)
+
 
 
 optimize!(model)
