@@ -15,6 +15,8 @@ The reader-facing site has a short introduction, a cumulative exam review and th
 
 **Study:** [Complete course notes](https://soheilgtex.github.io/mathematical-modeling-lab/) — select a session from the site navigation; the home page does not repeat the growing session list.
 
+**Assignments:** [All course assignments](https://soheilgtex.github.io/mathematical-modeling-lab/assignments/) — Assignment 01 has a complete investment-budgeting solution; Assignment 02 only required solving the already documented Session 03 transportation model in Python ([existing code](examples/session_03/01_transportation.py)); Assignment 03 provides the full analytical solution and graphs for triangular fuzzy numbers and their maximum.
+
 **Exam preparation:** [Cumulative exam review](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) — one continuously updated page for all sessions.
 
 **Scope and attribution:** Lecture formulations come from student-supplied notes. Worked optima, optimality proofs, integer variants and the numeric transportation demonstration are independent educational additions. This is not an official university resource. The lecture scans are not redistributed.
@@ -55,6 +57,7 @@ python examples/session_04/02_crude_oil.py
 python examples/session_04/03_revenue_cost_ratio.py
 python examples/session_05/01_fractional_charnes_cooper.py
 python examples/session_05/02_triangular_fuzzy.py
+python examples/assignments/03_fuzzy_numbers_max.py
 python -m pytest -q
 ```
 
@@ -110,6 +113,8 @@ model formulations, but **do not solve them numerically**. The full handwritten
 solutions, optimality arguments, integer-programming variant, visualizations,
 and sensitivity experiments are independent educational extensions. The scanned
 source notes are not redistributed here.
+
+Assignment 02 is only the Python implementation of the Session 03 lecture transportation problem, not a new dataset. Assignment 03 separately studies the maximum of two triangular fuzzy numbers using the extension principle; its worked solution is in the assignments section.
 
 The single photographed Session 02 page gives a symbolic transport problem and
 a TV production example with **60,000 person-hours of labor**, clarified

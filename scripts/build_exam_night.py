@@ -47,6 +47,14 @@ def topics(root: Path) -> list[tuple[str, str, str]]:
         persian = {p.name.removesuffix(".fa.md") for p in assignment_dir.glob("*.fa.md") if p.name != "index.fa.md"}
         if set(stems) != persian:
             raise ValueError("Every assignment must have both English and Persian site pages")
+        # Keep numbering stable even when slug names are not alphabetically sorted.
+        order_file = root / "assignments" / "ORDER.txt"
+        if order_file.is_file():
+            ordered = [line.strip() for line in order_file.read_text(encoding="utf-8").splitlines()
+                       if line.strip() and not line.lstrip().startswith("#")]
+            if len(ordered) != len(set(ordered)) or set(ordered) != set(stems):
+                raise ValueError("Assignment ORDER.txt must list every published assignment exactly once")
+            stems = ordered
         for i, slug in enumerate(stems, 1):
             result.append((f"assignment_{slug}", f"Assignment {i:02d}", f"تمرین {fa_ordinal(i)}"))
 

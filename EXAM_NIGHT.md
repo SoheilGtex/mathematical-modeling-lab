@@ -23,6 +23,8 @@ Run `python scripts/build_exam_night.py` after adding or changing a session/assi
 - [Session 04 | جلسهٔ چهارم](#session-04)
 - [Session 05 | جلسهٔ پنجم](#session-05)
 - [Assignment 01 | تمرین اول](#assignment-investment-budget)
+- [Assignment 02 | تمرین دوم](#assignment-transportation-python)
+- [Assignment 03 | تمرین سوم](#assignment-fuzzy-numbers-max)
 
 ---
 
@@ -525,3 +527,49 @@ $$
 $$
 
 **علت قیود:** در هر سال «منابع قابل‌استفاده = هزینهٔ پروژه + سپردهٔ جدید»؛ بنابراین هر چهار قید **تساوی** است. ضرایب $1.06,1.055,1.045$ اصل سپرده و سود یک‌سالهٔ آن را در بر می‌گیرند. تابع هدف مجموع **اسمی بهرهٔ اوراق** است، نه بازپرداخت اصل یا ارزش فعلی. در صورت سؤال واژهٔ «سهام» آمده، ولی با توجه به نرخ بهره و سررسید، آن را **اوراق بهره‌دار مشابه بدهی** تفسیر می‌کنیم؛ این فرض باید ذکر شود.
+
+---
+
+<a id="assignment-transportation-python"></a>
+## Assignment 02 | تمرین دوم
+
+### English
+
+#### Python solution to the existing transportation problem
+
+Assignment 02 was **only the Python implementation** of the existing [Session 03 transportation model](site_docs/session-03/transportation.en.md). No second transport dataset or different mathematical formulation was assigned. The [existing Python code](site_docs/assignments/transportation-python.en.md) solves that lecture example; the model is already included under Session 03 in this cumulative review. There is no need to repeat its constraints here.
+
+### فارسی
+
+#### حل پایتونی مسئلهٔ حمل‌ونقل جلسهٔ سوم
+
+تمرین دوم **فقط حل مسئلهٔ حمل‌ونقل جلسهٔ سوم با Python** بود؛ مسئله یا مدل جدیدی ندارد. [مدل کامل حمل‌ونقل](site_docs/session-03/transportation.fa.md) در مرور جلسهٔ سوم موجود است و [کد آمادهٔ پایتون](site_docs/assignments/transportation-python.fa.md) نیز در سایت معرفی شده است. قیود تکراری اینجا دوباره نوشته نمی‌شوند.
+
+---
+
+<a id="assignment-fuzzy-numbers-max"></a>
+## Assignment 03 | تمرین سوم
+
+### English
+
+#### Triangular fuzzy memberships and the maximum operator
+
+The full [fuzzy-number assignment solution](site_docs/assignments/fuzzy-numbers-max.en.md) uses $\widetilde A=(1,3,7)$ and $\widetilde B=(3,5,6)$. Model the membership functions with the triangular definition, then use **Zadeh's extension-principle constraint**:
+
+$$\mu_{\max(\widetilde A,\widetilde B)}(z)=
+\sup_{\substack{x,y\in\mathbb R\\\max(x,y)=z}}
+\min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
+
+The constraint $\max(x,y)=z$ requires $x\le z$, $y\le z$, and **at least one equality**. Identify the triangle vertices and sketch both membership functions and their maximum; all detailed interval calculations and proofs are on the full assignment page. This is a fuzzy-membership modeling exercise, **not** an extra linear-programming objective.
+
+### فارسی
+
+#### مدل تابع عضویت و عملگر ماکزیمم فازی
+
+در [حل کامل تمرین اعداد فازی](site_docs/assignments/fuzzy-numbers-max.fa.md)، دو عدد مثلثی $\widetilde A=(1,3,7)$ و $\widetilde B=(3,5,6)$ داده شده‌اند. توابع عضویت را از تعریف عدد فازی مثلثی مدل کنید و برای ماکزیمم آن‌ها **اصل گسترش زاده** را بنویسید:
+
+$$\mu_{\max(\widetilde A,\widetilde B)}(z)=
+\sup_{\substack{x,y\in\mathbb R\\\max(x,y)=z}}
+\min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
+
+شرط $\max(x,y)=z$ می‌گوید $x\le z$ و $y\le z$ و **حداقل یکی باید برابر $z$ باشد**. نقاط شکست توابع عضویت را مشخص و نمودارها را رسم کنید. محاسبات کاملِ بازه‌ای و اثبات‌ها در صفحهٔ تشریحی تمرین هستند. این مبحث مدل‌سازی تابع عضویت است، **نه** یک مسئلهٔ اضافی برنامه‌ریزی خطی.
