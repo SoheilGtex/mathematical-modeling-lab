@@ -45,6 +45,8 @@ plugins:
             Assignments: تمرین‌ها
             Assignment Overview: معرفی تمرین‌ها
             Investment Budgeting: بودجه‌بندی سرمایه‌گذاری
+            Transportation (Python): حمل‌ونقل با پایتون
+            Fuzzy Numbers: اعداد فازی
             Introduction: معرفی جلسه
             Fundamentals: مبانی مدل‌سازی
             Diet: رژیم غذایی
@@ -97,6 +99,8 @@ nav:
   - Assignments:
       - Assignment Overview: assignments/index.md
       - Investment Budgeting: assignments/investment-budget.md
+      - Transportation (Python): assignments/transportation-python.md
+      - Fuzzy Numbers: assignments/fuzzy-numbers-max.md
   - Julia Learning: julia/index.md
   - Technical Notes:
       - Computational Overview: reference/index.md

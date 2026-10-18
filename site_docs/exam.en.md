@@ -242,6 +242,24 @@ $$
 
 **Modeling explanation:** every year's available funds equal its required spending plus the next deposit. The factors $1.06,1.055,1.045$ include the principal **and** one year's deposit interest. This objective counts nominal coupon expense (not principal repayment or discounted present value). The handout calls the issued instruments “shares,” but because it specifies interest and maturity, the model interprets them as **bond-like interest-bearing securities**; state this assumption.
 
+## Assignment 02
+
+### Python solution to the existing transportation problem
+
+Assignment 02 was **only the Python implementation** of the existing [Session 03 transportation model](session-03/transportation.md). No second transport dataset or different mathematical formulation was assigned. The [existing Python code](assignments/transportation-python.md) solves that lecture example; the model is already included under Session 03 in this cumulative review. There is no need to repeat its constraints here.
+
+## Assignment 03
+
+### Triangular fuzzy memberships and the maximum operator
+
+The full [fuzzy-number assignment solution](assignments/fuzzy-numbers-max.md) uses $\widetilde A=(1,3,7)$ and $\widetilde B=(3,5,6)$. Model the membership functions with the triangular definition, then use **Zadeh's extension-principle constraint**:
+
+$$\mu_{\max(\widetilde A,\widetilde B)}(z)=
+\sup_{\substack{x,y\in\mathbb R\\\max(x,y)=z}}
+\min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
+
+The constraint $\max(x,y)=z$ requires $x\le z$, $y\le z$, and **at least one equality**. Identify the triangle vertices and sketch both membership functions and their maximum; all detailed interval calculations and proofs are on the full assignment page. This is a fuzzy-membership modeling exercise, **not** an extra linear-programming objective.
+
 ## Modeling-only checklist
 
 - [ ] Define every decision variable, its meaning, units and domain.

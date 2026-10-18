@@ -1,0 +1,5 @@
+# Stable assignment sequence in the public site and exam review.
+# Add each new site's assignment-page slug here in assignment-number order.
+investment-budget
+transportation-python
+fuzzy-numbers-max
