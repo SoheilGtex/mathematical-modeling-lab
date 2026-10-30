@@ -1,3 +1,4 @@
+import MathOptInterface as MOI
 using HiGHS
 using JuMP
 
@@ -35,10 +36,14 @@ demand = [150, 200, 100, 200]
 
 optimize!(model)
 
+@assert termination_status(model) == MOI.OPTIMAL
+
 println("Status: ", termination_status(model))
 
 if is_solved_and_feasible(model)
-    println("Minimum total cost = ", objective_value(model))
+    min_cost = objective_value(model)
+
+    println("Minimum total cost = ", min_cost)
 
     origins = ["Tabriz", "Yazd", "Kerman"]
     destinations = ["Tehran", "Mashhad", "Isfahan", "Shiraz"]
@@ -48,4 +53,12 @@ if is_solved_and_feasible(model)
             println(origins[i], " -> ", destinations[j], " = ", value(x[i,j]))
         end
     end
+
+    @assert isapprox(
+        min_cost,
+        2550.0;
+        atol=1e-6
+    )
+else
+    error("The model is not solved or not feasible.")
 end

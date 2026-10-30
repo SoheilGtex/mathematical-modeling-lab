@@ -1,3 +1,4 @@
+import MathOptInterface as MOI
 using JuMP
 using HiGHS
 
@@ -31,14 +32,26 @@ a = [
 
 optimize!(model)
 
+@assert termination_status(model) == MOI.OPTIMAL
+
 println("Status: ", termination_status(model))
 
 if is_solved_and_feasible(model)
-    println("Minimum cost = ", objective_value(model))
+    min_cost = objective_value(model)
+
+    println("Minimum cost = ", min_cost)
 
     for i in 1:3
         for j in 1:4
             println("Product $i on Machine $j = ", value(x[i,j]))
         end
     end
+
+    @assert isapprox(
+        min_cost,
+        82500.0;
+        atol=1e-6
+    )
+else
+    error("The model is not solved or not feasible.")
 end

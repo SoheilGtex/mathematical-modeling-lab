@@ -1,3 +1,4 @@
+import MathOptInterface as MOI
 using JuMP
 using HiGHS
 
@@ -16,17 +17,16 @@ model = Model(HiGHS.Optimizer)
 @constraint(model, x[4] + 1.045 * y[3] == 5)
 
 
-
-# کد مربوط به «حل مدل» توسط هوش مصنوعی نوشته شده
-
-# Solve the model
 optimize!(model)
 
-# Display the results
+@assert termination_status(model) == MOI.OPTIMAL
+
 println("Termination status: ", termination_status(model))
 
 if is_solved_and_feasible(model)
-    println("Minimum total interest cost: ", objective_value(model))
+    min_cost = objective_value(model)
+
+    println("Minimum total interest cost: ", min_cost)
 
     for i in 1:4
         println("Bonds sold in year $i: ", value(x[i]))
@@ -35,4 +35,12 @@ if is_solved_and_feasible(model)
     for i in 1:3
         println("Short-term deposit in year $i: ", value(y[i]))
     end
+
+    @assert isapprox(
+        min_cost,
+        22.1418263452686;
+        atol=1e-6
+    )
+else
+    error("The model is not solved or not feasible.")
 end

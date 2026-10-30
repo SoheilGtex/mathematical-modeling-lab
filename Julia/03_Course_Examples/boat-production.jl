@@ -1,3 +1,4 @@
+import MathOptInterface as MOI
 using JuMP
 using HiGHS
 
@@ -15,17 +16,18 @@ model = Model(HiGHS.Optimizer)
 
 optimize!(model)
 
+@assert termination_status(model) == MOI.OPTIMAL
+
 println("Status: ", termination_status(model))
 
 if is_solved_and_feasible(model)
     println("Regular boats = ", value(x))
     println("Competition boats = ", value(y))
-    println("Maximum profit = ", objective_value(model))
+
+    max_profit = objective_value(model)
+    println("Maximum profit = ", max_profit)
+
+    @assert isapprox(max_profit, 1600.0; atol=1e-6)
 else
-    println("The model is not solved or not feasible.")
+    error("The model is not solved or not feasible.")
 end
-
-
-
-
-
