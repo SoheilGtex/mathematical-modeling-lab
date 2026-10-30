@@ -14,7 +14,7 @@ c = [
 @objective(model, Min, 
     sum(c[i,j] * x[i,j] for i in 1:3, j in 1:4))
 
-production_min = [3000, 6000, 2000]
+production_min = [3000, 6000, 4000]
 
 @constraint(model, [i in 1:3], 
     sum(x[i,j] for j in 1:4) >= production_min[i])

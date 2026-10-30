@@ -3,8 +3,8 @@ using HiGHS
 
 model = Model(HiGHS.Optimizer)
 
-@variable(model, x[1:5] <= 2000) # Regular time
-@variable(model, y[1:5] <= 600) # Overtime
+@variable(model, 0 <= x[1:5] <= 2000) # Regular time
+@variable(model, 0 <= y[1:5] <= 600) # Overtime
 @variable(model, z[1:4] >= 0) # Ending inventory
 
 @objective(model, Min, 

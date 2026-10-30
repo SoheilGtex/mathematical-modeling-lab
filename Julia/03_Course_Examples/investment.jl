@@ -29,7 +29,7 @@ if is_solved_and_feasible(model)
     println("Minimum total interest cost: ", objective_value(model))
 
     for i in 1:4
-        println("Stocks sold in year $i: ", value(x[i]))
+        println("Bonds sold in year $i: ", value(x[i]))
     end
 
     for i in 1:3
