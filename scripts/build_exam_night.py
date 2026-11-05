@@ -117,54 +117,54 @@ def extract(root: Path, key: str, lang: str, *, site: bool) -> str:
     return content
 
 
+def review_fragment(root: Path, name: str, lang: str) -> str:
+    """Read editorial study sections outside the strict session-source registry."""
+    path = root / "review_guides" / f"{name}.{lang}.md"
+    if not path.is_file() and root.resolve() != ROOT.resolve():
+        # Unit tests build a miniature course tree without editorial fragments.
+        # Reuse immutable repository study-guidance, but keep all session data
+        # and assignment coverage sourced from the supplied fixture tree.
+        path = ROOT / "review_guides" / f"{name}.{lang}.md"
+    content = path.read_text(encoding="utf-8").strip()
+    if not content.startswith("## ") or len(content) < 100:
+        raise ValueError(f"Missing or incomplete study guide: {path}")
+    return content
+
+
 def generated(root: Path = ROOT) -> dict[str, str]:
     root = root.resolve()
     sections = topics(root)
+    # Only two public reviews; their names are deliberately simple and stable.
+    opening_en = review_fragment(root, "midterm_opening", "en")
+    opening_fa = review_fragment(root, "midterm_opening", "fa")
+    practice_en = review_fragment(root, "midterm_practice", "en")
+    practice_fa = review_fragment(root, "midterm_practice", "fa")
     root_parts = [
-        "# ARCHIVED MIDTERM — Modeling Only | آرشیو میان‌ترم حذف‌شده — فقط مدل‌سازی",
-        "",
-        "> **Instructor clarification:** the examination focuses on **model formulation only**.",
-        "> **طبق توضیح استاد:** در امتحان **فقط مدل‌سازی ریاضی** مدنظر است.",
-        "",
-        "This archived guide covers **Sessions 01–09 and their assignments only**. Define decision variables,",
-        "write the objective and all constraints, and specify domains and units. Numerical solutions,",
-        "optimality proofs, simplex and software are intentionally excluded from this exam review.",
-        "Full worked solutions remain available from the linked pages.",
-        "",
-        "این **آرشیو میان‌ترم حذف‌شده** فقط شامل **جلسات ۱ تا ۹ و تمرین‌های آن بخش** است. تمرکز مرور بر تعریف متغیرها، تابع هدف,",
-        "قیود، واحدها و دامنهٔ متغیرهاست؛ حل عددی و اثبات بهینگی در صفحات کامل باقی می‌مانند.",
-        "این مجموعه یک منبع دانشجویی مستقل است، نه بارم‌بندی رسمی امتحان.",
-        "",
-        "**Generated file:** Edit the bilingual files in `review_sources/`, not this file.",
-        "Run `python scripts/build_exam_night.py` after adding or changing a session/assignment.",
-        "",
-        "## Contents | فهرست",
-        "",
+        "# مرور میان‌ترم", "",
+        "**Midterm Review — Sessions 01–09 and their assigned coursework.**", "",
+        "این مرور برای مطالعهٔ جلسات **۱ تا ۹** و تمرین‌های مربوط به این دوره است.",
+        "مرور پایان‌ترم، از جلسهٔ **۱۰** به بعد، در فایل `EXAM_FINAL.md` نگهداری می‌شود.",
+        "این نوشته منبع مستقل دانشجویی است، نه اطلاعیه یا بارم‌بندی رسمی آزمون.", "",
+        "**Generated file:** Edit `review_sources/` and `review_guides/`, then run `python scripts/build_exam_night.py`.", "",
+        opening_fa, "", opening_en, "",
+        "## فهرست جلسات | Contents", "",
     ]
+    en_parts = [
+        "# Midterm Review", "",
+        "**Sessions 01–09 and the assignments for this period.** The final exam has its own independent review.",
+        "This is a student-written guide, not an official exam announcement or grading rubric.", "",
+        opening_en, "",
+    ]
+    fa_parts = [
+        "# مرور میان‌ترم", "",
+        "**ویژهٔ جلسات ۱ تا ۹ و تمرین‌های مربوط به این بخش.** برای جلسات ۱۰ به بعد، صفحهٔ مستقل «مرور پایان‌ترم» را بخوانید.",
+        "این راهنمای دانشجویی برای یادگیری و تمرین مدل‌سازی نوشته شده و برنامه یا بارم‌بندی رسمی امتحان نیست.", "",
+        opening_fa, "",
+    ]
+
     for key, en, fa in sections:
         root_parts.append(f"- [{en} | {fa}](#{key.replace('_', '-')})")
     root_parts.append("")
-
-    en_parts = [
-        "# Midterm Archive — Sessions 01–09 (Withdrawn)",
-        "",
-        "**Instructor clarification:** only mathematical modeling is required for the examination.",
-        "This archived review covers **Sessions 01–09 and their assignments**, not the final examination.",
-        "Practice defining the decision variables, objective, constraints, units and domains.",
-        "Numerical optimization and proof of optimality belong to the complete worked solutions, not this revision sheet.",
-        "This is an independent study aid, not an official exam syllabus or grading rubric.",
-        "",
-    ]
-    fa_parts = [
-        "# آرشیو میان‌ترم حذف‌شده — جلسات ۱ تا ۹",
-        "",
-        "**طبق توضیح استاد، فقط مدل‌سازی مسائل در امتحان مدنظر است.**",
-        "این مرور فقط شامل **جلسات ۱ تا ۹ و تمرین‌های این بخش** است و برای پایان‌ترم استفاده نمی‌شود.",
-        "در هر مسئله متغیرها و واحدشان، تابع هدف، قیود و دامنهٔ متغیرها را تمرین کنید.",
-        "حل عددی و اثبات بهینگی در صفحات تشریحی کامل موجودند و در این مرور نیامده‌اند.",
-        "این مجموعه راهنمای مستقل مطالعه است، نه بارم‌بندی رسمی امتحان.",
-        "",
-    ]
 
     for key, en, fa in sections:
         en_excerpt = extract(root, key, "en", site=True)
@@ -183,6 +183,12 @@ def generated(root: Path = ROOT) -> dict[str, str]:
             f"## {en_title} | {fa_title}", "", "### English", "", en_root, "",
             "### فارسی", "", fa_root, "",
         ])
+
+    # Place practice after the explanations, with its answer key intentionally
+    # separated from the prompts for genuine active recall.
+    en_parts.extend([practice_en, ""])
+    fa_parts.extend([practice_fa, ""])
+    root_parts.extend(["---", "", practice_fa, "", practice_en, ""])
 
     en_parts.extend([
         "## Modeling-only checklist", "",
@@ -215,21 +221,21 @@ def generated_final(root: Path = ROOT) -> dict[str, str]:
     if not sections:
         raise ValueError("Final review requires at least one published Session 10+")
     en=[
-        "# Final Exam Review — Sessions 10 Onward", "",
-        "**Period separation:** the former midterm (Sessions 01–09) was withdrawn. This review intentionally includes only Sessions 10 onward.",
+        "# Final Exam Review", "",
+        "**Scope:** this review includes only Sessions 10 onward. Sessions 01–09 have a separate Midterm Review.",
         "This is an independent study summary, not an official exam announcement. The final-exam question types have not been specified by the supplied scan.",
         "Retain definitions, modeling choices, complete formulations and any verified worked calculations; do not invent missing source data.", "",
     ]
     fa=[
-        "# مرور شب امتحان پایان‌ترم — از جلسهٔ دهم", "",
-        "**تفکیک امتحان‌ها:** میان‌ترمِ مربوط به جلسات ۱ تا ۹ حذف شده است. این مرور فقط از جلسهٔ ۱۰ به بعد را شامل می‌شود.",
+        "# مرور پایان‌ترم", "",
+        "**محدودهٔ این مرور:** فقط جلسات ۱۰ به بعد. مطالب جلسات ۱ تا ۹ در صفحهٔ مستقل «مرور میان‌ترم» قرار دارند.",
         "این متن راهنمای مستقل دانشجویی است، نه اطلاعیهٔ رسمی امتحان. نوع و جزئیات سؤال‌های پایان‌ترم از جزوهٔ ارسالی مشخص نیست.",
         "تعریف‌ها، فرض‌های مدل‌سازی، مدل کامل و محاسبات قابل‌راستی‌آزمایی را مرور کنید؛ برای داده‌های مبهم جواب ساختگی ندهید.", "",
     ]
     root_lines=[
-        "# FINAL EXAM REVIEW | مرور شب امتحان پایان‌ترم", "",
-        "**Sessions 10+ only. Sessions 01–09 are archived separately in EXAM_NIGHT.md.**", "",
-        "**فقط جلسات ۱۰ به بعد. جلسات ۱ تا ۹ در EXAM_NIGHT.md آرشیو شده‌اند.**", "",
+        "# مرور پایان‌ترم", "",
+        "**Final Exam Review: Sessions 10+ only. Sessions 01–09 are covered in EXAM_NIGHT.md.**", "",
+        "**فقط جلسات ۱۰ به بعد. مرور میان‌ترمِ جلسات ۱ تا ۹ در EXAM_NIGHT.md قرار دارد.**", "",
         "This is an independent student learning aid, not a published exam syllabus.", "",
         "**Generated file:** edit review_sources, then run python scripts/build_exam_night.py.", "",
     ]
@@ -292,7 +298,7 @@ def main() -> int:
         print("Exam review is stale: run python scripts/build_exam_night.py", file=sys.stderr)
         return 1
     if args.check:
-        print("Separate midterm archive (01–09) and final review (10+), EN/FA, are up to date")
+        print("Two independent reviews verified: Midterm Review (01–09), Final Exam Review (10+), EN/FA")
     return 0
 
 

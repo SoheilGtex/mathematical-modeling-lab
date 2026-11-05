@@ -1,10 +1,40 @@
-# Midterm Archive — Sessions 01–09 (Withdrawn)
+# Midterm Review
 
-**Instructor clarification:** only mathematical modeling is required for the examination.
-This archived review covers **Sessions 01–09 and their assignments**, not the final examination.
-Practice defining the decision variables, objective, constraints, units and domains.
-Numerical optimization and proof of optimality belong to the complete worked solutions, not this revision sheet.
-This is an independent study aid, not an official exam syllabus or grading rubric.
+**Sessions 01–09 and the assignments for this period.** The final exam has its own independent review.
+This is a student-written guide, not an official exam announcement or grading rubric.
+
+## How to study this review the day before the midterm
+
+This is a **one-day study guide** for Sessions 01–09 and the assignments belonging to that period. Read it to learn how to *formulate* a model from a new word problem, not just recognize a completed solution. The Session 10+ material has its own separate final-exam review.
+
+> **Scope caveat:** The recorded instructor clarification for the earlier review emphasized mathematical formulation. This independent student resource does not establish an official examination date, syllabus, grading distribution, or promised question types.
+
+### Suggested seven-to-eight-hour plan
+
+| Focus | Suggested time | Written deliverable |
+| --- | --- | --- |
+| Formulation principles | 45 min | One template for variables, objectives, constraints, and domains |
+| Sessions 01–02 | 75 min | Diet, boats, symbolic transportation, and televisions |
+| Sessions 03–04 | 90 min | Indexed transportation, inventory balances, machine allocation, refining |
+| Fractional objectives and Charnes–Cooper | 55 min | Correct scaling and normalization constraint |
+| Fuzzy foundations and LR numbers | 80 min | Membership graph, alpha-cuts, rank-based model |
+| Extension principle and Kerre | 70 min | Alpha-cut maximum, distance and comparison criterion |
+| Self-test and correction | 60 min | Corrected handwritten models, not just reread notes |
+
+### Six-step formulation checklist
+
+1. Identify what the decision maker chooses, rather than what is given as data.
+2. Define variables, indices, units, and their domains.
+3. Translate the objective into a minimum, maximum, or explicit ratio.
+4. Translate each capacity, minimum requirement, and exact balance into an appropriately directed constraint.
+5. Add nonnegativity, integrality **only when warranted**, and all boundary conditions.
+6. Check dimensional consistency, missing constraints, and whether the fuzzy comparison rule is specified.
+
+For formulas written at $\alpha=0$, interpret the interval as the **closure of support**; the literal set $\{x:\mu(x)\ge0\}$ would otherwise be the entire universe.
+
+**Common traps:** reversing supply and demand sums, confusing an inventory balance with a capacity limit, omitting the constant in a fractional objective, treating LR spreads as endpoints, or replacing the extension-principle maximum with a pointwise maximum of memberships.
+
+---
 
 ## Session 01
 
@@ -313,6 +343,55 @@ $$\mu_{\max(\widetilde A,\widetilde B)}(z)=
 \min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
 
 The constraint $\max(x,y)=z$ requires $x\le z$, $y\le z$, and **at least one equality**. Identify the triangle vertices and sketch both membership functions and their maximum; all detailed interval calculations and proofs are on the full assignment page. This is a fuzzy-membership modeling exercise, **not** an extra linear-programming objective.
+
+## Day-before self-assessment
+
+These are **independently written practice questions based on Sessions 01–09**, not official examination questions. Work without looking up the answers first. Always state variable meanings, units, domains, and the rationale for each inequality.
+
+### Questions
+
+1. What is the vitamin-A minimum constraint for diet quantities $p,s,t$ when contributions are $1,4,2$ and the daily requirement is 12?
+2. Write the machine-time constraint for 20 and 15 minutes per boat when only five machine-hours are available.
+3. Write the supply and exact-demand constraints for a transportation model, making explicit which index is summed.
+4. Write the second- and fifth-month balances of the published production/inventory model.
+5. Express the capacity constraint of machine 3 when $t_{i3}$ is the time for product $i$ on that machine.
+6. Derive usable diesel from purchased light crude when the refinery yield is 95% and the diesel fraction is 40%.
+7. Explain why maximizing revenue-to-cost differs from maximizing revenue minus cost.
+8. Give the Charnes–Cooper variables and normalization for the denominator $3x_1+4x_2+20$.
+9. Derive the two nonzero membership branches and the alpha-cut for $(1,5,7)$.
+10. Distinguish support, core, ordinary alpha-cut, and strong alpha-cut.
+11. Interpret the four parameters $(a^L,a^U,\ell,r)_{LR}$.
+12. Evaluate the course ranking formula for $(3,5,1,3)_{LR}$.
+13. Construct the alpha-cut maximum of $(0,2,5)$ and $(2,3,4)$ and determine the switching alpha.
+14. Explain why the extension-principle maximum of $(2,5,12)$ and $(2,4,10)$ is the first triangular number, and infer the Kerre score sign.
+15. Write the second-year financing balance with a 6% return on the previous year's deposit.
+16. For $A=(1,3,7)$ and $B=(3,5,6)$, identify the alpha where the right endpoint of their extension-principle maximum switches branches.
+
+### Answer key
+
+1. $p+4s+2t\ge12$.
+2. $20x+15y\le300$ minutes.
+3. $\sum_jx_{ij}\le a_i$ and $\sum_ix_{ij}=b_j$.
+4. $x_2+y_2+s_1-s_2=2100$ and $x_5+y_5+s_4=4000$.
+5. $\sum_{i=1}^3t_{i3}x_{i3}\le H_3$.
+6. $0.40\cdot0.95x_1=0.38x_1$.
+7. A ratio and a difference represent different objectives.
+8. $t=1/(3x_1+4x_2+20)$, $y_i=tx_i$, $3y_1+4y_2+20t=1$.
+9. $(x-1)/4$ and $(7-x)/2$ on their respective intervals; $[A]_\alpha=[1+4\alpha,7-2\alpha]$.
+10. $\{\mu>0\}$, $\{\mu=1\}$, $\{\mu\ge\alpha\}$, $\{\mu>\alpha\}$.
+11. Two core endpoints and two spreads.
+12. $4.5$.
+13. $[M]_\alpha=[2\alpha,5-3\alpha]$, $[N]_\alpha=[2+\alpha,4-\alpha]$, switching at $\alpha=1/2$.
+14. Both alpha-cut endpoints of the first dominate, hence $D=M$ and $r(M,N)=-d(M,N)<0$.
+15. $x_2+1.06s_1-s_2=4$.
+16. $[A]_{\alpha}=[1+2\alpha,7-4\alpha]$, $[B]_{\alpha}=[3+2\alpha,6-\alpha]$; the right bounds cross at $\alpha=1/3$.
+
+### Final checklist
+
+- [ ] I can rebuild each model from the word problem, not just recall its finished expression.
+- [ ] I can explain the direction and units of each constraint.
+- [ ] I keep all temporal boundaries, fractional-objective constants, and fuzzy comparison definitions.
+- [ ] I distinguish results explicitly supplied by the course notes from independent mathematical extensions.
 
 ## Modeling-only checklist
 

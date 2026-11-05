@@ -54,8 +54,8 @@ plugins:
             Session 06 Computation: محاسبات جلسهٔ ششم
             Session 07 Computation: محاسبات جلسهٔ هفتم
             Overview: معرفی
-            Exam Review: مرور شب امتحان
-            Midterm Archive: آرشیو میان‌ترم حذف‌شده
+            Exam Review: مرور میان‌ترم
+            Midterm Review: مرور میان‌ترم
             Final Exam Review: مرور پایان‌ترم
             Session 10: جلسهٔ دهم
             Session 11: جلسهٔ یازدهم
@@ -103,7 +103,7 @@ plugins:
 
 nav:
   - Overview: index.md
-  - Midterm Archive: exam.md
+  - Midterm Review: exam.md
   - Final Exam Review: exam-final.md
   - Session 01:
       - Introduction: session-01/index.md

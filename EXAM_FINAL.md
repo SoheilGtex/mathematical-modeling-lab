@@ -1,8 +1,8 @@
-# FINAL EXAM REVIEW | مرور شب امتحان پایان‌ترم
+# مرور پایان‌ترم
 
-**Sessions 10+ only. Sessions 01–09 are archived separately in EXAM_NIGHT.md.**
+**Final Exam Review: Sessions 10+ only. Sessions 01–09 are covered in EXAM_NIGHT.md.**
 
-**فقط جلسات ۱۰ به بعد. جلسات ۱ تا ۹ در EXAM_NIGHT.md آرشیو شده‌اند.**
+**فقط جلسات ۱۰ به بعد. مرور میان‌ترمِ جلسات ۱ تا ۹ در EXAM_NIGHT.md قرار دارد.**
 
 This is an independent student learning aid, not a published exam syllabus.
 
