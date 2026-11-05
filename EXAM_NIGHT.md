@@ -1,14 +1,14 @@
-# EXAM NIGHT — Mathematical Modeling Only | مرور شب امتحان — فقط مدل‌سازی
+# ARCHIVED MIDTERM — Modeling Only | آرشیو میان‌ترم حذف‌شده — فقط مدل‌سازی
 
 > **Instructor clarification:** the examination focuses on **model formulation only**.
 > **طبق توضیح استاد:** در امتحان **فقط مدل‌سازی ریاضی** مدنظر است.
 
-This is one cumulative guide for **every course session and assignment**. Define decision variables,
+This archived guide covers **Sessions 01–09 and their assignments only**. Define decision variables,
 write the objective and all constraints, and specify domains and units. Numerical solutions,
 optimality proofs, simplex and software are intentionally excluded from this exam review.
 Full worked solutions remain available from the linked pages.
 
-این فایل شامل **تمام جلسات و تمرین‌ها** است. تمرکز مرور بر تعریف متغیرها، تابع هدف،
+این **آرشیو میان‌ترم حذف‌شده** فقط شامل **جلسات ۱ تا ۹ و تمرین‌های آن بخش** است. تمرکز مرور بر تعریف متغیرها، تابع هدف,
 قیود، واحدها و دامنهٔ متغیرهاست؛ حل عددی و اثبات بهینگی در صفحات کامل باقی می‌مانند.
 این مجموعه یک منبع دانشجویی مستقل است، نه بارم‌بندی رسمی امتحان.
 

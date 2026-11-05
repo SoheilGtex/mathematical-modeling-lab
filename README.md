@@ -11,13 +11,13 @@
 
 The documentation opens in **English**. Use the small language selector at the top of any page to read the **complete Persian translation of that same page** (RTL). Dates and the academic term follow each language's calendar: Gregorian in English, Solar Hijri in Persian.
 
-The reader-facing site has a short introduction, a cumulative exam review and the course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
+The reader-facing site has a short introduction, two separate period reviews (withdrawn midterm and final), and the course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
 
 **Study:** [Complete course notes](https://soheilgtex.github.io/mathematical-modeling-lab/) — select a session from the site navigation; the home page does not repeat the growing session list.
 
 **Assignments:** [All course assignments](https://soheilgtex.github.io/mathematical-modeling-lab/assignments/) — Assignment 01 has a complete investment-budgeting solution; Assignment 02 only required solving the already documented Session 03 transportation model in Python ([existing code](examples/session_03/01_transportation.py)); Assignment 03 provides the full analytical solution and graphs for triangular fuzzy numbers and their maximum.
 
-**Exam preparation:** [Cumulative exam review](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) — one continuously updated page for all sessions.
+**Exam preparation:** [Archived midterm (Sessions 01–09)](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) · [Final exam (Sessions 10 onward)](https://soheilgtex.github.io/mathematical-modeling-lab/exam-final/). The midterm is withdrawn; the two reviews do not overlap.
 
 **Scope and attribution:** Lecture formulations come from student-supplied notes. Worked optima, optimality proofs, integer variants and the numeric transportation demonstration are independent educational additions. This is not an official university resource. The lecture scans are not redistributed.
 
@@ -54,6 +54,21 @@ membership denominators and independently evaluates the score $-17/9$.
 
 The scan is not redistributed. Distinguish supplied data from independent
 corrections and calculations; see the audit before attributing any result.
+
+## Sessions 10–11: Hesitant fuzzy sets and hesitant production modeling
+
+The five-page handwritten scan dated **10 Aban** is split editorially into
+**Session 10** (pages 1–3: hesitant fuzzy membership, the tall-student example,
+and hesitant fuzzy-number definition) and **Session 11** (pages 4–5: the
+trapezoidal ranking formula and a two-product hesitant production model).
+
+- [Session 10 (English)](site_docs/session-10/index.en.md) / [فارسی](site_docs/session-10/index.fa.md)
+- [Session 11 (English)](site_docs/session-11/index.en.md) / [فارسی](site_docs/session-11/index.fa.md)
+- [Source audit and ambiguous handwritten values](docs/session_10_11_source_audit.md)
+
+**Exam separation:** Sessions 01–09 belong to the **withdrawn midterm archive**;
+Sessions 10 onward have an independent [final-exam review](EXAM_FINAL.md).
+Assumed corrections and numerical illustrations are clearly marked as such.
 
 ## Julia learning materials
 
@@ -129,7 +144,8 @@ are not converted.
 ## Repository structure (for developers)
 
 ```text
-EXAM_NIGHT.md              # source-generated cumulative review (legacy EN/FA source)
+EXAM_NIGHT.md              # generated archived midterm, Sessions 01–09
+EXAM_FINAL.md              # generated final, Sessions 10 onward
 sessions/                  # written solutions + per-session review excerpts
 examples/                  # runnable Python examples grouped by session
 src/modeling_lab/           # reusable model/solver/plot/analysis code
@@ -137,7 +153,7 @@ docs/                      # technical documentation source
 site_docs/                 # complete English and Persian website pages
 mkdocs.yml                  # quiet, bilingual GitHub Pages navigation
 templates/                 # written-solution and computational templates
-scripts/build_exam_night.py # rebuild / check cumulative exam review
+scripts/build_exam_night.py # rebuild / check BOTH separated period reviews
 tests/                     # automated regression tests
 .github/workflows/ci.yml   # Python 3.11 / 3.12 CI
 ```

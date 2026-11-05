@@ -78,10 +78,17 @@ def check() -> list[str]:
         exam_heading = exam_page.splitlines()[0]
         if "Sessions 01–02" in exam_heading or "جلسات اول و دوم" in exam_heading:
             errors.append(f"Exam review title is tied to the current sessions: {lang}")
-        # A single cumulative review should link to every published session.
+        final_page = (ROOT / f"exam-final.{lang}.md").read_text(encoding="utf-8")
         for session_dir in sorted(ROOT.glob("session-[0-9][0-9]")):
-            if session_dir.is_dir() and f"{session_dir.name}/" not in exam_page:
-                errors.append(f"Session missing from {lang} cumulative review: {session_dir.name}")
+            if not session_dir.is_dir():
+                continue
+            n=int(session_dir.name.rsplit("-",1)[1])
+            target=exam_page if n<=9 else final_page
+            other=final_page if n<=9 else exam_page
+            if f"{session_dir.name}/" not in target:
+                errors.append(f"Session missing from correct {lang} period review: {session_dir.name}")
+            if f"{session_dir.name}/" in other:
+                errors.append(f"Session leaked into wrong {lang} period review: {session_dir.name}")
     # Key facts must appear in BOTH languages, not merely a language fallback.
     for lang in ("en", "fa"):
         src = (ROOT / f"session-02/televisions.{lang}.md").read_text("utf-8").translate(DIGIT_MAP)

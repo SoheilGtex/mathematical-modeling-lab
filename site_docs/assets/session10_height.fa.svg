@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" role="img" aria-label="Piecewise linear tallness membership: zero below 170, increasing to one at 180, then constant one">
+  <rect width="700" height="340" fill="#ffffff"/>
+  <g stroke="#475569" stroke-width="2" fill="none"><path d="M85 270 H660"/><path d="M85 275 V40"/></g>
+  <g fill="#334155" font-family="sans-serif" font-size="18">
+    <text x="31" y="46">1.0</text><text x="44" y="276">0</text>
+    <text x="218" y="303">170</text><text x="372" y="303">180</text>
+    <text x="485" y="303">height</text><text x="8" y="25">grade</text>
+  </g>
+  <path d="M95 270 H235 L385 55 H650" fill="none" stroke="#0369a1" stroke-width="5" stroke-linejoin="round"/>
+  <g fill="none" stroke="#94a3b8" stroke-width="1.8" stroke-dasharray="5 5"><path d="M280 270 V205 H85"/><path d="M370 270 V76 H85"/></g>
+  <g fill="#0369a1"><circle cx="280" cy="205" r="5"/><circle cx="370" cy="76" r="5"/></g>
+  <g fill="#334155" font-family="sans-serif" font-size="15"><text x="265" y="301">173</text><text x="355" y="323">179</text><text x="105" y="198">0.3</text><text x="105" y="70">0.9</text></g>
+</svg>

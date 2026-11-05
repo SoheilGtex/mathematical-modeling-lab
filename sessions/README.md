@@ -1,12 +1,12 @@
 # Study sessions | جلسات درس
 
 For the **paper-based written exam**, start with the full bilingual problems
-below. No Python is required. Use the single [EXAM_NIGHT.md](../EXAM_NIGHT.md)
-only for the final, cumulative review.
+below. No Python is required. Use the [archived midterm review](../EXAM_NIGHT.md) for Sessions 01–09
+and the separate [final review](../EXAM_FINAL.md) for Sessions 10 onward.
 
 **برای امتحان تشریحی،** هر جلسه را از بخش مفاهیم و سپس حل تشریحی کامل
-مثال‌های همان جلسه بخوان. در پایان ترم **فقط یک فایل مرور شب امتحان**
-خواهی داشت: [EXAM_NIGHT.md](../EXAM_NIGHT.md).
+مثال‌های همان جلسه بخوان. مرور دو بخش **جدا** دارد: [آرشیو میان‌ترم حذف‌شده](../EXAM_NIGHT.md)
+برای جلسات ۱ تا ۹ و [مرور پایان‌ترم](../EXAM_FINAL.md) برای جلسات ۱۰ به بعد.
 
 | Session | Topics / مباحث | Full notes |
 | --- | --- | --- |
@@ -19,6 +19,8 @@ only for the final, cumulative review.
 | 07 | Fuzzy LP, extension maximum and Kerre comparison / برنامه‌ریزی فازی، اصل گسترش و روش Kerre | [Session 07](session_07/README.md) |
 | 08 | Extension maximum and Kerre, rigorous recap / مرور دقیق اصل گسترش و مقایسهٔ Kerre | [Session 08](session_08/README.md) |
 | 09 | Corrected triangular LR example and exact comparison / مثال مثلثی اصلاح‌شده و مقایسهٔ دقیق | [Session 09](session_09/README.md) |
+| 10 | Hesitant fuzzy sets, height example and hesitant fuzzy numbers / مجموعه‌های فازی مردد و مثال قد | [Session 10](session_10/README.md) |
+| 11 | Hesitant-number ranking and production planning / رتبه‌بندی مردد و مدل تولید | [Session 11](session_11/README.md) |
 
 The original four-page session-one note **does not solve** the example models.
 Hand solutions and optimality arguments are independently derived educational
@@ -41,7 +43,7 @@ extensions; they are not claims about guaranteed exam requirements.
    ```
 
 3. Run `python3 scripts/build_exam_night.py` from the repository root to
-   rebuild the one-file term review. **Do not create a session-specific
+   rebuild the two separate period reviews. **Do not create a session-specific
    `quick_review.md` or edit `EXAM_NIGHT.md` manually.**
 4. Run `python3 scripts/build_exam_night.py --check` and `python -m pytest -q`.
    CI enforces the update so it cannot be forgotten when submitting a PR.
@@ -50,6 +52,6 @@ extensions; they are not claims about guaranteed exam requirements.
    and add regression tests. Use the [computational template](../templates/computational_example.md).
 6. Update the two short session-index tables in this file and in the root README.
 
-این روند تضمین می‌کند که با تکمیل هر جلسه، چکیدهٔ آن به یک فایل جامع و مرتب
+این روند تضمین می‌کند که هر جلسه فقط به مرورِ همان دورهٔ امتحانی اضافه شود و چکیدهٔ آن به فایل مربوط
 اضافه شود؛ اما **صحت علمی مطالب هنوز نیازمند بازبینی است** و CI فقط کامل
 بودن به‌روزرسانی و اجرای تست‌ها را بررسی می‌کند.

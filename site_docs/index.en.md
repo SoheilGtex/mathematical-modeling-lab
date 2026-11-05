@@ -13,7 +13,7 @@ This is an independent student project, **not an official university or instruct
 
 ## Course materials
 
-Use the navigation menu to browse each session and its fully worked problems. The [Exam Review](exam.md) brings the key points together on one page and is expanded as new sessions are added.
+Use the navigation menu to browse each session and its fully worked problems. Use the [archived, withdrawn midterm review (Sessions 01–09)](exam.md) for earlier material and the separate [final-exam review (Sessions 10 onward)](exam-final.md) for current preparation.
 
 ## Code and computation
 
@@ -21,4 +21,4 @@ The [GitHub repository](https://github.com/SoheilGtex/mathematical-modeling-lab)
 
 ## Julia learning
 
-Explore the optional [Julia learning](julia/index.md) materials. Julia is an optional programming supplement; the exam review remains focused on mathematical modeling.
+Explore the optional [Julia learning](julia/index.md) materials. Julia is an optional programming supplement; exam preparation is separated by examination period.
