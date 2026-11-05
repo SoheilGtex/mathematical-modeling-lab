@@ -24,6 +24,8 @@ Run `python scripts/build_exam_night.py` after adding or changing a session/assi
 - [Session 05 | جلسهٔ پنجم](#session-05)
 - [Session 06 | جلسهٔ ششم](#session-06)
 - [Session 07 | جلسهٔ هفتم](#session-07)
+- [Session 08 | جلسهٔ هشتم](#session-08)
+- [Session 09 | جلسهٔ نهم](#session-09)
 - [Assignment 01 | تمرین اول](#assignment-investment-budget)
 - [Assignment 02 | تمرین دوم](#assignment-transportation-python)
 - [Assignment 03 | تمرین سوم](#assignment-fuzzy-numbers-max)
@@ -556,6 +558,54 @@ $$\begin{aligned}
 - برای [مقایسهٔ Kerre](site_docs/session-07/kerre.fa.md)، فاصلهٔ $d(A,B)=\int|\mu_A-\mu_B|$ و مقایسهٔ $d(N,D)$ با $d(M,D)$ را بنویسید؛ $D$ باید از **اصل گسترش** محاسبه شده باشد.
 
 این‌ها برای مرور تعریف‌ها و صورت‌بندی‌اند. جواب بهینهٔ عددی و مقدار انتگرال‌ها به‌طور جداگانه و به‌عنوان مطالب تکمیلی آمده‌اند.
+
+---
+
+<a id="session-08"></a>
+## Session 08 | جلسهٔ هشتم
+
+### English
+
+#### Extension maximum and Kerre distance: modeling essentials
+
+- This session **revisits** the prior lecture's definitions; the first two scanned pages substantially overlap with Session 07. Preserve the distinction between fuzzy max and pointwise max of memberships.
+- State the extension-principle maximum: $\mu_D(z)=\sup_{\max(x,y)=z}\min\{\mu_M(x),\mu_N(y)\}$.
+- For $M=(0,2,5)$ and $N=(2,3,4)$, write $[M]_\alpha=[2\alpha,5-3\alpha]$ and $[N]_\alpha=[2+\alpha,4-\alpha]$. **Model** the maximum with the maximum of corresponding endpoints: $[D]_\alpha=[\max(L_M,L_N),\max(R_M,R_N)]$.
+- For Kerre-style comparison, define $d(M,N)=\int|\mu_M-\mu_N|\,dz$ and $r(M,N)=d(M,D)-d(N,D)$; write the comparison direction with its sign convention.
+- [Complete extension derivation](site_docs/session-08/extension-recap.en.md) and [distance formulation](site_docs/session-08/distance.en.md). Exact values are independently derived additions, not necessary to state the model.
+
+### فارسی
+
+#### بیشینهٔ فازی و فاصلهٔ Kerre: نکات مدل‌سازی
+
+- این جلسه **مرور تکمیلی** مطالب جلسهٔ هفتم است؛ دو صفحهٔ اول اسکن با جزوهٔ قبلی هم‌پوشانی دارد. بیشینهٔ دو عدد فازی را با بیشینهٔ نقطه‌ای درجات عضویت اشتباه نگیرید.
+- تعریف اصل گسترش: $\mu_D(z)=\sup_{\max(x,y)=z}\min\{\mu_M(x),\mu_N(y)\}$.
+- برای $M=(0,2,5)$ و $N=(2,3,4)$، دو برش آلفا را $[M]_\alpha=[2\alpha,5-3\alpha]$ و $[N]_\alpha=[2+\alpha,4-\alpha]$ بنویسید. **صورت‌بندی** بیشینه: $[D]_\alpha=[\max(L_M,L_N),\max(R_M,R_N)]$.
+- برای مقایسهٔ Kerre، $d(M,N)=\int|\mu_M-\mu_N|\,dz$ و $r(M,N)=d(M,D)-d(N,D)$ را تعریف و جهت علامت را مشخص کنید.
+- [استخراج بیشینه](site_docs/session-08/extension-recap.fa.md) و [صورت‌بندی فاصله](site_docs/session-08/distance.fa.md). مقادیر دقیق انتگرال‌ها تکمیل مستقل‌اند، نه شرط تعریف مدل.
+
+---
+
+<a id="session-09"></a>
+## Session 09 | جلسهٔ نهم
+
+### English
+
+#### LR triangular comparison: correcting the model before solving it
+
+- The new source example is $M=(2,5,12)$ and $N=(2,4,10)$, using **(support left, mode, support right)** rather than four-parameter LR core/spread tuples.
+- Write the correct branches $M_L(z)=(z-2)/3$ for $2\le z\le5$, $M_R(z)=(12-z)/7$ for $5\le z\le12$, $N_L(z)=(z-2)/2$ for $2\le z\le4$, and $N_R(z)=(10-z)/6$ for $4\le z\le10$. The handwritten denominators of $N$ are inconsistent with its stated endpoints; the corrected branches here are an explicit mathematical repair.
+- Formulate $[D]_\alpha=[\max(L_M,L_N),\max(R_M,R_N)]$ and the Kerre score $r(M,N)=d(M,D)-d(N,D)$. Distinguish model specification from computing the score.
+- [Corrected membership model](site_docs/session-09/source-example.en.md) and [general case analysis](site_docs/session-09/case-analysis.en.md). The evaluated value $-17/9$ is an independent extension.
+
+### فارسی
+
+#### مقایسهٔ مثلث‌های LR: ابتدا مدل را درست تعریف کنیم
+
+- مثال جدید جزوه $M=(2,5,12)$ و $N=(2,4,10)$ است؛ ترتیب اجزا **کران چپ، رأس و کران راست** است، نه چهارتایی هسته و گستردگی‌های LR.
+- شاخه‌های درست: $M_L(z)=(z-2)/3$ در $2\le z\le5$، $M_R(z)=(12-z)/7$ در $5\le z\le12$، $N_L(z)=(z-2)/2$ در $2\le z\le4$ و $N_R(z)=(10-z)/6$ در $4\le z\le10$. مخرج‌های شاخه‌های $N$ در دست‌نویس با رأس‌ها ناسازگارند؛ این فرمول‌ها اصلاح مستند و مستقل هستند.
+- صورت‌بندی بیشینه: $[D]_\alpha=[\max(L_M,L_N),\max(R_M,R_N)]$. صورت‌بندی امتیاز Kerre: $r(M,N)=d(M,D)-d(N,D)$. تعریف مدل را از محاسبهٔ نهایی امتیاز جدا نگه دارید.
+- [بازسازی تابع عضویت](site_docs/session-09/source-example.fa.md) و [بررسی حالت‌ها](site_docs/session-09/case-analysis.fa.md). مقدار عددی $-17/9$ نتیجهٔ تکمیل مستقل حل است.
 
 ---
 

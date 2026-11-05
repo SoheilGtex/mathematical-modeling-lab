@@ -39,6 +39,22 @@ Kerre-style distance comparison.
 The scans are **not redistributed**. Ranked LP optima and evaluated integrals are
 marked as independently derived supplements, not as handwritten solutions.
 
+## Sessions 08–09: Extension maximum and exact Kerre comparison
+
+The three-page handwritten scan dated 3 Aban substantially repeats the
+Session 07 material on its first two pages. **Session 08 is deliberately a
+rigorous recap, not a claim of new lecture definitions.** The last page
+adds case-split integrals and a new example with triangular fuzzy numbers
+$M=(2,5,12)$ and $N=(2,4,10)$. **Session 09** repairs inconsistent handwritten
+membership denominators and independently evaluates the score $-17/9$.
+
+- [Session 08 — English](site_docs/session-08/index.en.md) / [فارسی](site_docs/session-08/index.fa.md)
+- [Session 09 — English](site_docs/session-09/index.en.md) / [فارسی](site_docs/session-09/index.fa.md)
+- [Source overlap and mathematical audit](docs/session_08_09_source_audit.md)
+
+The scan is not redistributed. Distinguish supplied data from independent
+corrections and calculations; see the audit before attributing any result.
+
 ## Julia learning materials
 
 The [Julia learning materials](Julia/README.md) are an optional part of the project. The current

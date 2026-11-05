@@ -253,6 +253,25 @@ $$\begin{aligned}
 
 These are formulation/definition tasks. Numerical LP results and evaluated distance integrals are separately marked as extensions.
 
+## Session 08
+
+### Extension maximum and Kerre distance: modeling essentials
+
+- This session **revisits** the prior lecture's definitions; the first two scanned pages substantially overlap with Session 07. Preserve the distinction between fuzzy max and pointwise max of memberships.
+- State the extension-principle maximum: $\mu_D(z)=\sup_{\max(x,y)=z}\min\{\mu_M(x),\mu_N(y)\}$.
+- For $M=(0,2,5)$ and $N=(2,3,4)$, write $[M]_\alpha=[2\alpha,5-3\alpha]$ and $[N]_\alpha=[2+\alpha,4-\alpha]$. **Model** the maximum with the maximum of corresponding endpoints: $[D]_\alpha=[\max(L_M,L_N),\max(R_M,R_N)]$.
+- For Kerre-style comparison, define $d(M,N)=\int|\mu_M-\mu_N|\,dz$ and $r(M,N)=d(M,D)-d(N,D)$; write the comparison direction with its sign convention.
+- [Complete extension derivation](session-08/extension-recap.md) and [distance formulation](session-08/distance.md). Exact values are independently derived additions, not necessary to state the model.
+
+## Session 09
+
+### LR triangular comparison: correcting the model before solving it
+
+- The new source example is $M=(2,5,12)$ and $N=(2,4,10)$, using **(support left, mode, support right)** rather than four-parameter LR core/spread tuples.
+- Write the correct branches $M_L(z)=(z-2)/3$ for $2\le z\le5$, $M_R(z)=(12-z)/7$ for $5\le z\le12$, $N_L(z)=(z-2)/2$ for $2\le z\le4$, and $N_R(z)=(10-z)/6$ for $4\le z\le10$. The handwritten denominators of $N$ are inconsistent with its stated endpoints; the corrected branches here are an explicit mathematical repair.
+- Formulate $[D]_\alpha=[\max(L_M,L_N),\max(R_M,R_N)]$ and the Kerre score $r(M,N)=d(M,D)-d(N,D)$. Distinguish model specification from computing the score.
+- [Corrected membership model](session-09/source-example.md) and [general case analysis](session-09/case-analysis.md). The evaluated value $-17/9$ is an independent extension.
+
 ## Assignment 01
 
 ### Municipal investment budgeting — Assignment 01
