@@ -20,7 +20,11 @@ Run `python scripts/build_exam_night.py` after adding or changing a session/assi
 - [Session 01 | جلسهٔ اول](#session-01)
 - [Session 02 | جلسهٔ دوم](#session-02)
 - [Session 03 | جلسهٔ سوم](#session-03)
+- [Session 04 | جلسهٔ چهارم](#session-04)
+- [Session 05 | جلسهٔ پنجم](#session-05)
 - [Assignment 01 | تمرین اول](#assignment-investment-budget)
+- [Assignment 02 | تمرین دوم](#assignment-transportation-python)
+- [Assignment 03 | تمرین سوم](#assignment-fuzzy-numbers-max)
 
 ---
 
@@ -273,6 +277,206 @@ $$
 
 ---
 
+<a id="session-04"></a>
+## Session 04 | جلسهٔ چهارم
+
+### English
+
+#### Three products on four machines
+
+In the [full machine-allocation problem](site_docs/session-04/machines.en.md), $x_{ij}\ge0$ is the **number of units of product $i$ made on machine $j$**, for $i=1,2,3$ and $j=1,2,3,4$.
+
+Unit production costs (in USD), machine time (hours per unit), minimum product requirements and maximum machine hours come from the lecture:
+
+$$
+C=\begin{pmatrix}4&4&5&7\\6&7&5&6\\12&10&8&11\end{pmatrix},\quad
+T=\begin{pmatrix}.30&.25&.20&.20\\.20&.30&.20&.25\\.80&.60&.60&.50\end{pmatrix},
+$$
+
+$$d=(3000,6000,4000),\qquad H=(1500,1200,1500,2000).$$
+
+$$
+\boxed{\begin{aligned}
+\min\ &Z=\sum_{i=1}^3\sum_{j=1}^4 c_{ij}x_{ij}\\
+\mathrm{s.t.}\ &\sum_{i=1}^3t_{ij}x_{ij}\le H_j &&j=1,\ldots,4\\
+&\sum_{j=1}^4x_{ij}\ge d_i &&i=1,2,3\\
+&x_{ij}\ge0 &&\forall i,j.
+\end{aligned}}
+$$
+
+**Remember:** four $\le$ hour limits and three $\ge$ production minimums; there are **12** nonnegative decision variables. Costs are USD, not toman.
+
+#### Light/heavy crude oil procurement
+
+In the [full crude-oil example](site_docs/session-04/crude.en.md), let $x_1,x_2\ge0$ be the **amounts of light/heavy raw crude purchased** (before processing losses). Prices are $20 and $15 per unit; recovery is $95\%$ and $92\%$. The products are **diesel, kerosene and jet fuel**, and the output requirements are $1{,}000{,}000$, $500{,}000$, $300{,}000$:
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=20x_1+15x_2\\
+\mathrm{s.t.}\quad&0.40(0.95)x_1+0.32(0.92)x_2\ge1{,}000{,}000\\
+&0.20(0.95)x_1+0.40(0.92)x_2\ge500{,}000\\
+&0.35(0.95)x_1+0.20(0.92)x_2\ge300{,}000\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+Apply the recovery factor **before** each product's yield; all requirements are lower bounds ($\ge$).
+
+#### Maximum revenue-to-cost ratio (fractional objective)
+
+In the [full fractional model](site_docs/session-04/ratio.en.md), $x_1,x_2\ge0$ denote quantities of products $A,B$. Sale prices $(80,40)$, variable costs $(40,20)$ and fixed cost $200$ are measured in **thousand toman**. Products use $(2,3)$ hours and $(3,2)$ kg of raw materials per unit, respectively.
+
+$$
+\boxed{\begin{aligned}
+\max\quad&Z=\frac{80x_1+40x_2}{40x_1+20x_2+200}\\
+\mathrm{s.t.}\quad&2x_1+3x_2\le120\\
+&3x_1+2x_2\le150\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+**Do not replace the ratio with profit.** This is a **linear-fractional**, not an ordinary linear, objective. The denominator is positive because fixed cost is $200>0$.
+
+### فارسی
+
+#### تخصیص تولید سه محصول به چهار ماشین
+
+در [مسئلهٔ کامل تخصیص ماشین](site_docs/session-04/machines.fa.md)، $x_{ij}\ge0$ تعداد واحد **محصول $i$ تولیدشده روی ماشین $j$** است؛ $i=1,2,3$ و $j=1,2,3,4$.
+
+جدول هزینهٔ هر واحد (**دلار**)، زمان ساخت هر واحد (**ساعت**)، حداقل تولید هر محصول و ساعت موجود هر ماشین از جزوه آمده است:
+
+$$
+C=\begin{pmatrix}4&4&5&7\\6&7&5&6\\12&10&8&11\end{pmatrix},\quad
+T=\begin{pmatrix}.30&.25&.20&.20\\.20&.30&.20&.25\\.80&.60&.60&.50\end{pmatrix},
+$$
+
+$$d=(3000,6000,4000),\qquad H=(1500,1200,1500,2000).$$
+
+$$
+\boxed{\begin{aligned}
+\min\ &Z=\sum_{i=1}^3\sum_{j=1}^4 c_{ij}x_{ij}\\
+\mathrm{s.t.}\ &\sum_{i=1}^3t_{ij}x_{ij}\le H_j &&j=1,\ldots,4\\
+&\sum_{j=1}^4x_{ij}\ge d_i &&i=1,2,3\\
+&x_{ij}\ge0 &&\forall i,j.
+\end{aligned}}
+$$
+
+**برای مدل‌سازی:** چهار قید **$\le$** برای ساعت ماشین‌ها و سه قید **$\ge$** برای حداقل تولید داریم؛ تعداد متغیرهای نامنفی **۱۲** است. واحد هزینه **دلار** است.
+
+#### خرید نفت خام سبک و سنگین
+
+در [مسئلهٔ کامل پالایش](site_docs/session-04/crude.fa.md)، $x_1,x_2\ge0$ مقدار **خرید نفت خام سبک و سنگین قبل از اتلاف** هستند. قیمت‌ها ۲۰ و ۱۵ دلار و بازده پس از پالایش $0.95$ و $0.92$ است. فرآورده‌ها **گازوئیل، نفت سفید و سوخت هواپیما** با حداقل مقدار $1{,}000{,}000$، $500{,}000$ و $300{,}000$ هستند:
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=20x_1+15x_2\\
+\mathrm{s.t.}\quad&0.40(0.95)x_1+0.32(0.92)x_2\ge1{,}000{,}000\\
+&0.20(0.95)x_1+0.40(0.92)x_2\ge500{,}000\\
+&0.35(0.95)x_1+0.20(0.92)x_2\ge300{,}000\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+درصد بازده هر نوع نفت خام در ضریب تولید **هر فرآورده** ضرب می‌شود؛ هر سه قید «حداقل نیاز» با $\ge$ نوشته می‌شوند.
+
+#### بیشینه‌کردن نسبت درآمد به هزینه (تابع هدف کسری)
+
+در [مسئلهٔ کامل نسبت درآمد به هزینه](site_docs/session-04/ratio.fa.md)، $x_1,x_2\ge0$ تعداد محصولات $A,B$ هستند. قیمت فروش $(80,40)$، هزینهٔ متغیر $(40,20)$ و هزینهٔ ثابت ۲۰۰، همگی **هزار تومان** هستند. زمان ساخت $(2,3)$ ساعت و مصرف مواد اولیه $(3,2)$ کیلوگرم برای هر واحد است.
+
+$$
+\boxed{\begin{aligned}
+\max\quad&Z=\frac{80x_1+40x_2}{40x_1+20x_2+200}\\
+\mathrm{s.t.}\quad&2x_1+3x_2\le120\\
+&3x_1+2x_2\le150\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+**نسبت را با سود اشتباه نگیرید.** تابع هدف **کسری خطی** است و نه خطی معمولی. چون هزینهٔ ثابت ۲۰۰ است، مخرج در ناحیهٔ مجاز مثبت می‌ماند.
+
+---
+
+<a id="session-05"></a>
+## Session 05 | جلسهٔ پنجم
+
+### English
+
+#### Linear-fractional objective and Charnes–Cooper model
+
+The [fractional-programming lecture example](site_docs/session-05/fractional.en.md) is
+
+$$\boxed{\begin{aligned}
+\max\quad &\frac{10x_1+20x_2+10}{3x_1+4x_2+20}\\
+\mathrm{s.t.}\quad &x_1+3x_2\le50,\\
+&3x_1+2x_2\le80,\\
+&x_1,x_2\ge0.
+\end{aligned}}$$
+
+The denominator is **strictly positive** ($\ge20$). Let $t=1/(3x_1+4x_2+20)$ and $y_i=tx_i$ ($x_i=y_i/t$). Multiply **both** resource constraints by $t$ and normalize the denominator:
+
+$$\boxed{\begin{aligned}
+\max\quad&10y_1+20y_2+10t\\
+\mathrm{s.t.}\quad&y_1+3y_2\le50t,\\
+&3y_1+2y_2\le80t,\\
+&3y_1+4y_2+20t=1,\\
+&y_1,y_2,t\ge0.
+\end{aligned}}$$
+
+**Remember:** in general $t>0$ is needed to invert the transformation; for this model, $t=0$ is impossible because the first scaled constraint and $y\ge0$ contradict the normalizing equality. Do not drop the constant $10$ in the numerator or $20$ in the denominator.
+
+#### Triangular fuzzy membership as a mathematical model
+
+From the [fuzzy-number lecture](site_docs/session-05/fuzzy.en.md), a crisp characteristic function has values only $0$ or $1$, while fuzzy membership satisfies $\mu_{\widetilde A}(x)\in[0,1]$. For the triangular fuzzy number $\widetilde M=(1,5,7)$:
+
+$$\boxed{\mu_{\widetilde M}(x)=\begin{cases}
+0,&x\le1,\\
+(x-1)/4,&1<x\le5,\\
+(7-x)/2,&5<x<7,\\
+0,&x\ge7.
+\end{cases}}$$
+
+**Modeling point:** derive the two straight-line equations from $(1,0)$, $(5,1)$ and $(7,0)$. This is a **membership-function model**, not a fuzzy optimization problem; no numerical optimizer is included in the exam review.
+
+### فارسی
+
+#### تابع هدف کسری و مدل تبدیلی چارنز–کوپر
+
+در [مثال برنامه‌ریزی کسری جلسه](site_docs/session-05/fractional.fa.md) مدل اولیه عبارت است از
+
+$$\boxed{\begin{aligned}
+\max\quad &\frac{10x_1+20x_2+10}{3x_1+4x_2+20}\\
+\mathrm{s.t.}\quad&x_1+3x_2\le50,\\
+&3x_1+2x_2\le80,\\
+&x_1,x_2\ge0.
+\end{aligned}}$$
+
+مخرج همواره **مثبت** (حداقل ۲۰) است. با $t=1/(3x_1+4x_2+20)$ و $y_i=tx_i$ (و $x_i=y_i/t$) هر **دو** قید را در $t$ ضرب کرده، قید نرمال‌سازی می‌نویسیم:
+
+$$\boxed{\begin{aligned}
+\max\quad &10y_1+20y_2+10t\\
+\mathrm{s.t.}\quad&y_1+3y_2\le50t,\\
+&3y_1+2y_2\le80t,\\
+&3y_1+4y_2+20t=1,\\
+&y_1,y_2,t\ge0.
+\end{aligned}}$$
+
+**نکته:** در حالت کلی برای بازگشت به مدل اول باید $t>0$ باشد. در این مثال $t=0$ به‌دلیل تناقض قید اول و قید تساوی ممکن نیست. عدد ثابت ۱۰ صورت و عدد ثابت ۲۰ مخرج را فراموش نکنید.
+
+#### مدل‌سازی تابع عضویت فازی مثلثی
+
+در [بخش مجموعه‌های فازی](site_docs/session-05/fuzzy.fa.md)، تابع مشخصهٔ مجموعهٔ معمولی فقط صفر یا یک می‌گیرد؛ اما درجهٔ عضویت فازی در بازهٔ $[0,1]$ است. عدد فازی مثلثی جزوه $\widetilde M=(1,5,7)$ است:
+
+$$\boxed{\mu_{\widetilde M}(x)=\begin{cases}
+0,&x\le1,\\
+(x-1)/4,&1<x\le5,\\
+(7-x)/2,&5<x<7,\\
+0,&x\ge7.
+\end{cases}}$$
+
+**نکتهٔ مدل‌سازی:** دو معادلهٔ خط را از سه رأس $(1,0)$، $(5,1)$ و $(7,0)$ بنویسید. این یک **مدل تابع عضویت** است و در جزوه مسئلهٔ بهینه‌سازی فازی تعریف نشده؛ حل عددی در مرور شب امتحان نمی‌آید.
+
+---
+
 <a id="assignment-investment-budget"></a>
 ## Assignment 01 | تمرین اول
 
@@ -323,3 +527,49 @@ $$
 $$
 
 **علت قیود:** در هر سال «منابع قابل‌استفاده = هزینهٔ پروژه + سپردهٔ جدید»؛ بنابراین هر چهار قید **تساوی** است. ضرایب $1.06,1.055,1.045$ اصل سپرده و سود یک‌سالهٔ آن را در بر می‌گیرند. تابع هدف مجموع **اسمی بهرهٔ اوراق** است، نه بازپرداخت اصل یا ارزش فعلی. در صورت سؤال واژهٔ «سهام» آمده، ولی با توجه به نرخ بهره و سررسید، آن را **اوراق بهره‌دار مشابه بدهی** تفسیر می‌کنیم؛ این فرض باید ذکر شود.
+
+---
+
+<a id="assignment-transportation-python"></a>
+## Assignment 02 | تمرین دوم
+
+### English
+
+#### Python solution to the existing transportation problem
+
+Assignment 02 was **only the Python implementation** of the existing [Session 03 transportation model](site_docs/session-03/transportation.en.md). No second transport dataset or different mathematical formulation was assigned. The [existing Python code](site_docs/assignments/transportation-python.en.md) solves that lecture example; the model is already included under Session 03 in this cumulative review. There is no need to repeat its constraints here.
+
+### فارسی
+
+#### حل پایتونی مسئلهٔ حمل‌ونقل جلسهٔ سوم
+
+تمرین دوم **فقط حل مسئلهٔ حمل‌ونقل جلسهٔ سوم با Python** بود؛ مسئله یا مدل جدیدی ندارد. [مدل کامل حمل‌ونقل](site_docs/session-03/transportation.fa.md) در مرور جلسهٔ سوم موجود است و [کد آمادهٔ پایتون](site_docs/assignments/transportation-python.fa.md) نیز در سایت معرفی شده است. قیود تکراری اینجا دوباره نوشته نمی‌شوند.
+
+---
+
+<a id="assignment-fuzzy-numbers-max"></a>
+## Assignment 03 | تمرین سوم
+
+### English
+
+#### Triangular fuzzy memberships and the maximum operator
+
+The full [fuzzy-number assignment solution](site_docs/assignments/fuzzy-numbers-max.en.md) uses $\widetilde A=(1,3,7)$ and $\widetilde B=(3,5,6)$. Model the membership functions with the triangular definition, then use **Zadeh's extension-principle constraint**:
+
+$$\mu_{\max(\widetilde A,\widetilde B)}(z)=
+\sup_{\substack{x,y\in\mathbb R\\\max(x,y)=z}}
+\min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
+
+The constraint $\max(x,y)=z$ requires $x\le z$, $y\le z$, and **at least one equality**. Identify the triangle vertices and sketch both membership functions and their maximum; all detailed interval calculations and proofs are on the full assignment page. This is a fuzzy-membership modeling exercise, **not** an extra linear-programming objective.
+
+### فارسی
+
+#### مدل تابع عضویت و عملگر ماکزیمم فازی
+
+در [حل کامل تمرین اعداد فازی](site_docs/assignments/fuzzy-numbers-max.fa.md)، دو عدد مثلثی $\widetilde A=(1,3,7)$ و $\widetilde B=(3,5,6)$ داده شده‌اند. توابع عضویت را از تعریف عدد فازی مثلثی مدل کنید و برای ماکزیمم آن‌ها **اصل گسترش زاده** را بنویسید:
+
+$$\mu_{\max(\widetilde A,\widetilde B)}(z)=
+\sup_{\substack{x,y\in\mathbb R\\\max(x,y)=z}}
+\min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
+
+شرط $\max(x,y)=z$ می‌گوید $x\le z$ و $y\le z$ و **حداقل یکی باید برابر $z$ باشد**. نقاط شکست توابع عضویت را مشخص و نمودارها را رسم کنید. محاسبات کاملِ بازه‌ای و اثبات‌ها در صفحهٔ تشریحی تمرین هستند. این مبحث مدل‌سازی تابع عضویت است، **نه** یک مسئلهٔ اضافی برنامه‌ریزی خطی.

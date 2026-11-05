@@ -123,6 +123,101 @@ $$
 
 There are **14 decision variables**: five $x_i$, five $y_i$ and four $s_i$. The monthly balance equations are **equalities**, not capacity inequalities.
 
+## Session 04
+
+### Three products on four machines
+
+In the [full machine-allocation problem](session-04/machines.md), $x_{ij}\ge0$ is the **number of units of product $i$ made on machine $j$**, for $i=1,2,3$ and $j=1,2,3,4$.
+
+Unit production costs (in USD), machine time (hours per unit), minimum product requirements and maximum machine hours come from the lecture:
+
+$$
+C=\begin{pmatrix}4&4&5&7\\6&7&5&6\\12&10&8&11\end{pmatrix},\quad
+T=\begin{pmatrix}.30&.25&.20&.20\\.20&.30&.20&.25\\.80&.60&.60&.50\end{pmatrix},
+$$
+
+$$d=(3000,6000,4000),\qquad H=(1500,1200,1500,2000).$$
+
+$$
+\boxed{\begin{aligned}
+\min\ &Z=\sum_{i=1}^3\sum_{j=1}^4 c_{ij}x_{ij}\\
+\mathrm{s.t.}\ &\sum_{i=1}^3t_{ij}x_{ij}\le H_j &&j=1,\ldots,4\\
+&\sum_{j=1}^4x_{ij}\ge d_i &&i=1,2,3\\
+&x_{ij}\ge0 &&\forall i,j.
+\end{aligned}}
+$$
+
+**Remember:** four $\le$ hour limits and three $\ge$ production minimums; there are **12** nonnegative decision variables. Costs are USD, not toman.
+
+### Light/heavy crude oil procurement
+
+In the [full crude-oil example](session-04/crude.md), let $x_1,x_2\ge0$ be the **amounts of light/heavy raw crude purchased** (before processing losses). Prices are $20 and $15 per unit; recovery is $95\%$ and $92\%$. The products are **diesel, kerosene and jet fuel**, and the output requirements are $1{,}000{,}000$, $500{,}000$, $300{,}000$:
+
+$$
+\boxed{\begin{aligned}
+\min\quad&Z=20x_1+15x_2\\
+\mathrm{s.t.}\quad&0.40(0.95)x_1+0.32(0.92)x_2\ge1{,}000{,}000\\
+&0.20(0.95)x_1+0.40(0.92)x_2\ge500{,}000\\
+&0.35(0.95)x_1+0.20(0.92)x_2\ge300{,}000\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+Apply the recovery factor **before** each product's yield; all requirements are lower bounds ($\ge$).
+
+### Maximum revenue-to-cost ratio (fractional objective)
+
+In the [full fractional model](session-04/ratio.md), $x_1,x_2\ge0$ denote quantities of products $A,B$. Sale prices $(80,40)$, variable costs $(40,20)$ and fixed cost $200$ are measured in **thousand toman**. Products use $(2,3)$ hours and $(3,2)$ kg of raw materials per unit, respectively.
+
+$$
+\boxed{\begin{aligned}
+\max\quad&Z=\frac{80x_1+40x_2}{40x_1+20x_2+200}\\
+\mathrm{s.t.}\quad&2x_1+3x_2\le120\\
+&3x_1+2x_2\le150\\
+&x_1,x_2\ge0.
+\end{aligned}}
+$$
+
+**Do not replace the ratio with profit.** This is a **linear-fractional**, not an ordinary linear, objective. The denominator is positive because fixed cost is $200>0$.
+
+## Session 05
+
+### Linear-fractional objective and Charnes–Cooper model
+
+The [fractional-programming lecture example](session-05/fractional.md) is
+
+$$\boxed{\begin{aligned}
+\max\quad &\frac{10x_1+20x_2+10}{3x_1+4x_2+20}\\
+\mathrm{s.t.}\quad &x_1+3x_2\le50,\\
+&3x_1+2x_2\le80,\\
+&x_1,x_2\ge0.
+\end{aligned}}$$
+
+The denominator is **strictly positive** ($\ge20$). Let $t=1/(3x_1+4x_2+20)$ and $y_i=tx_i$ ($x_i=y_i/t$). Multiply **both** resource constraints by $t$ and normalize the denominator:
+
+$$\boxed{\begin{aligned}
+\max\quad&10y_1+20y_2+10t\\
+\mathrm{s.t.}\quad&y_1+3y_2\le50t,\\
+&3y_1+2y_2\le80t,\\
+&3y_1+4y_2+20t=1,\\
+&y_1,y_2,t\ge0.
+\end{aligned}}$$
+
+**Remember:** in general $t>0$ is needed to invert the transformation; for this model, $t=0$ is impossible because the first scaled constraint and $y\ge0$ contradict the normalizing equality. Do not drop the constant $10$ in the numerator or $20$ in the denominator.
+
+### Triangular fuzzy membership as a mathematical model
+
+From the [fuzzy-number lecture](session-05/fuzzy.md), a crisp characteristic function has values only $0$ or $1$, while fuzzy membership satisfies $\mu_{\widetilde A}(x)\in[0,1]$. For the triangular fuzzy number $\widetilde M=(1,5,7)$:
+
+$$\boxed{\mu_{\widetilde M}(x)=\begin{cases}
+0,&x\le1,\\
+(x-1)/4,&1<x\le5,\\
+(7-x)/2,&5<x<7,\\
+0,&x\ge7.
+\end{cases}}$$
+
+**Modeling point:** derive the two straight-line equations from $(1,0)$, $(5,1)$ and $(7,0)$. This is a **membership-function model**, not a fuzzy optimization problem; no numerical optimizer is included in the exam review.
+
 ## Assignment 01
 
 ### Municipal investment budgeting — Assignment 01
@@ -146,6 +241,24 @@ $$
 $$
 
 **Modeling explanation:** every year's available funds equal its required spending plus the next deposit. The factors $1.06,1.055,1.045$ include the principal **and** one year's deposit interest. This objective counts nominal coupon expense (not principal repayment or discounted present value). The handout calls the issued instruments “shares,” but because it specifies interest and maturity, the model interprets them as **bond-like interest-bearing securities**; state this assumption.
+
+## Assignment 02
+
+### Python solution to the existing transportation problem
+
+Assignment 02 was **only the Python implementation** of the existing [Session 03 transportation model](session-03/transportation.md). No second transport dataset or different mathematical formulation was assigned. The [existing Python code](assignments/transportation-python.md) solves that lecture example; the model is already included under Session 03 in this cumulative review. There is no need to repeat its constraints here.
+
+## Assignment 03
+
+### Triangular fuzzy memberships and the maximum operator
+
+The full [fuzzy-number assignment solution](assignments/fuzzy-numbers-max.md) uses $\widetilde A=(1,3,7)$ and $\widetilde B=(3,5,6)$. Model the membership functions with the triangular definition, then use **Zadeh's extension-principle constraint**:
+
+$$\mu_{\max(\widetilde A,\widetilde B)}(z)=
+\sup_{\substack{x,y\in\mathbb R\\\max(x,y)=z}}
+\min\bigl(\mu_{\widetilde A}(x),\mu_{\widetilde B}(y)\bigr).$$
+
+The constraint $\max(x,y)=z$ requires $x\le z$, $y\le z$, and **at least one equality**. Identify the triangle vertices and sketch both membership functions and their maximum; all detailed interval calculations and proofs are on the full assignment page. This is a fuzzy-membership modeling exercise, **not** an extra linear-programming objective.
 
 ## Modeling-only checklist
 
