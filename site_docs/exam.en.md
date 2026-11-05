@@ -1,7 +1,7 @@
-# Exam Review — Mathematical Modeling Only
+# Midterm Archive — Sessions 01–09 (Withdrawn)
 
 **Instructor clarification:** only mathematical modeling is required for the examination.
-This single cumulative review covers **all sessions and assignments**, including future additions.
+This archived review covers **Sessions 01–09 and their assignments**, not the final examination.
 Practice defining the decision variables, objective, constraints, units and domains.
 Numerical optimization and proof of optimality belong to the complete worked solutions, not this revision sheet.
 This is an independent study aid, not an official exam syllabus or grading rubric.

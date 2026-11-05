@@ -9,6 +9,7 @@ MkDocs review pages. Run with --check in CI to reject stale or missing material.
 from __future__ import annotations
 
 import argparse
+import json
 import difflib
 import re
 import sys
@@ -20,14 +21,14 @@ SOURCE = "review_sources"
 SESSION = re.compile(r"session_(\d+)$")
 LINK = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
 HEADING = re.compile(r"^(#{1,5})(\s+.*)$", re.MULTILINE)
-PERSIAN_ORDINALS = {1: "اول", 2: "دوم", 3: "سوم", 4: "چهارم", 5: "پنجم", 6: "ششم", 7: "هفتم", 8: "هشتم", 9: "نهم"}
+PERSIAN_ORDINALS = {1: "اول", 2: "دوم", 3: "سوم", 4: "چهارم", 5: "پنجم", 6: "ششم", 7: "هفتم", 8: "هشتم", 9: "نهم", 10: "دهم", 11: "یازدهم"}
 
 
 def fa_ordinal(n: int) -> str:
     return PERSIAN_ORDINALS.get(n, f"شمارهٔ {n}")
 
 
-def topics(root: Path) -> list[tuple[str, str, str]]:
+def topics(root: Path, period: str = "midterm") -> list[tuple[str, str, str]]:
     """List all published sessions followed by assignments, checking coverage."""
     session_root = root / "sessions"
     if not session_root.is_dir():
@@ -64,7 +65,26 @@ def topics(root: Path) -> list[tuple[str, str, str]]:
         raise ValueError(f"Missing modeling-only exam sources: {', '.join(sorted(missing))}")
     if extra := actual - expected:
         raise ValueError(f"Unexpected exam source without session/assignment: {', '.join(sorted(extra))}")
-    return result
+    if period not in {"midterm", "final", "all"}:
+        raise ValueError("Unknown exam period")
+    # In this course existing assignments are midterm. New assignments MUST be
+    # explicitly classified; otherwise they might leak into the wrong review.
+    assignment_keys={t[0] for t in result if t[0].startswith("assignment_")}
+    periods_file = root / SOURCE / "exam_assignment_periods.json"
+    if periods_file.is_file():
+        assignment_periods = json.loads(periods_file.read_text(encoding="utf-8"))
+        if set(assignment_periods) != assignment_keys or any(
+            v not in ("midterm", "final") for v in assignment_periods.values()
+        ):
+            raise ValueError("Assignment exam periods must be complete and explicit")
+    else:
+        # Compatibility for legacy unit fixtures; the installation adds the map.
+        assignment_periods={key: "midterm" for key in assignment_keys}
+    if period == "all":
+        return result
+    return [t for t in result if
+            (t[0].startswith("session_") and (int(t[0].split("_")[1]) <= 9) == (period=="midterm"))
+            or (t[0].startswith("assignment_") and assignment_periods[t[0]]==period)]
 
 
 def extract(root: Path, key: str, lang: str, *, site: bool) -> str:
@@ -101,17 +121,17 @@ def generated(root: Path = ROOT) -> dict[str, str]:
     root = root.resolve()
     sections = topics(root)
     root_parts = [
-        "# EXAM NIGHT — Mathematical Modeling Only | مرور شب امتحان — فقط مدل‌سازی",
+        "# ARCHIVED MIDTERM — Modeling Only | آرشیو میان‌ترم حذف‌شده — فقط مدل‌سازی",
         "",
         "> **Instructor clarification:** the examination focuses on **model formulation only**.",
         "> **طبق توضیح استاد:** در امتحان **فقط مدل‌سازی ریاضی** مدنظر است.",
         "",
-        "This is one cumulative guide for **every course session and assignment**. Define decision variables,",
+        "This archived guide covers **Sessions 01–09 and their assignments only**. Define decision variables,",
         "write the objective and all constraints, and specify domains and units. Numerical solutions,",
         "optimality proofs, simplex and software are intentionally excluded from this exam review.",
         "Full worked solutions remain available from the linked pages.",
         "",
-        "این فایل شامل **تمام جلسات و تمرین‌ها** است. تمرکز مرور بر تعریف متغیرها، تابع هدف،",
+        "این **آرشیو میان‌ترم حذف‌شده** فقط شامل **جلسات ۱ تا ۹ و تمرین‌های آن بخش** است. تمرکز مرور بر تعریف متغیرها، تابع هدف,",
         "قیود، واحدها و دامنهٔ متغیرهاست؛ حل عددی و اثبات بهینگی در صفحات کامل باقی می‌مانند.",
         "این مجموعه یک منبع دانشجویی مستقل است، نه بارم‌بندی رسمی امتحان.",
         "",
@@ -126,20 +146,20 @@ def generated(root: Path = ROOT) -> dict[str, str]:
     root_parts.append("")
 
     en_parts = [
-        "# Exam Review — Mathematical Modeling Only",
+        "# Midterm Archive — Sessions 01–09 (Withdrawn)",
         "",
         "**Instructor clarification:** only mathematical modeling is required for the examination.",
-        "This single cumulative review covers **all sessions and assignments**, including future additions.",
+        "This archived review covers **Sessions 01–09 and their assignments**, not the final examination.",
         "Practice defining the decision variables, objective, constraints, units and domains.",
         "Numerical optimization and proof of optimality belong to the complete worked solutions, not this revision sheet.",
         "This is an independent study aid, not an official exam syllabus or grading rubric.",
         "",
     ]
     fa_parts = [
-        "# مرور شب امتحان — فقط مدل‌سازی ریاضی",
+        "# آرشیو میان‌ترم حذف‌شده — جلسات ۱ تا ۹",
         "",
         "**طبق توضیح استاد، فقط مدل‌سازی مسائل در امتحان مدنظر است.**",
-        "این مرور واحد، **تمام جلسات و تمرین‌ها** را شامل می‌شود و با اضافه‌شدن مطالب جدید تکمیل خواهد شد.",
+        "این مرور فقط شامل **جلسات ۱ تا ۹ و تمرین‌های این بخش** است و برای پایان‌ترم استفاده نمی‌شود.",
         "در هر مسئله متغیرها و واحدشان، تابع هدف، قیود و دامنهٔ متغیرها را تمرین کنید.",
         "حل عددی و اثبات بهینگی در صفحات تشریحی کامل موجودند و در این مرور نیامده‌اند.",
         "این مجموعه راهنمای مستقل مطالعه است، نه بارم‌بندی رسمی امتحان.",
@@ -187,12 +207,70 @@ def generated(root: Path = ROOT) -> dict[str, str]:
     }
 
 
+
+def generated_final(root: Path = ROOT) -> dict[str, str]:
+    """Generate the independent Session-10+ review without midterm material."""
+    root=root.resolve()
+    sections=topics(root, period="final")
+    if not sections:
+        raise ValueError("Final review requires at least one published Session 10+")
+    en=[
+        "# Final Exam Review — Sessions 10 Onward", "",
+        "**Period separation:** the former midterm (Sessions 01–09) was withdrawn. This review intentionally includes only Sessions 10 onward.",
+        "This is an independent study summary, not an official exam announcement. The final-exam question types have not been specified by the supplied scan.",
+        "Retain definitions, modeling choices, complete formulations and any verified worked calculations; do not invent missing source data.", "",
+    ]
+    fa=[
+        "# مرور شب امتحان پایان‌ترم — از جلسهٔ دهم", "",
+        "**تفکیک امتحان‌ها:** میان‌ترمِ مربوط به جلسات ۱ تا ۹ حذف شده است. این مرور فقط از جلسهٔ ۱۰ به بعد را شامل می‌شود.",
+        "این متن راهنمای مستقل دانشجویی است، نه اطلاعیهٔ رسمی امتحان. نوع و جزئیات سؤال‌های پایان‌ترم از جزوهٔ ارسالی مشخص نیست.",
+        "تعریف‌ها، فرض‌های مدل‌سازی، مدل کامل و محاسبات قابل‌راستی‌آزمایی را مرور کنید؛ برای داده‌های مبهم جواب ساختگی ندهید.", "",
+    ]
+    root_lines=[
+        "# FINAL EXAM REVIEW | مرور شب امتحان پایان‌ترم", "",
+        "**Sessions 10+ only. Sessions 01–09 are archived separately in EXAM_NIGHT.md.**", "",
+        "**فقط جلسات ۱۰ به بعد. جلسات ۱ تا ۹ در EXAM_NIGHT.md آرشیو شده‌اند.**", "",
+        "This is an independent student learning aid, not a published exam syllabus.", "",
+        "**Generated file:** edit review_sources, then run python scripts/build_exam_night.py.", "",
+    ]
+    for key,en_name,fa_name in sections:
+        if key.startswith("session_"):
+            number=int(key.split("_")[1])
+            title_en=f"Session {number:02d}"
+            title_fa=f"جلسهٔ {fa_ordinal(number)}"
+        else:
+            title_en, title_fa=en_name, fa_name
+        en_excerpt=extract(root,key,"en",site=True)
+        fa_excerpt=extract(root,key,"fa",site=True)
+        en.extend([f"## {title_en}","",en_excerpt,""])
+        fa.extend([f"## {title_fa}","",fa_excerpt,""])
+        root_lines.extend([
+            f"## {title_en} | {title_fa}", "",
+            "### English", "", extract(root,key,"en",site=False), "",
+            "### فارسی", "", extract(root,key,"fa",site=False), "",
+        ])
+    en.extend(["## Final-exam preparation checklist", "",
+               "- [ ] State whether the object is an ordinary fuzzy set, a hesitant fuzzy set, or a hesitant fuzzy number.",
+               "- [ ] Verify each fuzzy tuple has ordered coordinates.",
+               "- [ ] Give the source-defined ranking or explicitly state any additional rule.",
+               "- [ ] Formulate variables, objective, constraints and units without fabricating ambiguous coefficients.", ""])
+    fa.extend(["## چک‌لیست مرور پایان‌ترم", "",
+               "- [ ] تفاوت مجموعهٔ فازی، مجموعهٔ فازی مردد و عدد فازی مردد را می‌دانم.",
+               "- [ ] ترتیب مؤلفه‌های عددهای مثلثی و ذوزنقه‌ای را کنترل کرده‌ام.",
+               "- [ ] روش رتبه‌بندیِ تعریف‌شده و فرض‌های اضافه را از هم جدا کرده‌ام.",
+               "- [ ] متغیرها، تابع هدف، قیود و واحدها را بدون حدس‌زدن دادهٔ مبهم نوشته‌ام.", ""])
+    return {
+        "EXAM_FINAL.md":"\n".join(root_lines).rstrip()+"\n",
+        "site_docs/exam-final.en.md":"\n".join(en).rstrip()+"\n",
+        "site_docs/exam-final.fa.md":"\n".join(fa).rstrip()+"\n",
+    }
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Fail if any generated review is stale")
     args = parser.parse_args()
     try:
-        outputs = generated()
+        outputs = {**generated(), **generated_final()}
     except (ValueError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
@@ -214,7 +292,7 @@ def main() -> int:
         print("Exam review is stale: run python scripts/build_exam_night.py", file=sys.stderr)
         return 1
     if args.check:
-        print("Modeling-only exam review is up to date (sessions + assignments; EN/FA)")
+        print("Separate midterm archive (01–09) and final review (10+), EN/FA, are up to date")
     return 0
 
 

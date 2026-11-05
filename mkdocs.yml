@@ -55,6 +55,18 @@ plugins:
             Session 07 Computation: محاسبات جلسهٔ هفتم
             Overview: معرفی
             Exam Review: مرور شب امتحان
+            Midterm Archive: آرشیو میان‌ترم حذف‌شده
+            Final Exam Review: مرور پایان‌ترم
+            Session 10: جلسهٔ دهم
+            Session 11: جلسهٔ یازدهم
+            Hesitant Set Definition: تعریف مجموعهٔ فازی مردد
+            Height Example: مثال قد دانشجویان
+            Hesitant Fuzzy Numbers: اعداد فازی مردد
+            Ranking Hesitant Numbers: رتبه‌بندی اعداد فازی مردد
+            Production Planning: برنامه‌ریزی تولید
+            Source Data Audit: ممیزی داده‌های جزوه
+            Session 10 Computation: محاسبات جلسهٔ دهم
+            Session 11 Computation: محاسبات جلسهٔ یازدهم
             Session 01: جلسهٔ اول
             Session 02: جلسهٔ دوم
             Session 03: جلسهٔ سوم
@@ -91,7 +103,8 @@ plugins:
 
 nav:
   - Overview: index.md
-  - Exam Review: exam.md
+  - Midterm Archive: exam.md
+  - Final Exam Review: exam-final.md
   - Session 01:
       - Introduction: session-01/index.md
       - Fundamentals: session-01/fundamentals.md
@@ -132,6 +145,16 @@ nav:
       - Introduction: session-09/index.md
       - Corrected LR Example: session-09/source-example.md
       - Kerre Integral Analysis: session-09/case-analysis.md
+  - Session 10:
+      - Introduction: session-10/index.md
+      - Hesitant Set Definition: session-10/hesitant.md
+      - Height Example: session-10/heights.md
+      - Hesitant Fuzzy Numbers: session-10/numbers.md
+  - Session 11:
+      - Introduction: session-11/index.md
+      - Ranking Hesitant Numbers: session-11/ranking.md
+      - Production Planning: session-11/production.md
+      - Source Data Audit: session-11/audit.md
   - Assignments:
       - Assignment Overview: assignments/index.md
       - Investment Budgeting: assignments/investment-budget.md
@@ -151,6 +174,8 @@ nav:
       - Session 07 Computation: session-07/computation.md
       - Session 08 Computation: session-08/computation.md
       - Session 09 Computation: session-09/computation.md
+      - Session 10 Computation: session-10/computation.md
+      - Session 11 Computation: session-11/computation.md
 
 markdown_extensions:
   - tables
