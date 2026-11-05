@@ -1,3 +1,4 @@
+
 name: Julia examples
 
 on:
@@ -18,13 +19,63 @@ jobs:
   basics:
     name: Julia basics (1.x)
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: julia-actions/setup-julia@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Julia
+        uses: julia-actions/setup-julia@v2
         with:
           version: '1'
-      - name: Run Julia example scripts
+
+      - name: Run Julia basics
         run: |
           julia --startup-file=no Julia/01_Basics/01_variables.jl
           julia --startup-file=no Julia/01_Basics/04_control_flow.jl
           julia --startup-file=no Julia/01_Basics/05_functions.jl
+
+  course-examples:
+    name: Julia course examples (1.x)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1'
+
+      - name: Install required packages
+        run: |
+          julia --startup-file=no -e '
+            using Pkg
+            Pkg.add(["JuMP", "HiGHS", "MathOptInterface"])
+          '
+
+      - name: Run all seven course examples
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          shopt -s nullglob
+          files=(Julia/03_Course_Examples/*.jl)
+
+          if [ "${#files[@]}" -ne 7 ]; then
+            echo "Expected exactly 7 Julia course examples."
+            echo "Found: ${#files[@]}"
+            exit 1
+          fi
+
+          for file in "${files[@]}"; do
+            echo "=================================="
+            echo "Running: $file"
+            echo "=================================="
+
+            julia --startup-file=no "$file"
+          done
+
+          echo "All seven course examples executed successfully."
