@@ -17,6 +17,8 @@ only for the final, cumulative review.
 | 05 | Charnes–Cooper fractional programming and triangular fuzzy membership / برنامه‌ریزی کسری و عضویت فازی مثلثی | [Session 05](session_05/README.md) |
 | 06 | Fuzzy sets, LR arithmetic and ranked production / مجموعه‌های فازی، حساب LR و تولید | [Session 06](session_06/README.md) |
 | 07 | Fuzzy LP, extension maximum and Kerre comparison / برنامه‌ریزی فازی، اصل گسترش و روش Kerre | [Session 07](session_07/README.md) |
+| 08 | Extension maximum and Kerre, rigorous recap / مرور دقیق اصل گسترش و مقایسهٔ Kerre | [Session 08](session_08/README.md) |
+| 09 | Corrected triangular LR example and exact comparison / مثال مثلثی اصلاح‌شده و مقایسهٔ دقیق | [Session 09](session_09/README.md) |
 
 The original four-page session-one note **does not solve** the example models.
 Hand solutions and optimality arguments are independently derived educational

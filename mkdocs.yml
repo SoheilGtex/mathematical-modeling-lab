@@ -35,6 +35,14 @@ plugins:
           build: true
           copyright: "مشارکت‌کنندگان: سهیل سلمانی · مهدیه مقیسه · محتوای تألیفی با مجوز MIT"
           nav_translations:
+            Session 08: جلسهٔ هشتم
+            Session 09: جلسهٔ نهم
+            Extension Maximum Revisited: مرور دقیق بیشینهٔ فازی
+            Exact Kerre Distance: فاصلهٔ دقیق Kerre
+            Corrected LR Example: مثال اصلاح‌شدهٔ LR
+            Kerre Integral Analysis: تحلیل انتگرال‌های Kerre
+            Session 08 Computation: محاسبات جلسهٔ هشتم
+            Session 09 Computation: محاسبات جلسهٔ نهم
             Session 06: جلسهٔ ششم
             Session 07: جلسهٔ هفتم
             Membership and Alpha-cuts: تابع عضویت و برش آلفا
@@ -116,6 +124,14 @@ nav:
       - Fuzzy LR Model: session-07/lr-model.md
       - Extension Maximum: session-07/extension-max.md
       - Kerre Comparison: session-07/kerre.md
+  - Session 08:
+      - Introduction: session-08/index.md
+      - Extension Maximum Revisited: session-08/extension-recap.md
+      - Exact Kerre Distance: session-08/distance.md
+  - Session 09:
+      - Introduction: session-09/index.md
+      - Corrected LR Example: session-09/source-example.md
+      - Kerre Integral Analysis: session-09/case-analysis.md
   - Assignments:
       - Assignment Overview: assignments/index.md
       - Investment Budgeting: assignments/investment-budget.md
@@ -133,6 +149,8 @@ nav:
       - Solution Verification: reference/verification.md
       - Session 06 Computation: session-06/computation.md
       - Session 07 Computation: session-07/computation.md
+      - Session 08 Computation: session-08/computation.md
+      - Session 09 Computation: session-09/computation.md
 
 markdown_extensions:
   - tables
