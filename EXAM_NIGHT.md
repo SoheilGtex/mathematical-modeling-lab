@@ -22,6 +22,8 @@ Run `python scripts/build_exam_night.py` after adding or changing a session/assi
 - [Session 03 | جلسهٔ سوم](#session-03)
 - [Session 04 | جلسهٔ چهارم](#session-04)
 - [Session 05 | جلسهٔ پنجم](#session-05)
+- [Session 06 | جلسهٔ ششم](#session-06)
+- [Session 07 | جلسهٔ هفتم](#session-07)
 - [Assignment 01 | تمرین اول](#assignment-investment-budget)
 - [Assignment 02 | تمرین دوم](#assignment-transportation-python)
 - [Assignment 03 | تمرین سوم](#assignment-fuzzy-numbers-max)
@@ -474,6 +476,86 @@ $$\boxed{\mu_{\widetilde M}(x)=\begin{cases}
 \end{cases}}$$
 
 **نکتهٔ مدل‌سازی:** دو معادلهٔ خط را از سه رأس $(1,0)$، $(5,1)$ و $(7,0)$ بنویسید. این یک **مدل تابع عضویت** است و در جزوه مسئلهٔ بهینه‌سازی فازی تعریف نشده؛ حل عددی در مرور شب امتحان نمی‌آید.
+
+---
+
+<a id="session-06"></a>
+## Session 06 | جلسهٔ ششم
+
+### English
+
+#### Fuzzy definitions and production formulation
+
+- State the membership function $\mu_{\widetilde A}:\mathbb R\to[0,1]$, the strong alpha-cut $\{x:\mu(x)>\alpha\}$, the weak alpha-cut $\{x:\mu(x)\ge\alpha\}$ for $\alpha>0$, support $\{\mu>0\}$ and core $\{\mu=1\}$.
+- Distinguish the conventional triangle $(a,b,c)$ from the LR core/spread form $(a^L,a^U,\ell,r)_{LR}$ and write their piecewise-linear membership functions.
+- For LR numbers with triangular/trapezoidal linear sides, use $R(A)=(a^L+a^U)/2+(r-\ell)/4$ when the comparison relation is **explicitly** $\le_R$.
+- In the [two-product lecture model](site_docs/session-06/ranking-production.en.md), define $x_1,x_2\ge0$ and write
+
+$$\begin{aligned}
+\max\ \widetilde Z&=(35,40,45)x_1+(45,50,55)x_2,\\
+(1.5,2,2.5)x_1+(0.75,1,1.2)x_2&\le_R(98,100,102),\\
+(0.25,1,1.5)x_1+(2,2.2,2.5)x_2&\le_R(78,80,82).
+\end{aligned}$$
+
+Identify which rows are machine hours and raw-material kilograms. For the exam-oriented **modeling** review, focus on the fuzzy formulation and the meaning of the order relation; the separately calculated optimum is not necessary.
+
+### فارسی
+
+#### تعریف مجموعهٔ فازی و صورت‌بندی تولید
+
+- تعریف تابع عضویت $\mu_{\widetilde A}:\mathbb R\to[0,1]$، برش قوی $\{x:\mu(x)>\alpha\}$، برش معمولی $\{x:\mu(x)\ge\alpha\}$ برای $\alpha>0$، تکیه‌گاه $\{\mu>0\}$ و هستهٔ $\{\mu=1\}$ را بدانید.
+- عدد مثلثی $(a,b,c)$ را از نمایش $LR$ به‌صورت $(a^L,a^U,\ell,r)$ تشخیص دهید و فرمول تابع عضویت هرکدام را بنویسید.
+- در مقایسهٔ مبتنی بر رتبه‌بندی $R(A)=(a^L+a^U)/2+(r-\ell)/4$، معنای دقیق علامت $\le_R$ را مشخص کنید.
+- در [مسئلهٔ دو محصول جزوه](site_docs/session-06/ranking-production.fa.md)، متغیرهای نامنفی $x_1,x_2$ را تعریف کنید و مدل فازی زیر را بنویسید:
+
+$$\begin{aligned}
+\max\ \widetilde Z&=(35,40,45)x_1+(45,50,55)x_2,\\
+(1.5,2,2.5)x_1+(0.75,1,1.2)x_2&\le_R(98,100,102),\\
+(0.25,1,1.5)x_1+(2,2.2,2.5)x_2&\le_R(78,80,82).
+\end{aligned}$$
+
+ردیف اول محدودیت ساعت کار ماشین و ردیف دوم محدودیت کیلوگرم مواد اولیه است. در مرور **مدل‌سازی** بر فرم قیود، جهت نامساوی‌ها و روش مقایسه تمرکز کنید؛ جواب عددیِ تکمیلی الزامی نیست.
+
+---
+
+<a id="session-07"></a>
+## Session 07 | جلسهٔ هفتم
+
+### English
+
+#### LR fuzzy LP, extension-principle maximum and Kerre comparison
+
+- Interpret $(a^L,a^U,\ell,r)_{LR}$ as **core and spreads**, not as four trapezoid vertices.
+- Formulate the [page 4 fuzzy LP](site_docs/session-07/lr-model.en.md) with $x_1,x_2\ge0$ and an explicitly specified ranking-based order:
+
+$$\begin{aligned}
+\max\ \widetilde Z&=(2,3,1,1)_{LR}x_1+(3,4,1,2)_{LR}x_2,\\
+(1,2,1,1)_{LR}x_1+(2,3,1,2)_{LR}x_2&\le_R(5,6,2,2)_{LR},\\
+(2,3,1,3)_{LR}x_1+(1,2,1,1)_{LR}x_2&\le_R(4,6,2,1)_{LR}.
+\end{aligned}$$
+
+- For [the extension principle](site_docs/session-07/extension-max.en.md), model $D=\max(M,N)$ by $\mu_D(z)=\sup_{\max(x,y)=z}\min(\mu_M(x),\mu_N(y))$; do **not** replace this with pointwise max of membership functions. For $M=(0,2,5)$, $N=(2,3,4)$, the key breakpoints are $2,3,3.5,5$.
+- For [Kerre comparison](site_docs/session-07/kerre.en.md), state $d(A,B)=\int|\mu_A-\mu_B|$ and the pairwise rule comparing $d(N,D)$ with $d(M,D)$, where $D$ is the **extension maximum**.
+
+These are formulation/definition tasks. Numerical LP results and evaluated distance integrals are separately marked as extensions.
+
+### فارسی
+
+#### مدل فازی LR، اصل گسترش و مقایسهٔ Kerre
+
+- چهارتایی $(a^L,a^U,\ell,r)_{LR}$ را به‌عنوان **هسته و گستردگی‌ها** بشناسید، نه چهار رأس ذوزنقه.
+- [مدل فازی صفحهٔ چهارم](site_docs/session-07/lr-model.fa.md) را با متغیرهای $x_1,x_2\ge0$ و ترتیب مبتنی بر رتبه‌بندی بنویسید:
+
+$$\begin{aligned}
+\max\ \widetilde Z&=(2,3,1,1)_{LR}x_1+(3,4,1,2)_{LR}x_2,\\
+(1,2,1,1)_{LR}x_1+(2,3,1,2)_{LR}x_2&\le_R(5,6,2,2)_{LR},\\
+(2,3,1,3)_{LR}x_1+(1,2,1,1)_{LR}x_2&\le_R(4,6,2,1)_{LR}.
+\end{aligned}$$
+
+- برای [اصل گسترش](site_docs/session-07/extension-max.fa.md)، بیشینهٔ دو عدد فازی را از رابطهٔ $\mu_D(z)=\sup_{\max(x,y)=z}\min(\mu_M(x),\mu_N(y))$ بسازید؛ این با بیشینهٔ نقطه‌ای توابع عضویت تفاوت دارد. در مثال $M=(0,2,5)$ و $N=(2,3,4)$ نقاط شکست $2,3,3.5,5$ هستند.
+- برای [مقایسهٔ Kerre](site_docs/session-07/kerre.fa.md)، فاصلهٔ $d(A,B)=\int|\mu_A-\mu_B|$ و مقایسهٔ $d(N,D)$ با $d(M,D)$ را بنویسید؛ $D$ باید از **اصل گسترش** محاسبه شده باشد.
+
+این‌ها برای مرور تعریف‌ها و صورت‌بندی‌اند. جواب بهینهٔ عددی و مقدار انتگرال‌ها به‌طور جداگانه و به‌عنوان مطالب تکمیلی آمده‌اند.
 
 ---
 

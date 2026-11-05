@@ -20,7 +20,7 @@ SOURCE = "review_sources"
 SESSION = re.compile(r"session_(\d+)$")
 LINK = re.compile(r"(?<!!)\[([^\]]+)\]\(([^)]+)\)")
 HEADING = re.compile(r"^(#{1,5})(\s+.*)$", re.MULTILINE)
-PERSIAN_ORDINALS = {1: "اول", 2: "دوم", 3: "سوم", 4: "چهارم", 5: "پنجم", 6: "ششم"}
+PERSIAN_ORDINALS = {1: "اول", 2: "دوم", 3: "سوم", 4: "چهارم", 5: "پنجم", 6: "ششم", 7: "هفتم"}
 
 
 def fa_ordinal(n: int) -> str:
