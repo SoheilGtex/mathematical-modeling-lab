@@ -38,6 +38,6 @@ def test_midterm_and_final_reviews_are_disjoint():
 
 def test_site_navigation_has_two_periods():
     nav=(ROOT/'mkdocs.yml').read_text('utf-8')
-    assert 'Midterm Archive: exam.md' in nav
+    assert 'Midterm Review: exam.md' in nav
     assert 'Final Exam Review: exam-final.md' in nav
     assert 'Session 10:' in nav and 'Session 11:' in nav

@@ -11,13 +11,13 @@
 
 The documentation opens in **English**. Use the small language selector at the top of any page to read the **complete Persian translation of that same page** (RTL). Dates and the academic term follow each language's calendar: Gregorian in English, Solar Hijri in Persian.
 
-The reader-facing site has a short introduction, two separate period reviews (withdrawn midterm and final), and the course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
+The reader-facing site has a short introduction, two separate period reviews (midterm and final), and the course sessions. Full handwritten-style solutions are available without running Python. Supplementary software explanations are kept in an optional technical section.
 
 **Study:** [Complete course notes](https://soheilgtex.github.io/mathematical-modeling-lab/) — select a session from the site navigation; the home page does not repeat the growing session list.
 
 **Assignments:** [All course assignments](https://soheilgtex.github.io/mathematical-modeling-lab/assignments/) — Assignment 01 has a complete investment-budgeting solution; Assignment 02 only required solving the already documented Session 03 transportation model in Python ([existing code](examples/session_03/01_transportation.py)); Assignment 03 provides the full analytical solution and graphs for triangular fuzzy numbers and their maximum.
 
-**Exam preparation:** [Archived midterm (Sessions 01–09)](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) · [Final exam (Sessions 10 onward)](https://soheilgtex.github.io/mathematical-modeling-lab/exam-final/). The midterm is withdrawn; the two reviews do not overlap.
+**Exam preparation:** [Midterm Review (Sessions 01–09)](https://soheilgtex.github.io/mathematical-modeling-lab/exam/) · [Final Exam Review (Sessions 10 onward)](https://soheilgtex.github.io/mathematical-modeling-lab/exam-final/). The midterm guide includes a one-day plan, worked explanations and an independently authored self-test; the periods never overlap.
 
 **Scope and attribution:** Lecture formulations come from student-supplied notes. Worked optima, optimality proofs, integer variants and the numeric transportation demonstration are independent educational additions. This is not an official university resource. The lecture scans are not redistributed.
 
@@ -66,8 +66,8 @@ trapezoidal ranking formula and a two-product hesitant production model).
 - [Session 11 (English)](site_docs/session-11/index.en.md) / [فارسی](site_docs/session-11/index.fa.md)
 - [Source audit and ambiguous handwritten values](docs/session_10_11_source_audit.md)
 
-**Exam separation:** Sessions 01–09 belong to the **withdrawn midterm archive**;
-Sessions 10 onward have an independent [final-exam review](EXAM_FINAL.md).
+**Exam separation:** Sessions 01–09 belong to the [Midterm Review](EXAM_NIGHT.md);
+Sessions 10 onward have the independent [Final Exam Review](EXAM_FINAL.md).
 Assumed corrections and numerical illustrations are clearly marked as such.
 
 ## Julia learning materials
@@ -144,8 +144,8 @@ are not converted.
 ## Repository structure (for developers)
 
 ```text
-EXAM_NIGHT.md              # generated archived midterm, Sessions 01–09
-EXAM_FINAL.md              # generated final, Sessions 10 onward
+EXAM_NIGHT.md              # generated Midterm Review, Sessions 01–09
+EXAM_FINAL.md              # generated Final Exam Review, Sessions 10 onward
 sessions/                  # written solutions + per-session review excerpts
 examples/                  # runnable Python examples grouped by session
 src/modeling_lab/           # reusable model/solver/plot/analysis code

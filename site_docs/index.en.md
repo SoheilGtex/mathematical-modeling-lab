@@ -13,7 +13,7 @@ This is an independent student project, **not an official university or instruct
 
 ## Course materials
 
-Use the navigation menu to browse each session and its fully worked problems. Use the [archived, withdrawn midterm review (Sessions 01–09)](exam.md) for earlier material and the separate [final-exam review (Sessions 10 onward)](exam-final.md) for current preparation.
+Use the navigation menu for complete session notes and worked solutions. Two independent study guides are available: **[Midterm Review](exam.md)** for Sessions 01–09, including a day-before study plan and self-test, and **[Final Exam Review](exam-final.md)** for Sessions 10 onward.
 
 ## Code and computation
 

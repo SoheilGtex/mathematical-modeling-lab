@@ -1,6 +1,6 @@
-# Final Exam Review — Sessions 10 Onward
+# Final Exam Review
 
-**Period separation:** the former midterm (Sessions 01–09) was withdrawn. This review intentionally includes only Sessions 10 onward.
+**Scope:** this review includes only Sessions 10 onward. Sessions 01–09 have a separate Midterm Review.
 This is an independent study summary, not an official exam announcement. The final-exam question types have not been specified by the supplied scan.
 Retain definitions, modeling choices, complete formulations and any verified worked calculations; do not invent missing source data.
 
