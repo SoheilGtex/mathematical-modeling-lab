@@ -23,6 +23,22 @@ The reader-facing site has a short introduction, a cumulative exam review and th
 
 ---
 
+## Session 06–07: Fuzzy modeling (two lecture meetings)
+
+The six-page, student-supplied handwritten notes (pages 1–3 / pages 4–6) are
+reconstructed as **Sessions 06 and 07**. The bilingual site includes all fuzzy-set
+membership definitions, alpha-cuts, triangular/trapezoidal LR arithmetic,
+rank-based fuzzy linear programs, the extension-principle maximum, and
+Kerre-style distance comparison.
+
+- [Session 06: membership, LR arithmetic and production](site_docs/session-06/index.en.md)
+- [Session 07: LR optimization, extension max and Kerre](site_docs/session-07/index.en.md)
+- [Persian Session 06](site_docs/session-06/index.fa.md) / [Persian Session 07](site_docs/session-07/index.fa.md)
+- [Extraction and mathematical audit](docs/session_06_07_source_audit.md)
+
+The scans are **not redistributed**. Ranked LP optima and evaluated integrals are
+marked as independently derived supplements, not as handwritten solutions.
+
 ## Julia learning materials
 
 The [Julia learning materials](Julia/README.md) are an optional part of the project. The current
@@ -57,6 +73,10 @@ python examples/session_04/02_crude_oil.py
 python examples/session_04/03_revenue_cost_ratio.py
 python examples/session_05/01_fractional_charnes_cooper.py
 python examples/session_05/02_triangular_fuzzy.py
+python examples/session_06/01_membership_and_arithmetic.py
+python examples/session_06/02_ranked_production.py
+python examples/session_07/01_ranked_lr_lp.py
+python examples/session_07/02_extension_kerre.py
 python examples/assignments/03_fuzzy_numbers_max.py
 python -m pytest -q
 ```

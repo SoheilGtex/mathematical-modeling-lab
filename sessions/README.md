@@ -15,6 +15,8 @@ only for the final, cumulative review.
 | 03 | Numerical transportation, five-month production/inventory / حمل‌ونقل عددی و تولید پنج‌ماهه | [Session 03](session_03/README.md) |
 | 04 | Machine allocation, crude refining, revenue-to-cost ratio / تخصیص ماشین، پالایش نفت، نسبت درآمد به هزینه | [Session 04](session_04/README.md) |
 | 05 | Charnes–Cooper fractional programming and triangular fuzzy membership / برنامه‌ریزی کسری و عضویت فازی مثلثی | [Session 05](session_05/README.md) |
+| 06 | Fuzzy sets, LR arithmetic and ranked production / مجموعه‌های فازی، حساب LR و تولید | [Session 06](session_06/README.md) |
+| 07 | Fuzzy LP, extension maximum and Kerre comparison / برنامه‌ریزی فازی، اصل گسترش و روش Kerre | [Session 07](session_07/README.md) |
 
 The original four-page session-one note **does not solve** the example models.
 Hand solutions and optimality arguments are independently derived educational

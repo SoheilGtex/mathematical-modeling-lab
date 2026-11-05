@@ -35,6 +35,16 @@ plugins:
           build: true
           copyright: "مشارکت‌کنندگان: سهیل سلمانی · مهدیه مقیسه · محتوای تألیفی با مجوز MIT"
           nav_translations:
+            Session 06: جلسهٔ ششم
+            Session 07: جلسهٔ هفتم
+            Membership and Alpha-cuts: تابع عضویت و برش آلفا
+            LR Arithmetic: حساب اعداد LR
+            Ranking and Production: رتبه‌بندی و مدل تولید
+            Fuzzy LR Model: برنامه‌ریزی فازی LR
+            Extension Maximum: بیشینه با اصل گسترش
+            Kerre Comparison: مقایسهٔ Kerre
+            Session 06 Computation: محاسبات جلسهٔ ششم
+            Session 07 Computation: محاسبات جلسهٔ هفتم
             Overview: معرفی
             Exam Review: مرور شب امتحان
             Session 01: جلسهٔ اول
@@ -96,6 +106,16 @@ nav:
       - Introduction: session-05/index.md
       - Fractional Programming: session-05/fractional.md
       - Fuzzy Membership: session-05/fuzzy.md
+  - Session 06:
+      - Introduction: session-06/index.md
+      - Membership and Alpha-cuts: session-06/foundations.md
+      - LR Arithmetic: session-06/arithmetic.md
+      - Ranking and Production: session-06/ranking-production.md
+  - Session 07:
+      - Introduction: session-07/index.md
+      - Fuzzy LR Model: session-07/lr-model.md
+      - Extension Maximum: session-07/extension-max.md
+      - Kerre Comparison: session-07/kerre.md
   - Assignments:
       - Assignment Overview: assignments/index.md
       - Investment Budgeting: assignments/investment-budget.md
@@ -111,6 +131,8 @@ nav:
       - Session 05 Computation: session-05/computation.md
       - Sensitivity Analysis: reference/sensitivity.md
       - Solution Verification: reference/verification.md
+      - Session 06 Computation: session-06/computation.md
+      - Session 07 Computation: session-07/computation.md
 
 markdown_extensions:
   - tables
